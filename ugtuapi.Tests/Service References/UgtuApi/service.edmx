@@ -1,0 +1,564 @@
+﻿<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <edmx:DataServices m:DataServiceVersion="3.0" m:MaxDataServiceVersion="3.0" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">
+    <Schema Namespace="ugtuapi.Models" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <EntityType Name="Person">
+        <Key>
+          <PropertyRef Name="nCode" />
+        </Key>
+        <Property Name="nCode" Type="Edm.Decimal" Nullable="false" />
+        <Property Name="Birthdate" Type="Edm.DateTime" />
+        <Property Name="BirthPlace" Type="Edm.String" />
+        <Property Name="IsInvalid" Type="Edm.Boolean" />
+        <Property Name="HasChildren" Type="Edm.Boolean" />
+        <Property Name="HasJob" Type="Edm.Boolean" />
+        <Property Name="IsMale" Type="Edm.Boolean" />
+        <Property Name="IsDormitored" Type="Edm.Boolean" />
+        <Property Name="Ik_grazd" Type="Edm.Int32" />
+        <Property Name="Ik_sem_pol" Type="Edm.Int32" />
+        <Property Name="INN" Type="Edm.String" />
+        <Property Name="SocialNumber" Type="Edm.String" />
+        <Property Name="ik_voen_zvanie" Type="Edm.Int32" />
+        <Property Name="itab_n" Type="Edm.Int32" />
+        <Property Name="ik_nac" Type="Edm.Int32" />
+        <Property Name="PersonGUID" Type="Edm.Guid" Nullable="false" />
+        <Property Name="PersonFullName" Type="Edm.String" />
+        <Property Name="PersonSmallName" Type="Edm.String" />
+        <Property Name="PersName" Type="Edm.String" />
+        <Property Name="Name" Type="ugtuapi.Models.PersonName" />
+        <Property Name="Contact" Type="ugtuapi.Models.Contact" />
+        <NavigationProperty Name="Student" Relationship="ugtuapi.Models.ugtuapi_Models_Person_Student_ugtuapi_Models_Student_StudentPartner" ToRole="Student" FromRole="StudentPartner" />
+      </EntityType>
+      <EntityType Name="Student">
+        <Key>
+          <PropertyRef Name="nCode" />
+        </Key>
+        <Property Name="nCode" Type="Edm.Decimal" Nullable="false" />
+        <Property Name="Nn_abit" Type="Edm.Decimal" />
+        <Property Name="ik_medal" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Ik_vid_pens" Type="Edm.Int32" />
+        <Property Name="Ik_podg" Type="Edm.Int32" />
+        <Property Name="Ik_ob_rab" Type="Edm.Int32" />
+        <Property Name="Ik_special_uchet" Type="Edm.Int32" />
+        <Property Name="Ik_zaved" Type="Edm.Int32" />
+        <Property Name="CompletedOn" Type="Edm.Decimal" />
+        <Property Name="ExtraInformation" Type="Edm.String" />
+        <Property Name="ik_pred" Type="Edm.Int32" />
+        <Property Name="JobPosition" Type="Edm.String" />
+        <Property Name="ExperienceYears" Type="Edm.Int32" />
+        <Property Name="ExperienceMonth" Type="Edm.Int32" />
+        <Property Name="Benefits" Type="Edm.String" />
+        <Property Name="Basments" Type="Edm.String" />
+        <NavigationProperty Name="Person" Relationship="ugtuapi.Models.ugtuapi_Models_Student_Person_ugtuapi_Models_Person_PersonPartner" ToRole="Person" FromRole="PersonPartner" />
+        <NavigationProperty Name="Zach" Relationship="ugtuapi.Models.ugtuapi_Models_Student_Zach_ugtuapi_Models_Zach_ZachPartner" ToRole="Zach" FromRole="ZachPartner" />
+        <NavigationProperty Name="StudentInfo" Relationship="ugtuapi.Models.ugtuapi_Models_Student_StudentInfo_ugtuapi_Models_StudentInfo_StudentInfoPartner" ToRole="StudentInfo" FromRole="StudentInfoPartner" />
+      </EntityType>
+      <EntityType Name="Zach">
+        <Key>
+          <PropertyRef Name="Ik_zach" />
+        </Key>
+        <Property Name="Ik_zach" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Number" Type="Edm.String" />
+        <Property Name="nCode" Type="Edm.Decimal" Nullable="false" />
+        <NavigationProperty Name="Student" Relationship="ugtuapi.Models.ugtuapi_Models_Zach_Student_ugtuapi_Models_Student_StudentPartner" ToRole="Student" FromRole="StudentPartner" />
+        <NavigationProperty Name="StudentGroup" Relationship="ugtuapi.Models.ugtuapi_Models_Zach_StudentGroup_ugtuapi_Models_StudGrup_StudentGroupPartner" ToRole="StudentGroup" FromRole="StudentGroupPartner" />
+      </EntityType>
+      <EntityType Name="StudGrup">
+        <Key>
+          <PropertyRef Name="Ik_studGrup" />
+        </Key>
+        <Property Name="Ik_studGrup" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Ik_grup" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Ik_zach" Type="Edm.Int32" Nullable="false" />
+        <Property Name="ik_kat_zach" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Ik_prikazZach" Type="Edm.Int32" />
+        <Property Name="ik_pricZach" Type="Edm.Int32" Nullable="false" />
+        <Property Name="cObosnZach" Type="Edm.String" />
+        <Property Name="Ik_prikazOtch" Type="Edm.Int32" />
+        <Property Name="ik_pricOtch" Type="Edm.Int32" />
+        <Property Name="cObosnOtch" Type="Edm.String" />
+        <NavigationProperty Name="Group" Relationship="ugtuapi.Models.ugtuapi_Models_StudGrup_Group_ugtuapi_Models_Group_GroupPartner" ToRole="Group" FromRole="GroupPartner" />
+        <NavigationProperty Name="Zach" Relationship="ugtuapi.Models.ugtuapi_Models_StudGrup_Zach_ugtuapi_Models_Zach_ZachPartner" ToRole="Zach" FromRole="ZachPartner" />
+      </EntityType>
+      <EntityType Name="Group">
+        <Key>
+          <PropertyRef Name="Id" />
+        </Key>
+        <Property Name="Id" Type="Edm.Int32" Nullable="false" />
+        <Property Name="FacultyRelId" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Name" Type="Edm.String" />
+        <Property Name="CurriculaId" Type="Edm.Int32" />
+        <Property Name="AdmitsOn" Type="Edm.Int32" />
+        <Property Name="Created" Type="Edm.DateTime" />
+        <Property Name="DisbandedOn" Type="Edm.DateTime" />
+        <Property Name="SpecializationId" Type="Edm.Int32" />
+        <NavigationProperty Name="StudentGroup" Relationship="ugtuapi.Models.ugtuapi_Models_Group_StudentGroup_ugtuapi_Models_StudGrup_StudentGroupPartner" ToRole="StudentGroup" FromRole="StudentGroupPartner" />
+        <NavigationProperty Name="FacultyRel" Relationship="ugtuapi.Models.ugtuapi_Models_Group_FacultyRel_ugtuapi_Models_FacultyRel_FacultyRelPartner" ToRole="FacultyRel" FromRole="FacultyRelPartner" />
+        <NavigationProperty Name="Curricula" Relationship="ugtuapi.Models.ugtuapi_Models_Group_Curricula_ugtuapi_Models_Curricula_CurriculaPartner" ToRole="Curricula" FromRole="CurriculaPartner" />
+        <NavigationProperty Name="EducationBranch" Relationship="ugtuapi.Models.ugtuapi_Models_Group_EducationBranch_ugtuapi_Models_EducationBranch_EducationBranchPartner" ToRole="EducationBranch" FromRole="EducationBranchPartner" />
+      </EntityType>
+      <EntityType Name="Curricula">
+        <Key>
+          <PropertyRef Name="ik_uch_plan" />
+        </Key>
+        <Property Name="ik_uch_plan" Type="Edm.Int32" Nullable="false" />
+        <Property Name="ik_year_uch_pl" Type="Edm.Int32" Nullable="false" />
+        <Property Name="ik_spec" Type="Edm.Int32" Nullable="false" />
+        <Property Name="ik_spclz" Type="Edm.Int32" />
+        <Property Name="ik_form_ed" Type="Edm.Int32" Nullable="false" />
+        <Property Name="IsBRSPlan" Type="Edm.Boolean" />
+        <Property Name="ik_year_utverzh" Type="Edm.Int32" />
+        <Property Name="date_utv" Type="Edm.DateTime" />
+        <Property Name="UserName" Type="Edm.String" />
+        <Property Name="is_main" Type="Edm.Int32" />
+        <Property Name="id_parent" Type="Edm.Int32" />
+        <Property Name="grup_comment" Type="Edm.String" />
+        <Property Name="IsChecked" Type="Edm.Boolean" />
+        <Property Name="date_approved" Type="Edm.DateTime" />
+        <Property Name="Nprotocol" Type="Edm.Int32" />
+        <Property Name="ik_kaf" Type="Edm.Int32" />
+        <NavigationProperty Name="Group" Relationship="ugtuapi.Models.ugtuapi_Models_Curricula_Group_ugtuapi_Models_Group_GroupPartner" ToRole="Group" FromRole="GroupPartner" />
+        <NavigationProperty Name="Uch_pl1" Relationship="ugtuapi.Models.ugtuapi_Models_Curricula_Uch__pl1_ugtuapi_Models_Curricula_Uch__pl1Partner" ToRole="Uch_pl1" FromRole="Uch_pl1Partner" />
+        <NavigationProperty Name="Uch_pl2" Relationship="ugtuapi.Models.ugtuapi_Models_Curricula_Uch__pl2_ugtuapi_Models_Curricula_Uch__pl2Partner" ToRole="Uch_pl2" FromRole="Uch_pl2Partner" />
+        <NavigationProperty Name="EducationBranch" Relationship="ugtuapi.Models.ugtuapi_Models_Curricula_EducationBranch_ugtuapi_Models_EducationBranch_EducationBranchPartner" ToRole="EducationBranch" FromRole="EducationBranchPartner" />
+        <NavigationProperty Name="EducationBranch1" Relationship="ugtuapi.Models.ugtuapi_Models_Curricula_EducationBranch1_ugtuapi_Models_EducationBranch_EducationBranch1Partner" ToRole="EducationBranch1" FromRole="EducationBranch1Partner" />
+      </EntityType>
+      <EntityType Name="StudentInfo">
+        <Key>
+          <PropertyRef Name="nCode" />
+        </Key>
+        <Property Name="nCode" Type="Edm.Decimal" Nullable="false" />
+        <Property Name="Lastname" Type="Edm.String" />
+        <Property Name="Firstname" Type="Edm.String" />
+        <Property Name="Patronimic" Type="Edm.String" />
+        <Property Name="Course" Type="Edm.Int32" />
+        <Property Name="Group" Type="Edm.String" />
+        <Property Name="EducationForm" Type="Edm.String" />
+        <Property Name="Category" Type="Edm.String" />
+        <Property Name="Phone" Type="Edm.String" />
+        <Property Name="Mobile" Type="Edm.String" />
+        <Property Name="Faculty" Type="Edm.String" />
+        <Property Name="Speciality" Type="Edm.String" />
+        <Property Name="ManagerName" Type="Edm.String" />
+        <Property Name="DismissedOrder" Type="Edm.DateTime" />
+        <NavigationProperty Name="Student" Relationship="ugtuapi.Models.ugtuapi_Models_StudentInfo_Student_ugtuapi_Models_Student_StudentPartner" ToRole="Student" FromRole="StudentPartner" />
+      </EntityType>
+      <EntityType Name="Department">
+        <Key>
+          <PropertyRef Name="UID" />
+        </Key>
+        <Property Name="UID" Type="Edm.Guid" Nullable="false" />
+        <Property Name="Name" Type="Edm.String" />
+        <Property Name="ShortName" Type="Edm.String" />
+        <Property Name="Index" Type="Edm.String" />
+        <Property Name="TypeId" Type="Edm.Int32" />
+        <Property Name="Phone" Type="Edm.String" />
+        <Property Name="ManagerShortName" Type="Edm.String" />
+        <Property Name="ManagerName" Type="Edm.String" />
+        <Property Name="DisbandedOn" Type="Edm.DateTime" />
+        <Property Name="ManagerDepartmentUID" Type="Edm.Guid" />
+        <Property Name="FormedOn" Type="Edm.DateTime" />
+        <Property Name="ManagerId" Type="Edm.Int32" />
+        <NavigationProperty Name="ChildDepartment" Relationship="ugtuapi.Models.ugtuapi_Models_Department_ChildDepartment_ugtuapi_Models_Department_ChildDepartmentPartner" ToRole="ChildDepartment" FromRole="ChildDepartmentPartner" />
+        <NavigationProperty Name="ManagerDepartment" Relationship="ugtuapi.Models.ugtuapi_Models_Department_ManagerDepartment_ugtuapi_Models_Department_ManagerDepartmentPartner" ToRole="ManagerDepartment" FromRole="ManagerDepartmentPartner" />
+        <NavigationProperty Name="Faculty" Relationship="ugtuapi.Models.ugtuapi_Models_Department_Faculty_ugtuapi_Models_Faculty_FacultyPartner" ToRole="Faculty" FromRole="FacultyPartner" />
+        <NavigationProperty Name="Employees" Relationship="ugtuapi.Models.ugtuapi_Models_Department_Employees_ugtuapi_Models_Employee_EmployeesPartner" ToRole="Employees" FromRole="EmployeesPartner" />
+        <NavigationProperty Name="Manager" Relationship="ugtuapi.Models.ugtuapi_Models_Department_Manager_ugtuapi_Models_Employee_ManagerPartner" ToRole="Manager" FromRole="ManagerPartner" />
+      </EntityType>
+      <EntityType Name="Employee">
+        <Key>
+          <PropertyRef Name="Id" />
+        </Key>
+        <Property Name="Id" Type="Edm.Int32" Nullable="false" />
+        <Property Name="TypeWorkName" Type="Edm.String" />
+        <Property Name="Post" Type="Edm.String" />
+        <Property Name="UID" Type="Edm.Guid" Nullable="false" />
+        <Property Name="FirstName" Type="Edm.String" />
+        <Property Name="LastName" Type="Edm.String" />
+        <Property Name="Patronimic" Type="Edm.String" />
+        <Property Name="DepartmentUID" Type="Edm.Guid" Nullable="false" />
+        <Property Name="PostUID" Type="Edm.Guid" />
+        <Property Name="HiredOn" Type="Edm.DateTime" />
+        <Property Name="FiredOn" Type="Edm.DateTime" />
+        <Property Name="StaffCount" Type="Edm.Decimal" />
+        <Property Name="HourCount" Type="Edm.Decimal" />
+        <Property Name="Login" Type="Edm.String" />
+        <Property Name="IsTutorial" Type="Edm.Boolean" />
+        <Property Name="Degree" Type="Edm.String" />
+        <Property Name="itab_n" Type="Edm.String" />
+        <Property Name="Rank" Type="Edm.String" />
+        <NavigationProperty Name="Department" Relationship="ugtuapi.Models.ugtuapi_Models_Employee_Department_ugtuapi_Models_Department_DepartmentPartner" ToRole="Department" FromRole="DepartmentPartner" />
+        <NavigationProperty Name="Manages" Relationship="ugtuapi.Models.ugtuapi_Models_Employee_Manages_ugtuapi_Models_Department_ManagesPartner" ToRole="Manages" FromRole="ManagesPartner" />
+      </EntityType>
+      <EntityType Name="FacultyRel">
+        <Key>
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="ID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="BranchId" Type="Edm.Int32" Nullable="false" />
+        <Property Name="FacultyId" Type="Edm.Int32" Nullable="false" />
+        <Property Name="EducationYears" Type="Edm.Int32" />
+        <Property Name="RuleId" Type="Edm.Int32" />
+        <Property Name="EducationFormId" Type="Edm.Int32" Nullable="false" />
+        <Property Name="EducationMonthes" Type="Edm.Int32" Nullable="false" />
+        <Property Name="CategoryId" Type="Edm.Int32" Nullable="false" />
+        <Property Name="IsDisbanded" Type="Edm.Boolean" />
+        <NavigationProperty Name="Group" Relationship="ugtuapi.Models.ugtuapi_Models_FacultyRel_Group_ugtuapi_Models_Group_GroupPartner" ToRole="Group" FromRole="GroupPartner" />
+        <NavigationProperty Name="EducationBranch" Relationship="ugtuapi.Models.ugtuapi_Models_FacultyRel_EducationBranch_ugtuapi_Models_EducationBranch_EducationBranchPartner" ToRole="EducationBranch" FromRole="EducationBranchPartner" />
+        <NavigationProperty Name="Faculty" Relationship="ugtuapi.Models.ugtuapi_Models_FacultyRel_Faculty_ugtuapi_Models_Faculty_FacultyPartner" ToRole="Faculty" FromRole="FacultyPartner" />
+      </EntityType>
+      <EntityType Name="EducationBranch">
+        <Key>
+          <PropertyRef Name="ik_spec" />
+        </Key>
+        <Property Name="ik_spec" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Cname_spec" Type="Edm.String" />
+        <Property Name="Cshort_spec" Type="Edm.String" />
+        <Property Name="Sh_spec" Type="Edm.String" />
+        <Property Name="ik_direction" Type="Edm.Int32" />
+        <Property Name="Ik_vip_dep" Type="Edm.Int32" />
+        <Property Name="dDate_spec" Type="Edm.DateTime" />
+        <Property Name="nN_prikaz" Type="Edm.Decimal" />
+        <Property Name="spDateExit" Type="Edm.DateTime" />
+        <Property Name="Cname_qualif" Type="Edm.String" />
+        <Property Name="SpecСategory" Type="Edm.String" />
+        <Property Name="QualifShortName" Type="Edm.String" />
+        <Property Name="ik_FB" Type="Edm.Int32" />
+        <Property Name="ik_main_spec" Type="Edm.Int32" />
+        <Property Name="id_parent" Type="Edm.Int32" />
+        <Property Name="id_type_branch" Type="Edm.Int32" />
+        <NavigationProperty Name="EducationBranch1" Relationship="ugtuapi.Models.ugtuapi_Models_EducationBranch_EducationBranch1_ugtuapi_Models_EducationBranch_EducationBranch1Partner" ToRole="EducationBranch1" FromRole="EducationBranch1Partner" />
+        <NavigationProperty Name="EducationBranch2" Relationship="ugtuapi.Models.ugtuapi_Models_EducationBranch_EducationBranch2_ugtuapi_Models_EducationBranch_EducationBranch2Partner" ToRole="EducationBranch2" FromRole="EducationBranch2Partner" />
+        <NavigationProperty Name="Grup" Relationship="ugtuapi.Models.ugtuapi_Models_EducationBranch_Grup_ugtuapi_Models_Group_GrupPartner" ToRole="Grup" FromRole="GrupPartner" />
+        <NavigationProperty Name="Relation_spec_fac" Relationship="ugtuapi.Models.ugtuapi_Models_EducationBranch_Relation__spec__fac_ugtuapi_Models_FacultyRel_Relation__spec__facPartner" ToRole="Relation_spec_fac" FromRole="Relation_spec_facPartner" />
+        <NavigationProperty Name="Uch_pl" Relationship="ugtuapi.Models.ugtuapi_Models_EducationBranch_Uch__pl_ugtuapi_Models_Curricula_Uch__plPartner" ToRole="Uch_pl" FromRole="Uch_plPartner" />
+        <NavigationProperty Name="Uch_pl1" Relationship="ugtuapi.Models.ugtuapi_Models_EducationBranch_Uch__pl1_ugtuapi_Models_Curricula_Uch__pl1Partner" ToRole="Uch_pl1" FromRole="Uch_pl1Partner" />
+      </EntityType>
+      <EntityType Name="Faculty">
+        <Key>
+          <PropertyRef Name="Id" />
+        </Key>
+        <Property Name="Id" Type="Edm.Int32" Nullable="false" />
+        <Property Name="DiplExcPatternName" Type="Edm.String" />
+        <Property Name="DiplVklExcPatternName" Type="Edm.String" />
+        <Property Name="DiplVklDatPadez" Type="Edm.Boolean" />
+        <Property Name="DepartmentUID" Type="Edm.Guid" />
+        <NavigationProperty Name="FacultyRel" Relationship="ugtuapi.Models.ugtuapi_Models_Faculty_FacultyRel_ugtuapi_Models_FacultyRel_FacultyRelPartner" ToRole="FacultyRel" FromRole="FacultyRelPartner" />
+        <NavigationProperty Name="Department" Relationship="ugtuapi.Models.ugtuapi_Models_Faculty_Department_ugtuapi_Models_Department_DepartmentPartner" ToRole="Department" FromRole="DepartmentPartner" />
+      </EntityType>
+      <ComplexType Name="PersonName">
+        <Property Name="Clastname" Type="Edm.String" />
+        <Property Name="Cfirstname" Type="Edm.String" />
+        <Property Name="Cotch" Type="Edm.String" />
+      </ComplexType>
+      <ComplexType Name="Contact">
+        <Property Name="cSotTel" Type="Edm.String" />
+        <Property Name="ctelefon" Type="Edm.String" />
+        <Property Name="cEmail" Type="Edm.String" />
+      </ComplexType>
+      <Association Name="ugtuapi_Models_Person_Student_ugtuapi_Models_Student_StudentPartner">
+        <End Type="ugtuapi.Models.Student" Role="Student" Multiplicity="0..1" />
+        <End Type="ugtuapi.Models.Person" Role="StudentPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ugtuapi_Models_Student_Person_ugtuapi_Models_Person_PersonPartner">
+        <End Type="ugtuapi.Models.Person" Role="Person" Multiplicity="0..1" />
+        <End Type="ugtuapi.Models.Student" Role="PersonPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ugtuapi_Models_Student_Zach_ugtuapi_Models_Zach_ZachPartner">
+        <End Type="ugtuapi.Models.Zach" Role="Zach" Multiplicity="*" />
+        <End Type="ugtuapi.Models.Student" Role="ZachPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ugtuapi_Models_Student_StudentInfo_ugtuapi_Models_StudentInfo_StudentInfoPartner">
+        <End Type="ugtuapi.Models.StudentInfo" Role="StudentInfo" Multiplicity="0..1" />
+        <End Type="ugtuapi.Models.Student" Role="StudentInfoPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ugtuapi_Models_Zach_Student_ugtuapi_Models_Student_StudentPartner">
+        <End Type="ugtuapi.Models.Student" Role="Student" Multiplicity="0..1" />
+        <End Type="ugtuapi.Models.Zach" Role="StudentPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ugtuapi_Models_Zach_StudentGroup_ugtuapi_Models_StudGrup_StudentGroupPartner">
+        <End Type="ugtuapi.Models.StudGrup" Role="StudentGroup" Multiplicity="*" />
+        <End Type="ugtuapi.Models.Zach" Role="StudentGroupPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ugtuapi_Models_StudGrup_Group_ugtuapi_Models_Group_GroupPartner">
+        <End Type="ugtuapi.Models.Group" Role="Group" Multiplicity="0..1" />
+        <End Type="ugtuapi.Models.StudGrup" Role="GroupPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ugtuapi_Models_StudGrup_Zach_ugtuapi_Models_Zach_ZachPartner">
+        <End Type="ugtuapi.Models.Zach" Role="Zach" Multiplicity="0..1" />
+        <End Type="ugtuapi.Models.StudGrup" Role="ZachPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ugtuapi_Models_Group_StudentGroup_ugtuapi_Models_StudGrup_StudentGroupPartner">
+        <End Type="ugtuapi.Models.StudGrup" Role="StudentGroup" Multiplicity="*" />
+        <End Type="ugtuapi.Models.Group" Role="StudentGroupPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ugtuapi_Models_Group_FacultyRel_ugtuapi_Models_FacultyRel_FacultyRelPartner">
+        <End Type="ugtuapi.Models.FacultyRel" Role="FacultyRel" Multiplicity="0..1" />
+        <End Type="ugtuapi.Models.Group" Role="FacultyRelPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ugtuapi_Models_Group_Curricula_ugtuapi_Models_Curricula_CurriculaPartner">
+        <End Type="ugtuapi.Models.Curricula" Role="Curricula" Multiplicity="0..1" />
+        <End Type="ugtuapi.Models.Group" Role="CurriculaPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ugtuapi_Models_Group_EducationBranch_ugtuapi_Models_EducationBranch_EducationBranchPartner">
+        <End Type="ugtuapi.Models.EducationBranch" Role="EducationBranch" Multiplicity="0..1" />
+        <End Type="ugtuapi.Models.Group" Role="EducationBranchPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ugtuapi_Models_Curricula_Group_ugtuapi_Models_Group_GroupPartner">
+        <End Type="ugtuapi.Models.Group" Role="Group" Multiplicity="*" />
+        <End Type="ugtuapi.Models.Curricula" Role="GroupPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ugtuapi_Models_Curricula_Uch__pl1_ugtuapi_Models_Curricula_Uch__pl1Partner">
+        <End Type="ugtuapi.Models.Curricula" Role="Uch_pl1" Multiplicity="*" />
+        <End Type="ugtuapi.Models.Curricula" Role="Uch_pl1Partner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ugtuapi_Models_Curricula_Uch__pl2_ugtuapi_Models_Curricula_Uch__pl2Partner">
+        <End Type="ugtuapi.Models.Curricula" Role="Uch_pl2" Multiplicity="0..1" />
+        <End Type="ugtuapi.Models.Curricula" Role="Uch_pl2Partner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ugtuapi_Models_Curricula_EducationBranch_ugtuapi_Models_EducationBranch_EducationBranchPartner">
+        <End Type="ugtuapi.Models.EducationBranch" Role="EducationBranch" Multiplicity="0..1" />
+        <End Type="ugtuapi.Models.Curricula" Role="EducationBranchPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ugtuapi_Models_Curricula_EducationBranch1_ugtuapi_Models_EducationBranch_EducationBranch1Partner">
+        <End Type="ugtuapi.Models.EducationBranch" Role="EducationBranch1" Multiplicity="0..1" />
+        <End Type="ugtuapi.Models.Curricula" Role="EducationBranch1Partner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ugtuapi_Models_StudentInfo_Student_ugtuapi_Models_Student_StudentPartner">
+        <End Type="ugtuapi.Models.Student" Role="Student" Multiplicity="0..1" />
+        <End Type="ugtuapi.Models.StudentInfo" Role="StudentPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ugtuapi_Models_Department_ChildDepartment_ugtuapi_Models_Department_ChildDepartmentPartner">
+        <End Type="ugtuapi.Models.Department" Role="ChildDepartment" Multiplicity="*" />
+        <End Type="ugtuapi.Models.Department" Role="ChildDepartmentPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ugtuapi_Models_Department_ManagerDepartment_ugtuapi_Models_Department_ManagerDepartmentPartner">
+        <End Type="ugtuapi.Models.Department" Role="ManagerDepartment" Multiplicity="0..1" />
+        <End Type="ugtuapi.Models.Department" Role="ManagerDepartmentPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ugtuapi_Models_Department_Faculty_ugtuapi_Models_Faculty_FacultyPartner">
+        <End Type="ugtuapi.Models.Faculty" Role="Faculty" Multiplicity="*" />
+        <End Type="ugtuapi.Models.Department" Role="FacultyPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ugtuapi_Models_Department_Employees_ugtuapi_Models_Employee_EmployeesPartner">
+        <End Type="ugtuapi.Models.Employee" Role="Employees" Multiplicity="*" />
+        <End Type="ugtuapi.Models.Department" Role="EmployeesPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ugtuapi_Models_Department_Manager_ugtuapi_Models_Employee_ManagerPartner">
+        <End Type="ugtuapi.Models.Employee" Role="Manager" Multiplicity="0..1" />
+        <End Type="ugtuapi.Models.Department" Role="ManagerPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ugtuapi_Models_Employee_Department_ugtuapi_Models_Department_DepartmentPartner">
+        <End Type="ugtuapi.Models.Department" Role="Department" Multiplicity="0..1" />
+        <End Type="ugtuapi.Models.Employee" Role="DepartmentPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ugtuapi_Models_Employee_Manages_ugtuapi_Models_Department_ManagesPartner">
+        <End Type="ugtuapi.Models.Department" Role="Manages" Multiplicity="*" />
+        <End Type="ugtuapi.Models.Employee" Role="ManagesPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ugtuapi_Models_FacultyRel_Group_ugtuapi_Models_Group_GroupPartner">
+        <End Type="ugtuapi.Models.Group" Role="Group" Multiplicity="*" />
+        <End Type="ugtuapi.Models.FacultyRel" Role="GroupPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ugtuapi_Models_FacultyRel_EducationBranch_ugtuapi_Models_EducationBranch_EducationBranchPartner">
+        <End Type="ugtuapi.Models.EducationBranch" Role="EducationBranch" Multiplicity="0..1" />
+        <End Type="ugtuapi.Models.FacultyRel" Role="EducationBranchPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ugtuapi_Models_FacultyRel_Faculty_ugtuapi_Models_Faculty_FacultyPartner">
+        <End Type="ugtuapi.Models.Faculty" Role="Faculty" Multiplicity="0..1" />
+        <End Type="ugtuapi.Models.FacultyRel" Role="FacultyPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ugtuapi_Models_EducationBranch_EducationBranch1_ugtuapi_Models_EducationBranch_EducationBranch1Partner">
+        <End Type="ugtuapi.Models.EducationBranch" Role="EducationBranch1" Multiplicity="*" />
+        <End Type="ugtuapi.Models.EducationBranch" Role="EducationBranch1Partner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ugtuapi_Models_EducationBranch_EducationBranch2_ugtuapi_Models_EducationBranch_EducationBranch2Partner">
+        <End Type="ugtuapi.Models.EducationBranch" Role="EducationBranch2" Multiplicity="0..1" />
+        <End Type="ugtuapi.Models.EducationBranch" Role="EducationBranch2Partner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ugtuapi_Models_EducationBranch_Grup_ugtuapi_Models_Group_GrupPartner">
+        <End Type="ugtuapi.Models.Group" Role="Grup" Multiplicity="*" />
+        <End Type="ugtuapi.Models.EducationBranch" Role="GrupPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ugtuapi_Models_EducationBranch_Relation__spec__fac_ugtuapi_Models_FacultyRel_Relation__spec__facPartner">
+        <End Type="ugtuapi.Models.FacultyRel" Role="Relation_spec_fac" Multiplicity="*" />
+        <End Type="ugtuapi.Models.EducationBranch" Role="Relation_spec_facPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ugtuapi_Models_EducationBranch_Uch__pl_ugtuapi_Models_Curricula_Uch__plPartner">
+        <End Type="ugtuapi.Models.Curricula" Role="Uch_pl" Multiplicity="*" />
+        <End Type="ugtuapi.Models.EducationBranch" Role="Uch_plPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ugtuapi_Models_EducationBranch_Uch__pl1_ugtuapi_Models_Curricula_Uch__pl1Partner">
+        <End Type="ugtuapi.Models.Curricula" Role="Uch_pl1" Multiplicity="*" />
+        <End Type="ugtuapi.Models.EducationBranch" Role="Uch_pl1Partner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ugtuapi_Models_Faculty_FacultyRel_ugtuapi_Models_FacultyRel_FacultyRelPartner">
+        <End Type="ugtuapi.Models.FacultyRel" Role="FacultyRel" Multiplicity="*" />
+        <End Type="ugtuapi.Models.Faculty" Role="FacultyRelPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="ugtuapi_Models_Faculty_Department_ugtuapi_Models_Department_DepartmentPartner">
+        <End Type="ugtuapi.Models.Department" Role="Department" Multiplicity="0..1" />
+        <End Type="ugtuapi.Models.Faculty" Role="DepartmentPartner" Multiplicity="0..1" />
+      </Association>
+    </Schema>
+    <Schema Namespace="Default" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <EntityContainer Name="Container" m:IsDefaultEntityContainer="true">
+        <EntitySet Name="Persons" EntityType="ugtuapi.Models.Person" />
+        <EntitySet Name="Students" EntityType="ugtuapi.Models.Student" />
+        <EntitySet Name="Zach" EntityType="ugtuapi.Models.Zach" />
+        <EntitySet Name="StudentGroups" EntityType="ugtuapi.Models.StudGrup" />
+        <EntitySet Name="Groups" EntityType="ugtuapi.Models.Group" />
+        <EntitySet Name="Plans" EntityType="ugtuapi.Models.Curricula" />
+        <EntitySet Name="StudentInfoes" EntityType="ugtuapi.Models.StudentInfo" />
+        <EntitySet Name="Departments" EntityType="ugtuapi.Models.Department" />
+        <EntitySet Name="Employees" EntityType="ugtuapi.Models.Employee" />
+        <EntitySet Name="SpecialityRel" EntityType="ugtuapi.Models.FacultyRel" />
+        <EntitySet Name="Brunches" EntityType="ugtuapi.Models.EducationBranch" />
+        <EntitySet Name="Faculties" EntityType="ugtuapi.Models.Faculty" />
+        <AssociationSet Name="ugtuapi_Models_Person_Student_ugtuapi_Models_Student_StudentPartnerSet" Association="ugtuapi.Models.ugtuapi_Models_Person_Student_ugtuapi_Models_Student_StudentPartner">
+          <End Role="StudentPartner" EntitySet="Persons" />
+          <End Role="Student" EntitySet="Students" />
+        </AssociationSet>
+        <AssociationSet Name="ugtuapi_Models_Student_Person_ugtuapi_Models_Person_PersonPartnerSet" Association="ugtuapi.Models.ugtuapi_Models_Student_Person_ugtuapi_Models_Person_PersonPartner">
+          <End Role="PersonPartner" EntitySet="Students" />
+          <End Role="Person" EntitySet="Persons" />
+        </AssociationSet>
+        <AssociationSet Name="ugtuapi_Models_Student_Zach_ugtuapi_Models_Zach_ZachPartnerSet" Association="ugtuapi.Models.ugtuapi_Models_Student_Zach_ugtuapi_Models_Zach_ZachPartner">
+          <End Role="ZachPartner" EntitySet="Students" />
+          <End Role="Zach" EntitySet="Zach" />
+        </AssociationSet>
+        <AssociationSet Name="ugtuapi_Models_Student_StudentInfo_ugtuapi_Models_StudentInfo_StudentInfoPartnerSet" Association="ugtuapi.Models.ugtuapi_Models_Student_StudentInfo_ugtuapi_Models_StudentInfo_StudentInfoPartner">
+          <End Role="StudentInfoPartner" EntitySet="Students" />
+          <End Role="StudentInfo" EntitySet="StudentInfoes" />
+        </AssociationSet>
+        <AssociationSet Name="ugtuapi_Models_Zach_Student_ugtuapi_Models_Student_StudentPartnerSet" Association="ugtuapi.Models.ugtuapi_Models_Zach_Student_ugtuapi_Models_Student_StudentPartner">
+          <End Role="StudentPartner" EntitySet="Zach" />
+          <End Role="Student" EntitySet="Students" />
+        </AssociationSet>
+        <AssociationSet Name="ugtuapi_Models_Zach_StudentGroup_ugtuapi_Models_StudGrup_StudentGroupPartnerSet" Association="ugtuapi.Models.ugtuapi_Models_Zach_StudentGroup_ugtuapi_Models_StudGrup_StudentGroupPartner">
+          <End Role="StudentGroupPartner" EntitySet="Zach" />
+          <End Role="StudentGroup" EntitySet="StudentGroups" />
+        </AssociationSet>
+        <AssociationSet Name="ugtuapi_Models_StudGrup_Group_ugtuapi_Models_Group_GroupPartnerSet" Association="ugtuapi.Models.ugtuapi_Models_StudGrup_Group_ugtuapi_Models_Group_GroupPartner">
+          <End Role="GroupPartner" EntitySet="StudentGroups" />
+          <End Role="Group" EntitySet="Groups" />
+        </AssociationSet>
+        <AssociationSet Name="ugtuapi_Models_StudGrup_Zach_ugtuapi_Models_Zach_ZachPartnerSet" Association="ugtuapi.Models.ugtuapi_Models_StudGrup_Zach_ugtuapi_Models_Zach_ZachPartner">
+          <End Role="ZachPartner" EntitySet="StudentGroups" />
+          <End Role="Zach" EntitySet="Zach" />
+        </AssociationSet>
+        <AssociationSet Name="ugtuapi_Models_Group_StudentGroup_ugtuapi_Models_StudGrup_StudentGroupPartnerSet" Association="ugtuapi.Models.ugtuapi_Models_Group_StudentGroup_ugtuapi_Models_StudGrup_StudentGroupPartner">
+          <End Role="StudentGroupPartner" EntitySet="Groups" />
+          <End Role="StudentGroup" EntitySet="StudentGroups" />
+        </AssociationSet>
+        <AssociationSet Name="ugtuapi_Models_Group_FacultyRel_ugtuapi_Models_FacultyRel_FacultyRelPartnerSet" Association="ugtuapi.Models.ugtuapi_Models_Group_FacultyRel_ugtuapi_Models_FacultyRel_FacultyRelPartner">
+          <End Role="FacultyRelPartner" EntitySet="Groups" />
+          <End Role="FacultyRel" EntitySet="SpecialityRel" />
+        </AssociationSet>
+        <AssociationSet Name="ugtuapi_Models_Group_Curricula_ugtuapi_Models_Curricula_CurriculaPartnerSet" Association="ugtuapi.Models.ugtuapi_Models_Group_Curricula_ugtuapi_Models_Curricula_CurriculaPartner">
+          <End Role="CurriculaPartner" EntitySet="Groups" />
+          <End Role="Curricula" EntitySet="Plans" />
+        </AssociationSet>
+        <AssociationSet Name="ugtuapi_Models_Group_EducationBranch_ugtuapi_Models_EducationBranch_EducationBranchPartnerSet" Association="ugtuapi.Models.ugtuapi_Models_Group_EducationBranch_ugtuapi_Models_EducationBranch_EducationBranchPartner">
+          <End Role="EducationBranchPartner" EntitySet="Groups" />
+          <End Role="EducationBranch" EntitySet="Brunches" />
+        </AssociationSet>
+        <AssociationSet Name="ugtuapi_Models_Curricula_Group_ugtuapi_Models_Group_GroupPartnerSet" Association="ugtuapi.Models.ugtuapi_Models_Curricula_Group_ugtuapi_Models_Group_GroupPartner">
+          <End Role="GroupPartner" EntitySet="Plans" />
+          <End Role="Group" EntitySet="Groups" />
+        </AssociationSet>
+        <AssociationSet Name="ugtuapi_Models_Curricula_Uch__pl1_ugtuapi_Models_Curricula_Uch__pl1PartnerSet" Association="ugtuapi.Models.ugtuapi_Models_Curricula_Uch__pl1_ugtuapi_Models_Curricula_Uch__pl1Partner">
+          <End Role="Uch_pl1Partner" EntitySet="Plans" />
+          <End Role="Uch_pl1" EntitySet="Plans" />
+        </AssociationSet>
+        <AssociationSet Name="ugtuapi_Models_Curricula_Uch__pl2_ugtuapi_Models_Curricula_Uch__pl2PartnerSet" Association="ugtuapi.Models.ugtuapi_Models_Curricula_Uch__pl2_ugtuapi_Models_Curricula_Uch__pl2Partner">
+          <End Role="Uch_pl2Partner" EntitySet="Plans" />
+          <End Role="Uch_pl2" EntitySet="Plans" />
+        </AssociationSet>
+        <AssociationSet Name="ugtuapi_Models_Curricula_EducationBranch_ugtuapi_Models_EducationBranch_EducationBranchPartnerSet" Association="ugtuapi.Models.ugtuapi_Models_Curricula_EducationBranch_ugtuapi_Models_EducationBranch_EducationBranchPartner">
+          <End Role="EducationBranchPartner" EntitySet="Plans" />
+          <End Role="EducationBranch" EntitySet="Brunches" />
+        </AssociationSet>
+        <AssociationSet Name="ugtuapi_Models_Curricula_EducationBranch1_ugtuapi_Models_EducationBranch_EducationBranch1PartnerSet" Association="ugtuapi.Models.ugtuapi_Models_Curricula_EducationBranch1_ugtuapi_Models_EducationBranch_EducationBranch1Partner">
+          <End Role="EducationBranch1Partner" EntitySet="Plans" />
+          <End Role="EducationBranch1" EntitySet="Brunches" />
+        </AssociationSet>
+        <AssociationSet Name="ugtuapi_Models_StudentInfo_Student_ugtuapi_Models_Student_StudentPartnerSet" Association="ugtuapi.Models.ugtuapi_Models_StudentInfo_Student_ugtuapi_Models_Student_StudentPartner">
+          <End Role="StudentPartner" EntitySet="StudentInfoes" />
+          <End Role="Student" EntitySet="Students" />
+        </AssociationSet>
+        <AssociationSet Name="ugtuapi_Models_Department_ChildDepartment_ugtuapi_Models_Department_ChildDepartmentPartnerSet" Association="ugtuapi.Models.ugtuapi_Models_Department_ChildDepartment_ugtuapi_Models_Department_ChildDepartmentPartner">
+          <End Role="ChildDepartmentPartner" EntitySet="Departments" />
+          <End Role="ChildDepartment" EntitySet="Departments" />
+        </AssociationSet>
+        <AssociationSet Name="ugtuapi_Models_Department_ManagerDepartment_ugtuapi_Models_Department_ManagerDepartmentPartnerSet" Association="ugtuapi.Models.ugtuapi_Models_Department_ManagerDepartment_ugtuapi_Models_Department_ManagerDepartmentPartner">
+          <End Role="ManagerDepartmentPartner" EntitySet="Departments" />
+          <End Role="ManagerDepartment" EntitySet="Departments" />
+        </AssociationSet>
+        <AssociationSet Name="ugtuapi_Models_Department_Faculty_ugtuapi_Models_Faculty_FacultyPartnerSet" Association="ugtuapi.Models.ugtuapi_Models_Department_Faculty_ugtuapi_Models_Faculty_FacultyPartner">
+          <End Role="FacultyPartner" EntitySet="Departments" />
+          <End Role="Faculty" EntitySet="Faculties" />
+        </AssociationSet>
+        <AssociationSet Name="ugtuapi_Models_Department_Employees_ugtuapi_Models_Employee_EmployeesPartnerSet" Association="ugtuapi.Models.ugtuapi_Models_Department_Employees_ugtuapi_Models_Employee_EmployeesPartner">
+          <End Role="EmployeesPartner" EntitySet="Departments" />
+          <End Role="Employees" EntitySet="Employees" />
+        </AssociationSet>
+        <AssociationSet Name="ugtuapi_Models_Department_Manager_ugtuapi_Models_Employee_ManagerPartnerSet" Association="ugtuapi.Models.ugtuapi_Models_Department_Manager_ugtuapi_Models_Employee_ManagerPartner">
+          <End Role="ManagerPartner" EntitySet="Departments" />
+          <End Role="Manager" EntitySet="Employees" />
+        </AssociationSet>
+        <AssociationSet Name="ugtuapi_Models_Employee_Department_ugtuapi_Models_Department_DepartmentPartnerSet" Association="ugtuapi.Models.ugtuapi_Models_Employee_Department_ugtuapi_Models_Department_DepartmentPartner">
+          <End Role="DepartmentPartner" EntitySet="Employees" />
+          <End Role="Department" EntitySet="Departments" />
+        </AssociationSet>
+        <AssociationSet Name="ugtuapi_Models_Employee_Manages_ugtuapi_Models_Department_ManagesPartnerSet" Association="ugtuapi.Models.ugtuapi_Models_Employee_Manages_ugtuapi_Models_Department_ManagesPartner">
+          <End Role="ManagesPartner" EntitySet="Employees" />
+          <End Role="Manages" EntitySet="Departments" />
+        </AssociationSet>
+        <AssociationSet Name="ugtuapi_Models_FacultyRel_Group_ugtuapi_Models_Group_GroupPartnerSet" Association="ugtuapi.Models.ugtuapi_Models_FacultyRel_Group_ugtuapi_Models_Group_GroupPartner">
+          <End Role="GroupPartner" EntitySet="SpecialityRel" />
+          <End Role="Group" EntitySet="Groups" />
+        </AssociationSet>
+        <AssociationSet Name="ugtuapi_Models_FacultyRel_EducationBranch_ugtuapi_Models_EducationBranch_EducationBranchPartnerSet" Association="ugtuapi.Models.ugtuapi_Models_FacultyRel_EducationBranch_ugtuapi_Models_EducationBranch_EducationBranchPartner">
+          <End Role="EducationBranchPartner" EntitySet="SpecialityRel" />
+          <End Role="EducationBranch" EntitySet="Brunches" />
+        </AssociationSet>
+        <AssociationSet Name="ugtuapi_Models_FacultyRel_Faculty_ugtuapi_Models_Faculty_FacultyPartnerSet" Association="ugtuapi.Models.ugtuapi_Models_FacultyRel_Faculty_ugtuapi_Models_Faculty_FacultyPartner">
+          <End Role="FacultyPartner" EntitySet="SpecialityRel" />
+          <End Role="Faculty" EntitySet="Faculties" />
+        </AssociationSet>
+        <AssociationSet Name="ugtuapi_Models_EducationBranch_EducationBranch1_ugtuapi_Models_EducationBranch_EducationBranch1PartnerSet" Association="ugtuapi.Models.ugtuapi_Models_EducationBranch_EducationBranch1_ugtuapi_Models_EducationBranch_EducationBranch1Partner">
+          <End Role="EducationBranch1Partner" EntitySet="Brunches" />
+          <End Role="EducationBranch1" EntitySet="Brunches" />
+        </AssociationSet>
+        <AssociationSet Name="ugtuapi_Models_EducationBranch_EducationBranch2_ugtuapi_Models_EducationBranch_EducationBranch2PartnerSet" Association="ugtuapi.Models.ugtuapi_Models_EducationBranch_EducationBranch2_ugtuapi_Models_EducationBranch_EducationBranch2Partner">
+          <End Role="EducationBranch2Partner" EntitySet="Brunches" />
+          <End Role="EducationBranch2" EntitySet="Brunches" />
+        </AssociationSet>
+        <AssociationSet Name="ugtuapi_Models_EducationBranch_Grup_ugtuapi_Models_Group_GrupPartnerSet" Association="ugtuapi.Models.ugtuapi_Models_EducationBranch_Grup_ugtuapi_Models_Group_GrupPartner">
+          <End Role="GrupPartner" EntitySet="Brunches" />
+          <End Role="Grup" EntitySet="Groups" />
+        </AssociationSet>
+        <AssociationSet Name="ugtuapi_Models_EducationBranch_Relation__spec__fac_ugtuapi_Models_FacultyRel_Relation__spec__facPartnerSet" Association="ugtuapi.Models.ugtuapi_Models_EducationBranch_Relation__spec__fac_ugtuapi_Models_FacultyRel_Relation__spec__facPartner">
+          <End Role="Relation_spec_facPartner" EntitySet="Brunches" />
+          <End Role="Relation_spec_fac" EntitySet="SpecialityRel" />
+        </AssociationSet>
+        <AssociationSet Name="ugtuapi_Models_EducationBranch_Uch__pl_ugtuapi_Models_Curricula_Uch__plPartnerSet" Association="ugtuapi.Models.ugtuapi_Models_EducationBranch_Uch__pl_ugtuapi_Models_Curricula_Uch__plPartner">
+          <End Role="Uch_plPartner" EntitySet="Brunches" />
+          <End Role="Uch_pl" EntitySet="Plans" />
+        </AssociationSet>
+        <AssociationSet Name="ugtuapi_Models_EducationBranch_Uch__pl1_ugtuapi_Models_Curricula_Uch__pl1PartnerSet" Association="ugtuapi.Models.ugtuapi_Models_EducationBranch_Uch__pl1_ugtuapi_Models_Curricula_Uch__pl1Partner">
+          <End Role="Uch_pl1Partner" EntitySet="Brunches" />
+          <End Role="Uch_pl1" EntitySet="Plans" />
+        </AssociationSet>
+        <AssociationSet Name="ugtuapi_Models_Faculty_FacultyRel_ugtuapi_Models_FacultyRel_FacultyRelPartnerSet" Association="ugtuapi.Models.ugtuapi_Models_Faculty_FacultyRel_ugtuapi_Models_FacultyRel_FacultyRelPartner">
+          <End Role="FacultyRelPartner" EntitySet="Faculties" />
+          <End Role="FacultyRel" EntitySet="SpecialityRel" />
+        </AssociationSet>
+        <AssociationSet Name="ugtuapi_Models_Faculty_Department_ugtuapi_Models_Department_DepartmentPartnerSet" Association="ugtuapi.Models.ugtuapi_Models_Faculty_Department_ugtuapi_Models_Department_DepartmentPartner">
+          <End Role="DepartmentPartner" EntitySet="Faculties" />
+          <End Role="Department" EntitySet="Departments" />
+        </AssociationSet>
+      </EntityContainer>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>
