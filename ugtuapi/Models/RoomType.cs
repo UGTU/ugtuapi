@@ -12,21 +12,16 @@ namespace ugtuapi.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class DocumentType
+    public partial class RoomType
     {
-        public DocumentType()
+        public RoomType()
         {
-            this.Documents = new HashSet<Document>();
+            this.Room = new HashSet<Room>();
         }
     
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public bool IsDefault { get; set; }
-        public bool IsIdentity { get; set; }
-        public bool IsEducational { get; set; }
-        public Nullable<int> ik_subFB { get; set; }
-        public Nullable<int> ik_type_grazd { get; set; }
+        public int ik_room_type { get; set; }
+        public string cName_room_type { get; set; }
     
-        public virtual ICollection<Document> Documents { get; set; }
+        public virtual ICollection<Room> Room { get; set; }
     }
 }

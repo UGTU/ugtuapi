@@ -41,5 +41,25 @@ namespace ugtuapi.Models
         public virtual DbSet<DocumentType> documents { get; set; }
         public virtual DbSet<Reason> Pricina { get; set; }
         public virtual DbSet<ReasonType> TypePricina { get; set; }
+        public virtual DbSet<Address> Address { get; set; }
+        public virtual DbSet<Campus> Campus { get; set; }
+        public virtual DbSet<Destination> Destination { get; set; }
+        public virtual DbSet<PersonDocument> PersonDocumentSet { get; set; }
+        public virtual DbSet<Roles> Roles { get; set; }
+        public virtual DbSet<Room> Room { get; set; }
+        public virtual DbSet<RoomType> RoomType { get; set; }
+        public virtual DbSet<Content> Content_UchPl { get; set; }
+        public virtual DbSet<Discipline> discpln { get; set; }
+        public virtual DbSet<CurriculaDisciplines> sv_disc { get; set; }
+        public virtual DbSet<TutorialTypeClass> typ_zan { get; set; }
+        public virtual DbSet<BrunchType> Type_branch { get; set; }
+        public virtual DbSet<DisciplineType> Type_disc { get; set; }
+        public virtual DbSet<TutorialType> TutorialType { get; set; }
+        public virtual DbSet<TutorialClass> vid_zaniat { get; set; }
+        public virtual DbSet<CurriculaYear> Year_uch_pl { get; set; }
+        public virtual DbSet<DisciplineCycle> ckl_disc { get; set; }
+        public virtual DbSet<EducationForm> Form_ed { get; set; }
+        public virtual DbSet<DisciplineGroup> grp_disc { get; set; }
+        public virtual DbSet<TypeSupply> TypeSupply { get; set; }
     }
 }

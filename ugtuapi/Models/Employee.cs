@@ -37,6 +37,10 @@ namespace ugtuapi.Models
         public string Degree { get; set; }
         public string itab_n { get; set; }
         public string Rank { get; set; }
+        public string DegreeSmallName { get; set; }
+        public Nullable<System.DateTime> BirthDate { get; set; }
+        public Nullable<int> idEmployee { get; set; }
+        public string DegreeScienceName { get; set; }
     
         public virtual Department Department { get; set; }
         public virtual ICollection<Department> Manages { get; set; }

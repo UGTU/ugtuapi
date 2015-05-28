@@ -12,21 +12,18 @@ namespace ugtuapi.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class DocumentType
+    public partial class DisciplineType
     {
-        public DocumentType()
+        public DisciplineType()
         {
-            this.Documents = new HashSet<Document>();
+            this.discpln = new HashSet<Discipline>();
         }
     
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public bool IsDefault { get; set; }
-        public bool IsIdentity { get; set; }
-        public bool IsEducational { get; set; }
-        public Nullable<int> ik_subFB { get; set; }
-        public Nullable<int> ik_type_grazd { get; set; }
+        public byte ik_type_disc { get; set; }
+        public string cName_type_disc { get; set; }
+        public Nullable<bool> bit_calc_as_practice { get; set; }
+        public Nullable<int> ik_ed_izm { get; set; }
     
-        public virtual ICollection<Document> Documents { get; set; }
+        public virtual ICollection<Discipline> discpln { get; set; }
     }
 }

@@ -26,7 +26,7 @@ namespace ugtuapi.Models
         public Nullable<int> AdmitsOn { get; set; }
         public Nullable<System.DateTime> Created { get; set; }
         public Nullable<System.DateTime> DisbandedOn { get; set; }
-        public Nullable<int> SpecializationId { get; set; }
+        public Nullable<int> ProfileId { get; set; }
     
         public virtual ICollection<StudGrup> StudentGroup { get; set; }
         public virtual FacultyRel FacultyRel { get; set; }

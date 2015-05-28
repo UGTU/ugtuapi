@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,6 +40,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Data.Edm, Version=5.6.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Data.Edm.5.6.2\lib\net40\Microsoft.Data.Edm.dll</HintPath>
@@ -57,7 +66,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
@@ -127,6 +135,9 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="WebApiContrib.Formatting.Jsonp">
+      <HintPath>..\..\WebApiContrib.Formatting.Jsonp-master\src\WebApiContrib.Formatting.Jsonp\bin\Release\WebApiContrib.Formatting.Jsonp.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -137,12 +148,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.1.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -223,25 +228,62 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DepartmentsController.cs" />
+    <Compile Include="Controllers\DestinationsController.cs" />
+    <Compile Include="Controllers\EducationBranchesController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\FacultiesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PeopleController.cs" />
+    <Compile Include="Controllers\ImagesController.cs" />
     <Compile Include="Controllers\ReasonTypesController.cs" />
+    <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\StudentInfoesController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Address.cs">
+      <DependentUpon>ugtustudent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BrunchType.cs">
+      <DependentUpon>ugtustudent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Campus.cs">
+      <DependentUpon>ugtustudent.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Contact.cs">
+      <DependentUpon>ugtustudent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Content.cs">
       <DependentUpon>ugtustudent.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Curricula.cs">
       <DependentUpon>ugtustudent.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CurriculaDisciplines.cs">
+      <DependentUpon>ugtustudent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CurriculaYear.cs">
+      <DependentUpon>ugtustudent.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Department.cs">
+      <DependentUpon>ugtustudent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Destination.cs">
+      <DependentUpon>ugtustudent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Discipline.cs">
+      <DependentUpon>ugtustudent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DisciplineCycle.cs">
+      <DependentUpon>ugtustudent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DisciplineGroup.cs">
+      <DependentUpon>ugtustudent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DisciplineType.cs">
       <DependentUpon>ugtustudent.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Document.cs">
@@ -251,6 +293,9 @@
       <DependentUpon>ugtustudent.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EducationBranch.cs">
+      <DependentUpon>ugtustudent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EducationForm.cs">
       <DependentUpon>ugtustudent.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Employee.cs">
@@ -269,6 +314,10 @@
     <Compile Include="Models\Person.cs">
       <DependentUpon>ugtustudent.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Person.PicutureUrl.cs" />
+    <Compile Include="Models\PersonDocument.cs">
+      <DependentUpon>ugtustudent.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\PersonName.cs">
       <DependentUpon>ugtustudent.tt</DependentUpon>
     </Compile>
@@ -278,6 +327,15 @@
     <Compile Include="Models\ReasonType.cs">
       <DependentUpon>ugtustudent.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Roles.cs">
+      <DependentUpon>ugtustudent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Room.cs">
+      <DependentUpon>ugtustudent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RoomType.cs">
+      <DependentUpon>ugtustudent.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Student.cs">
       <DependentUpon>ugtustudent.tt</DependentUpon>
     </Compile>
@@ -285,6 +343,18 @@
       <DependentUpon>ugtustudent.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StudGrup.cs">
+      <DependentUpon>ugtustudent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TutorialClass.cs">
+      <DependentUpon>ugtustudent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TutorialType.cs">
+      <DependentUpon>ugtustudent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TutorialTypeClass.cs">
+      <DependentUpon>ugtustudent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TypeSupply.cs">
       <DependentUpon>ugtustudent.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ugtustudent.Context.cs">

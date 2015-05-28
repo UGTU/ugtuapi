@@ -5,6 +5,82 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="UGTU_ACTTESTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="ik_address" />
+          </Key>
+          <Property Name="ik_address" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ik_street" Type="int" Nullable="false" />
+          <Property Name="BuildingNumber" Type="varchar" MaxLength="10" />
+          <Property Name="StructNumber" Type="varchar" MaxLength="10" />
+          <Property Name="FlatNumber" Type="varchar" MaxLength="10" />
+          <Property Name="fIndex" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'UGTU.dbo.Base_Destination' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Base_Destination">
+          <Key>
+            <PropertyRef Name="Ik_destination1" />
+            <PropertyRef Name="Ik_destination2" />
+          </Key>
+          <Property Name="Ik_destination1" Type="int" Nullable="false" />
+          <Property Name="Ik_destination2" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Campus">
+          <Key>
+            <PropertyRef Name="ik_campus" />
+          </Key>
+          <Property Name="ik_campus" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CName_campus" Type="varchar" MaxLength="15" />
+          <Property Name="ik_address" Type="int" />
+        </EntityType>
+        <EntityType Name="ckl_disc">
+          <Key>
+            <PropertyRef Name="IK_ckl_disc" />
+          </Key>
+          <Property Name="IK_ckl_disc" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cname_ckl_disc" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Ccode_ckl_disc" Type="varchar" MaxLength="10" />
+          <Property Name="OrderNumber" Type="int" />
+          <Property Name="VidGos" Type="int" />
+        </EntityType>
+        <EntityType Name="Content_UchPl">
+          <Key>
+            <PropertyRef Name="ik_upContent" />
+          </Key>
+          <Property Name="ik_upContent" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="n_sem" Type="tinyint" Nullable="false" />
+          <Property Name="ik_vid_zanyat" Type="int" Nullable="false" />
+          <Property Name="i_hour_per_week" Type="int" />
+          <Property Name="ik_disc_uch_plan" Type="int" Nullable="false" />
+          <Property Name="ik_kaf" Type="int" />
+          <Property Name="n_module" Type="tinyint" />
+          <Property Name="i_balls" Type="int" />
+          <Property Name="ik_act_off" Type="int" />
+          <Property Name="i_hours_per_sem" Type="int" />
+        </EntityType>
+        <EntityType Name="Destination">
+          <Key>
+            <PropertyRef Name="Ik_destination" />
+          </Key>
+          <Property Name="Ik_destination" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cNameDestination" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="cShortNameDestination" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ik_typesup" Type="int" />
+          <Property Name="Base" Type="bit" />
+          <Property Name="DescriptionDoc" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="discpln">
+          <Key>
+            <PropertyRef Name="iK_disc" />
+          </Key>
+          <Property Name="iK_disc" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cName_disc" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="cShortName" Type="varchar" MaxLength="40" />
+          <Property Name="lPract" Type="bit" Nullable="false" />
+          <Property Name="ik_type_disc" Type="tinyint" />
+          <Property Name="DiplDiscName" Type="varchar" MaxLength="500" />
+        </EntityType>
         <EntityType Name="Doc_stud">
           <Key>
             <PropertyRef Name="Ik_doc" />
@@ -16,17 +92,44 @@
           <Property Name="Np_number" Type="varchar" MaxLength="15" />
           <Property Name="Cd_seria" Type="varchar" MaxLength="10" />
           <Property Name="nCode" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="AdditionalInfo" Type="varchar(max)" />
+          <Property Name="IsReal" Type="bit" />
+        </EntityType>
+        <EntityType Name="Document">
+          <Key>
+            <PropertyRef Name="Ik_Document" />
+          </Key>
+          <Property Name="Ik_Document" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ik_Transfer" Type="int" Nullable="false" />
+          <Property Name="Ik_destination" Type="int" Nullable="false" />
+          <Property Name="Ik_studGrup" Type="int" Nullable="false" />
+          <Property Name="Num_podrazd" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="NumberDoc" Type="int" />
+          <Property Name="DateCreate" Type="datetime" />
+          <Property Name="DateReady" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'UGTU.dbo.DocumentBase' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DocumentBase">
+          <Key>
+            <PropertyRef Name="Ik_Document_base" />
+            <PropertyRef Name="Ik_Document_reference" />
+          </Key>
+          <Property Name="Ik_Document_base" Type="int" Nullable="false" />
+          <Property Name="Ik_Document_reference" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="documents">
           <Key>
             <PropertyRef Name="ik_vid_doc" />
           </Key>
           <Property Name="ik_vid_doc" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="cvid_doc" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="cvid_doc" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="IsDefault" Type="bit" Nullable="false" />
           <Property Name="IsIdentity" Type="bit" Nullable="false" />
           <Property Name="IsEducational" Type="bit" Nullable="false" />
           <Property Name="ik_FB" Type="int" />
+          <Property Name="ik_subFB" Type="int" />
+          <Property Name="ik_type_grazd" Type="int" />
         </EntityType>
         <EntityType Name="EducationBranch">
           <Key>
@@ -67,6 +170,27 @@
           <Property Name="Dep_Index" Type="varchar" MaxLength="500" />
           <Property Name="ik_type_department" Type="int" />
           <Property Name="Cname_fac_small" Type="varchar" MaxLength="500" />
+          <Property Name="DateDiplomDelivery" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Form_ed">
+          <Key>
+            <PropertyRef Name="Ik_form_ed" />
+          </Key>
+          <Property Name="Ik_form_ed" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cname_form_ed" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ik_FB" Type="int" />
+          <Property Name="Cname_form_pril" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="grp_disc">
+          <Key>
+            <PropertyRef Name="IK_grp_disc" />
+          </Key>
+          <Property Name="IK_grp_disc" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cname_grp_disc" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Ccode_grp_disc" Type="varchar" MaxLength="10" />
+          <Property Name="lVibor" Type="bit" Nullable="false" />
+          <Property Name="OrderNumber" Type="int" />
+          <Property Name="VidGos" Type="int" />
         </EntityType>
         <EntityType Name="Grup">
           <Key>
@@ -96,7 +220,7 @@
           <Property Name="Lrab" Type="bit" />
           <Property Name="lSex" Type="bit" />
           <Property Name="Lobchegit" Type="bit" />
-          <Property Name="cSotTel" Type="varchar" MaxLength="50" />
+          <Property Name="cSotTel" Type="varchar" MaxLength="500" />
           <Property Name="ctelefon" Type="varchar" MaxLength="20" />
           <Property Name="cEmail" Type="varchar" MaxLength="50" />
           <Property Name="Photo" Type="image" />
@@ -137,6 +261,44 @@
           <Property Name="DepartmentGUID" Type="uniqueidentifier" />
           <Property Name="is_short" Type="bit" />
           <Property Name="is_old" Type="bit" />
+          <Property Name="ik_room" Type="int" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="ik_Roles" />
+          </Key>
+          <Property Name="ik_Roles" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cNameRoles" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'UGTU.dbo.Roles_Destination' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Roles_Destination">
+          <Key>
+            <PropertyRef Name="ik_destination" />
+            <PropertyRef Name="ik_Roles" />
+          </Key>
+          <Property Name="ik_destination" Type="int" Nullable="false" />
+          <Property Name="ik_Roles" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Room">
+          <Key>
+            <PropertyRef Name="ik_room" />
+          </Key>
+          <Property Name="ik_room" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cname_room" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ik_campus" Type="int" />
+          <Property Name="iSeatCount" Type="tinyint" />
+          <Property Name="ik_room_type" Type="int" />
+          <Property Name="FireProtectionBy" Type="uniqueidentifier" />
+          <Property Name="Timetable" Type="varchar" MaxLength="70" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="RoomType">
+          <Key>
+            <PropertyRef Name="ik_room_type" />
+          </Key>
+          <Property Name="ik_room_type" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cName_room_type" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
@@ -174,6 +336,53 @@
           <Property Name="cObosnOtch" Type="varchar" MaxLength="500" />
           <Property Name="Ik_studGrup" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
+        <EntityType Name="sv_disc">
+          <Key>
+            <PropertyRef Name="ik_disc_uch_plan" />
+          </Key>
+          <Property Name="ik_disc" Type="int" Nullable="false" />
+          <Property Name="ik_grp_disc" Type="int" Nullable="false" />
+          <Property Name="ik_ckl_disc" Type="int" Nullable="false" />
+          <Property Name="ik_podckl" Type="int" />
+          <Property Name="cname_ckl_disc1" Type="varchar" MaxLength="20" />
+          <Property Name="ik_uch_plan" Type="int" Nullable="false" />
+          <Property Name="Uchet" Type="bit" />
+          <Property Name="iHour_gos" Type="int" />
+          <Property Name="ik_disc_uch_plan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ik_default_kaf" Type="int" />
+          <Property Name="iIndivid" Type="int" />
+          <Property Name="ViborGroup" Type="int" />
+          <Property Name="ik_pdgrp_disc" Type="int" />
+          <Property Name="iK_spclz" Type="int" />
+          <Property Name="url_UMKD" Type="varchar" MaxLength="200" />
+          <Property Name="WeekCount" Type="float" StoreGeneratedPattern="Computed" />
+          <Property Name="WeekCountInt" Type="int" StoreGeneratedPattern="Computed" />
+          <Property Name="WeekCountResidue" Type="int" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="typ_zan">
+          <Key>
+            <PropertyRef Name="iK_type_vz" />
+          </Key>
+          <Property Name="iK_type_vz" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cname_typ_vz" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Type_branch">
+          <Key>
+            <PropertyRef Name="ik_type_branch" />
+          </Key>
+          <Property Name="ik_type_branch" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cName_type_branch" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Order" Type="int" />
+        </EntityType>
+        <EntityType Name="Type_disc">
+          <Key>
+            <PropertyRef Name="ik_type_disc" />
+          </Key>
+          <Property Name="ik_type_disc" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cName_type_disc" Type="varchar" MaxLength="30" />
+          <Property Name="bit_calc_as_practice" Type="bit" />
+          <Property Name="ik_ed_izm" Type="int" />
+        </EntityType>
         <EntityType Name="TypePricina">
           <Key>
             <PropertyRef Name="ikTypePric" />
@@ -181,6 +390,23 @@
           <Property Name="ikTypePric" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="cTypePric" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="IsMain" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeSupply">
+          <Key>
+            <PropertyRef Name="ik_typesup" />
+          </Key>
+          <Property Name="ik_typesup" Type="int" Nullable="false" />
+          <Property Name="TypeSup" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeZanyat">
+          <Key>
+            <PropertyRef Name="ikTypeZanyat" />
+          </Key>
+          <Property Name="ikTypeZanyat" Type="int" Nullable="false" />
+          <Property Name="TypeZanyat" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="bitExam" Type="bit" Nullable="false" />
+          <Property Name="bitOtchetnost" Type="bit" Nullable="false" />
+          <Property Name="bitZach" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Uch_pl">
           <Key>
@@ -202,6 +428,29 @@
           <Property Name="date_approved" Type="date" />
           <Property Name="Nprotocol" Type="int" />
           <Property Name="ik_kaf" Type="int" />
+        </EntityType>
+        <EntityType Name="vid_zaniat">
+          <Key>
+            <PropertyRef Name="iK_vid_zanyat" />
+          </Key>
+          <Property Name="iK_vid_zanyat" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ikTypeZanyat" Type="int" Nullable="false" />
+          <Property Name="iK_type_vz" Type="int" Nullable="false" />
+          <Property Name="cName_vid_zanyat" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="cshort_vid_zanyat" Type="varchar" MaxLength="20" />
+          <Property Name="lTema" Type="bit" />
+          <Property Name="bit_priznak_decompose" Type="bit" />
+          <Property Name="bit_nagr" Type="bit" />
+          <Property Name="bit_must_be_in_uch_plan" Type="bit" />
+          <Property Name="year_expire" Type="int" />
+        </EntityType>
+        <EntityType Name="Year_uch_pl">
+          <Key>
+            <PropertyRef Name="ik_year_uch_pl" />
+          </Key>
+          <Property Name="ik_year_uch_pl" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="year_value" Type="int" Nullable="false" />
+          <Property Name="DateDiplomDelivery" Type="datetime" />
         </EntityType>
         <EntityType Name="Zach">
           <Key>
@@ -250,6 +499,10 @@
           <Property Name="DegreeName" Type="varchar" MaxLength="100" />
           <Property Name="itab_n" Type="varchar" MaxLength="50" />
           <Property Name="RankName" Type="varchar" MaxLength="100" />
+          <Property Name="DegreeSmallName" Type="varchar" MaxLength="50" />
+          <Property Name="BirthDate" Type="date" />
+          <Property Name="idEmployee" Type="int" />
+          <Property Name="DegreeScienceName" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -285,6 +538,116 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
           <Property Name="ik_spec" Type="int" Nullable="false" />
           <Property Name="DepartmentGUID" Type="uniqueidentifier" />
         </EntityType>
+        <Association Name="Base_Destination_Destination_FK1">
+          <End Role="Destination" Type="Self.Destination" Multiplicity="1" />
+          <End Role="Base_Destination" Type="Self.Base_Destination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Destination">
+              <PropertyRef Name="Ik_destination" />
+            </Principal>
+            <Dependent Role="Base_Destination">
+              <PropertyRef Name="Ik_destination1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Base_Destination_Destination_FK2">
+          <End Role="Destination" Type="Self.Destination" Multiplicity="1" />
+          <End Role="Base_Destination" Type="Self.Base_Destination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Destination">
+              <PropertyRef Name="Ik_destination" />
+            </Principal>
+            <Dependent Role="Base_Destination">
+              <PropertyRef Name="Ik_destination2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Document_Destination_FK">
+          <End Role="Destination" Type="Self.Destination" Multiplicity="1" />
+          <End Role="Document" Type="Self.Document" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Destination">
+              <PropertyRef Name="Ik_destination" />
+            </Principal>
+            <Dependent Role="Document">
+              <PropertyRef Name="Ik_destination" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Document_StudGrup_FK">
+          <End Role="StudGrup" Type="Self.StudGrup" Multiplicity="1" />
+          <End Role="Document" Type="Self.Document" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudGrup">
+              <PropertyRef Name="Ik_studGrup" />
+            </Principal>
+            <Dependent Role="Document">
+              <PropertyRef Name="Ik_studGrup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DocumentBase_Document_FK1">
+          <End Role="Document" Type="Self.Document" Multiplicity="1" />
+          <End Role="DocumentBase" Type="Self.DocumentBase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Document">
+              <PropertyRef Name="Ik_Document" />
+            </Principal>
+            <Dependent Role="DocumentBase">
+              <PropertyRef Name="Ik_Document_base" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DocumentBase_Document_FK2">
+          <End Role="Document" Type="Self.Document" Multiplicity="1" />
+          <End Role="DocumentBase" Type="Self.DocumentBase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Document">
+              <PropertyRef Name="Ik_Document" />
+            </Principal>
+            <Dependent Role="DocumentBase">
+              <PropertyRef Name="Ik_Document_reference" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Campus_Adress">
+          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+          <End Role="Campus" Type="Self.Campus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="ik_address" />
+            </Principal>
+            <Dependent Role="Campus">
+              <PropertyRef Name="ik_address" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Content_UchPl_sv_disc">
+          <End Role="sv_disc" Type="Self.sv_disc" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Content_UchPl" Type="Self.Content_UchPl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sv_disc">
+              <PropertyRef Name="ik_disc_uch_plan" />
+            </Principal>
+            <Dependent Role="Content_UchPl">
+              <PropertyRef Name="ik_disc_uch_plan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Content_UchPl_vid_zaniat">
+          <End Role="vid_zaniat" Type="Self.vid_zaniat" Multiplicity="1" />
+          <End Role="Content_UchPl" Type="Self.Content_UchPl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vid_zaniat">
+              <PropertyRef Name="iK_vid_zanyat" />
+            </Principal>
+            <Dependent Role="Content_UchPl">
+              <PropertyRef Name="ik_vid_zanyat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DepartmentMainData_DepartmentMainData">
           <End Role="DepartmentMainData" Type="Self.DepartmentMainData" Multiplicity="0..1" />
           <End Role="DepartmentMainData1" Type="Self.DepartmentMainData" Multiplicity="*" />
@@ -294,6 +657,18 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
             </Principal>
             <Dependent Role="DepartmentMainData1">
               <PropertyRef Name="ManagerDepartmentGUID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_discpln_Type_disc">
+          <End Role="Type_disc" Type="Self.Type_disc" Multiplicity="0..1" />
+          <End Role="discpln" Type="Self.discpln" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_disc">
+              <PropertyRef Name="ik_type_disc" />
+            </Principal>
+            <Dependent Role="discpln">
+              <PropertyRef Name="ik_type_disc" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -330,6 +705,18 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
             </Principal>
             <Dependent Role="EducationBranch1">
               <PropertyRef Name="id_parent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EdBranch_Type_Branch">
+          <End Role="Type_branch" Type="Self.Type_branch" Multiplicity="0..1" />
+          <End Role="EducationBranch" Type="Self.EducationBranch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_branch">
+              <PropertyRef Name="ik_type_branch" />
+            </Principal>
+            <Dependent Role="EducationBranch">
+              <PropertyRef Name="id_type_branch" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -407,6 +794,30 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Relation_spec_fac_Form_ed">
+          <End Role="Form_ed" Type="Self.Form_ed" Multiplicity="1" />
+          <End Role="Relation_spec_fac" Type="Self.Relation_spec_fac" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form_ed">
+              <PropertyRef Name="Ik_form_ed" />
+            </Principal>
+            <Dependent Role="Relation_spec_fac">
+              <PropertyRef Name="Ik_form_ed" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Relation_spec_fac_Room">
+          <End Role="Room" Type="Self.Room" Multiplicity="0..1" />
+          <End Role="Relation_spec_fac" Type="Self.Relation_spec_fac" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="ik_room" />
+            </Principal>
+            <Dependent Role="Relation_spec_fac">
+              <PropertyRef Name="ik_room" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Relation_spec_fac_Spec_stud">
           <End Role="EducationBranch" Type="Self.EducationBranch" Multiplicity="1" />
           <End Role="Relation_spec_fac" Type="Self.Relation_spec_fac" Multiplicity="*" />
@@ -416,6 +827,30 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
             </Principal>
             <Dependent Role="Relation_spec_fac">
               <PropertyRef Name="ik_spec" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Room_Campus">
+          <End Role="Campus" Type="Self.Campus" Multiplicity="0..1" />
+          <End Role="Room" Type="Self.Room" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Campus">
+              <PropertyRef Name="ik_campus" />
+            </Principal>
+            <Dependent Role="Room">
+              <PropertyRef Name="ik_campus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Room_RoomType">
+          <End Role="RoomType" Type="Self.RoomType" Multiplicity="0..1" />
+          <End Role="Room" Type="Self.Room" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoomType">
+              <PropertyRef Name="ik_room_type" />
+            </Principal>
+            <Dependent Role="Room">
+              <PropertyRef Name="ik_room_type" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -479,6 +914,80 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_sv_disc_ckl_disc">
+          <End Role="ckl_disc" Type="Self.ckl_disc" Multiplicity="1" />
+          <End Role="sv_disc" Type="Self.sv_disc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ckl_disc">
+              <PropertyRef Name="IK_ckl_disc" />
+            </Principal>
+            <Dependent Role="sv_disc">
+              <PropertyRef Name="ik_ckl_disc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sv_disc_discpln">
+          <End Role="discpln" Type="Self.discpln" Multiplicity="1" />
+          <End Role="sv_disc" Type="Self.sv_disc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="discpln">
+              <PropertyRef Name="iK_disc" />
+            </Principal>
+            <Dependent Role="sv_disc">
+              <PropertyRef Name="ik_disc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sv_disc_grp_disc">
+          <End Role="grp_disc" Type="Self.grp_disc" Multiplicity="1" />
+          <End Role="sv_disc" Type="Self.sv_disc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="grp_disc">
+              <PropertyRef Name="IK_grp_disc" />
+            </Principal>
+            <Dependent Role="sv_disc">
+              <PropertyRef Name="ik_grp_disc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sv_disc_Uch_pl">
+          <End Role="Uch_pl" Type="Self.Uch_pl" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="sv_disc" Type="Self.sv_disc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uch_pl">
+              <PropertyRef Name="ik_uch_plan" />
+            </Principal>
+            <Dependent Role="sv_disc">
+              <PropertyRef Name="ik_uch_plan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TypeSupply_Destination">
+          <End Role="TypeSupply" Type="Self.TypeSupply" Multiplicity="0..1" />
+          <End Role="Destination" Type="Self.Destination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeSupply">
+              <PropertyRef Name="ik_typesup" />
+            </Principal>
+            <Dependent Role="Destination">
+              <PropertyRef Name="ik_typesup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Uch_pl_Form_ed">
+          <End Role="Form_ed" Type="Self.Form_ed" Multiplicity="1" />
+          <End Role="Uch_pl" Type="Self.Uch_pl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form_ed">
+              <PropertyRef Name="Ik_form_ed" />
+            </Principal>
+            <Dependent Role="Uch_pl">
+              <PropertyRef Name="ik_form_ed" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Uch_pl_spclz">
           <End Role="EducationBranch" Type="Self.EducationBranch" Multiplicity="0..1" />
           <End Role="Uch_pl" Type="Self.Uch_pl" Multiplicity="*" />
@@ -503,6 +1012,18 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Uch_pl_Year_uch_pl">
+          <End Role="Year_uch_pl" Type="Self.Year_uch_pl" Multiplicity="1" />
+          <End Role="Uch_pl" Type="Self.Uch_pl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Year_uch_pl">
+              <PropertyRef Name="ik_year_uch_pl" />
+            </Principal>
+            <Dependent Role="Uch_pl">
+              <PropertyRef Name="ik_year_uch_pl" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_uchpl_uchpl">
           <End Role="Uch_pl" Type="Self.Uch_pl" Multiplicity="0..1" />
           <End Role="Uch_pl1" Type="Self.Uch_pl" Multiplicity="*" />
@@ -512,6 +1033,30 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
             </Principal>
             <Dependent Role="Uch_pl1">
               <PropertyRef Name="id_parent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vid_zaniat_typ_zan">
+          <End Role="typ_zan" Type="Self.typ_zan" Multiplicity="1" />
+          <End Role="vid_zaniat" Type="Self.vid_zaniat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="typ_zan">
+              <PropertyRef Name="iK_type_vz" />
+            </Principal>
+            <Dependent Role="vid_zaniat">
+              <PropertyRef Name="iK_type_vz" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vid_zaniat_TypeZanyat">
+          <End Role="TypeZanyat" Type="Self.TypeZanyat" Multiplicity="1" />
+          <End Role="vid_zaniat" Type="Self.vid_zaniat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeZanyat">
+              <PropertyRef Name="ikTypeZanyat" />
+            </Principal>
+            <Dependent Role="vid_zaniat">
+              <PropertyRef Name="ikTypeZanyat" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -527,22 +1072,84 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="Roles_Destination_Dest_FK">
+          <End Role="Destination" Type="Self.Destination" Multiplicity="1" />
+          <End Role="Roles_Destination" Type="Self.Roles_Destination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Destination">
+              <PropertyRef Name="Ik_destination" />
+            </Principal>
+            <Dependent Role="Roles_Destination">
+              <PropertyRef Name="ik_destination" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Roles_Destination_Rolse_FK">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Roles_Destination" Type="Self.Roles_Destination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="ik_Roles" />
+            </Principal>
+            <Dependent Role="Roles_Destination">
+              <PropertyRef Name="ik_Roles" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="UGTU_ACTTESTModelStoreContainer">
+          <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Campus" EntityType="Self.Campus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ckl_disc" EntityType="Self.ckl_disc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Content_UchPl" EntityType="Self.Content_UchPl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Destination" EntityType="Self.Destination" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="discpln" EntityType="Self.discpln" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Doc_stud" EntityType="Self.Doc_stud" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Document" EntityType="Self.Document" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="documents" EntityType="Self.documents" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EducationBranch" EntityType="Self.EducationBranch" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Fac" EntityType="Self.Fac" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Form_ed" EntityType="Self.Form_ed" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="grp_disc" EntityType="Self.grp_disc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Grup" EntityType="Self.Grup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pricina" EntityType="Self.Pricina" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Relation_spec_fac" EntityType="Self.Relation_spec_fac" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RoomType" EntityType="Self.RoomType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudGrup" EntityType="Self.StudGrup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sv_disc" EntityType="Self.sv_disc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="typ_zan" EntityType="Self.typ_zan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Type_branch" EntityType="Self.Type_branch" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Type_disc" EntityType="Self.Type_disc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypePricina" EntityType="Self.TypePricina" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeSupply" EntityType="Self.TypeSupply" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeZanyat" EntityType="Self.TypeZanyat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Uch_pl" EntityType="Self.Uch_pl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vid_zaniat" EntityType="Self.vid_zaniat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Year_uch_pl" EntityType="Self.Year_uch_pl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Zach" EntityType="Self.Zach" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepartmentMainData" EntityType="Self.DepartmentMainData" Schema="Import" store:Type="Tables" />
           <EntitySet Name="KafTeachers" EntityType="Self.KafTeachers" Schema="Import" store:Type="Tables" />
+          <EntitySet Name="Base_Destination" EntityType="Self.Base_Destination" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Base_Destination].[Ik_destination1] AS [Ik_destination1], 
+    [Base_Destination].[Ik_destination2] AS [Ik_destination2]
+    FROM [dbo].[Base_Destination] AS [Base_Destination]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DocumentBase" EntityType="Self.DocumentBase" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DocumentBase].[Ik_Document_base] AS [Ik_Document_base], 
+    [DocumentBase].[Ik_Document_reference] AS [Ik_Document_reference]
+    FROM [dbo].[DocumentBase] AS [DocumentBase]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Roles_Destination" EntityType="Self.Roles_Destination" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Roles_Destination].[ik_destination] AS [ik_destination], 
+    [Roles_Destination].[ik_Roles] AS [ik_Roles]
+    FROM [dbo].[Roles_Destination] AS [Roles_Destination]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="StudInfo" EntityType="Self.StudInfo" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [StudInfo].[nCode] AS [nCode], 
@@ -566,9 +1173,49 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
     [StudInfo].[DepartmentGUID] AS [DepartmentGUID]
     FROM [dbo].[StudInfo] AS [StudInfo]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="Base_Destination_Destination_FK1" Association="Self.Base_Destination_Destination_FK1">
+            <End Role="Destination" EntitySet="Destination" />
+            <End Role="Base_Destination" EntitySet="Base_Destination" />
+          </AssociationSet>
+          <AssociationSet Name="Base_Destination_Destination_FK2" Association="Self.Base_Destination_Destination_FK2">
+            <End Role="Destination" EntitySet="Destination" />
+            <End Role="Base_Destination" EntitySet="Base_Destination" />
+          </AssociationSet>
+          <AssociationSet Name="Document_Destination_FK" Association="Self.Document_Destination_FK">
+            <End Role="Destination" EntitySet="Destination" />
+            <End Role="Document" EntitySet="Document" />
+          </AssociationSet>
+          <AssociationSet Name="Document_StudGrup_FK" Association="Self.Document_StudGrup_FK">
+            <End Role="StudGrup" EntitySet="StudGrup" />
+            <End Role="Document" EntitySet="Document" />
+          </AssociationSet>
+          <AssociationSet Name="DocumentBase_Document_FK1" Association="Self.DocumentBase_Document_FK1">
+            <End Role="Document" EntitySet="Document" />
+            <End Role="DocumentBase" EntitySet="DocumentBase" />
+          </AssociationSet>
+          <AssociationSet Name="DocumentBase_Document_FK2" Association="Self.DocumentBase_Document_FK2">
+            <End Role="Document" EntitySet="Document" />
+            <End Role="DocumentBase" EntitySet="DocumentBase" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Campus_Adress" Association="Self.FK_Campus_Adress">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="Campus" EntitySet="Campus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Content_UchPl_sv_disc" Association="Self.FK_Content_UchPl_sv_disc">
+            <End Role="sv_disc" EntitySet="sv_disc" />
+            <End Role="Content_UchPl" EntitySet="Content_UchPl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Content_UchPl_vid_zaniat" Association="Self.FK_Content_UchPl_vid_zaniat">
+            <End Role="vid_zaniat" EntitySet="vid_zaniat" />
+            <End Role="Content_UchPl" EntitySet="Content_UchPl" />
+          </AssociationSet>
           <AssociationSet Name="FK_DepartmentMainData_DepartmentMainData" Association="Self.FK_DepartmentMainData_DepartmentMainData">
             <End Role="DepartmentMainData" EntitySet="DepartmentMainData" />
             <End Role="DepartmentMainData1" EntitySet="DepartmentMainData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_discpln_Type_disc" Association="Self.FK_discpln_Type_disc">
+            <End Role="Type_disc" EntitySet="Type_disc" />
+            <End Role="discpln" EntitySet="discpln" />
           </AssociationSet>
           <AssociationSet Name="FK_Doc_stud_documents" Association="Self.FK_Doc_stud_documents">
             <End Role="documents" EntitySet="documents" />
@@ -581,6 +1228,10 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
           <AssociationSet Name="FK_EdBranch_EdBranch" Association="Self.FK_EdBranch_EdBranch">
             <End Role="EducationBranch" EntitySet="EducationBranch" />
             <End Role="EducationBranch1" EntitySet="EducationBranch" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EdBranch_Type_Branch" Association="Self.FK_EdBranch_Type_Branch">
+            <End Role="Type_branch" EntitySet="Type_branch" />
+            <End Role="EducationBranch" EntitySet="EducationBranch" />
           </AssociationSet>
           <AssociationSet Name="FK_Grup_EdBranch" Association="Self.FK_Grup_EdBranch">
             <End Role="EducationBranch" EntitySet="EducationBranch" />
@@ -606,9 +1257,25 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
             <End Role="Fac" EntitySet="Fac" />
             <End Role="Relation_spec_fac" EntitySet="Relation_spec_fac" />
           </AssociationSet>
+          <AssociationSet Name="FK_Relation_spec_fac_Form_ed" Association="Self.FK_Relation_spec_fac_Form_ed">
+            <End Role="Form_ed" EntitySet="Form_ed" />
+            <End Role="Relation_spec_fac" EntitySet="Relation_spec_fac" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Relation_spec_fac_Room" Association="Self.FK_Relation_spec_fac_Room">
+            <End Role="Room" EntitySet="Room" />
+            <End Role="Relation_spec_fac" EntitySet="Relation_spec_fac" />
+          </AssociationSet>
           <AssociationSet Name="FK_Relation_spec_fac_Spec_stud" Association="Self.FK_Relation_spec_fac_Spec_stud">
             <End Role="EducationBranch" EntitySet="EducationBranch" />
             <End Role="Relation_spec_fac" EntitySet="Relation_spec_fac" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Room_Campus" Association="Self.FK_Room_Campus">
+            <End Role="Campus" EntitySet="Campus" />
+            <End Role="Room" EntitySet="Room" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Room_RoomType" Association="Self.FK_Room_RoomType">
+            <End Role="RoomType" EntitySet="RoomType" />
+            <End Role="Room" EntitySet="Room" />
           </AssociationSet>
           <AssociationSet Name="FK_Student_Person" Association="Self.FK_Student_Person">
             <End Role="Person" EntitySet="Person" />
@@ -630,6 +1297,30 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
             <End Role="Zach" EntitySet="Zach" />
             <End Role="StudGrup" EntitySet="StudGrup" />
           </AssociationSet>
+          <AssociationSet Name="FK_sv_disc_ckl_disc" Association="Self.FK_sv_disc_ckl_disc">
+            <End Role="ckl_disc" EntitySet="ckl_disc" />
+            <End Role="sv_disc" EntitySet="sv_disc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sv_disc_discpln" Association="Self.FK_sv_disc_discpln">
+            <End Role="discpln" EntitySet="discpln" />
+            <End Role="sv_disc" EntitySet="sv_disc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sv_disc_grp_disc" Association="Self.FK_sv_disc_grp_disc">
+            <End Role="grp_disc" EntitySet="grp_disc" />
+            <End Role="sv_disc" EntitySet="sv_disc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sv_disc_Uch_pl" Association="Self.FK_sv_disc_Uch_pl">
+            <End Role="Uch_pl" EntitySet="Uch_pl" />
+            <End Role="sv_disc" EntitySet="sv_disc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TypeSupply_Destination" Association="Self.FK_TypeSupply_Destination">
+            <End Role="TypeSupply" EntitySet="TypeSupply" />
+            <End Role="Destination" EntitySet="Destination" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Uch_pl_Form_ed" Association="Self.FK_Uch_pl_Form_ed">
+            <End Role="Form_ed" EntitySet="Form_ed" />
+            <End Role="Uch_pl" EntitySet="Uch_pl" />
+          </AssociationSet>
           <AssociationSet Name="FK_Uch_pl_spclz" Association="Self.FK_Uch_pl_spclz">
             <End Role="EducationBranch" EntitySet="EducationBranch" />
             <End Role="Uch_pl" EntitySet="Uch_pl" />
@@ -638,13 +1329,33 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
             <End Role="EducationBranch" EntitySet="EducationBranch" />
             <End Role="Uch_pl" EntitySet="Uch_pl" />
           </AssociationSet>
+          <AssociationSet Name="FK_Uch_pl_Year_uch_pl" Association="Self.FK_Uch_pl_Year_uch_pl">
+            <End Role="Year_uch_pl" EntitySet="Year_uch_pl" />
+            <End Role="Uch_pl" EntitySet="Uch_pl" />
+          </AssociationSet>
           <AssociationSet Name="FK_uchpl_uchpl" Association="Self.FK_uchpl_uchpl">
             <End Role="Uch_pl" EntitySet="Uch_pl" />
             <End Role="Uch_pl1" EntitySet="Uch_pl" />
           </AssociationSet>
+          <AssociationSet Name="FK_vid_zaniat_typ_zan" Association="Self.FK_vid_zaniat_typ_zan">
+            <End Role="typ_zan" EntitySet="typ_zan" />
+            <End Role="vid_zaniat" EntitySet="vid_zaniat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vid_zaniat_TypeZanyat" Association="Self.FK_vid_zaniat_TypeZanyat">
+            <End Role="TypeZanyat" EntitySet="TypeZanyat" />
+            <End Role="vid_zaniat" EntitySet="vid_zaniat" />
+          </AssociationSet>
           <AssociationSet Name="FK_Zach_Stud" Association="Self.FK_Zach_Stud">
             <End Role="Student" EntitySet="Student" />
             <End Role="Zach" EntitySet="Zach" />
+          </AssociationSet>
+          <AssociationSet Name="Roles_Destination_Dest_FK" Association="Self.Roles_Destination_Dest_FK">
+            <End Role="Destination" EntitySet="Destination" />
+            <End Role="Roles_Destination" EntitySet="Roles_Destination" />
+          </AssociationSet>
+          <AssociationSet Name="Roles_Destination_Rolse_FK" Association="Self.Roles_Destination_Rolse_FK">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Roles_Destination" EntitySet="Roles_Destination" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -677,7 +1388,8 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
           <Property Name="PersonFullName" Type="String" Nullable="false" MaxLength="92" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
           <Property Name="PersonSmallName" Type="String" Nullable="false" MaxLength="34" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
           <Property Name="PersName" Type="String" Nullable="false" MaxLength="92" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
-          <NavigationProperty Name="Documents" Relationship="UGTU_ACTTESTModel.FK_Doc_stud_Person" FromRole="Person" ToRole="Doc_stud" />
+          <Property Name="Photo" Type="Binary" FixedLength="false" MaxLength="Max" />
+          <NavigationProperty Name="Documents" Relationship="UGTU_ACTTESTModel.PersonDocument1" FromRole="Person" ToRole="Document" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
@@ -806,10 +1518,6 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
             <End Role="documents" EntitySet="documents" />
             <End Role="Doc_stud" EntitySet="Doc_stud" />
           </AssociationSet>
-          <AssociationSet Name="FK_Doc_stud_Person" Association="UGTU_ACTTESTModel.FK_Doc_stud_Person">
-            <End Role="Person" EntitySet="Person" />
-            <End Role="Doc_stud" EntitySet="Doc_stud" />
-          </AssociationSet>
           <EntitySet Name="Pricina" EntityType="UGTU_ACTTESTModel.Reason" />
           <EntitySet Name="TypePricina" EntityType="UGTU_ACTTESTModel.ReasonType" />
           <AssociationSet Name="FK_Pricina_TypePricina" Association="UGTU_ACTTESTModel.FK_Pricina_TypePricina">
@@ -823,6 +1531,122 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
           <AssociationSet Name="FK_StudGrup_Pricina1" Association="UGTU_ACTTESTModel.FK_StudGrup_Pricina1">
             <End Role="Pricina" EntitySet="Pricina" />
             <End Role="StudGrup" EntitySet="StudGrup" />
+          </AssociationSet>
+          <EntitySet Name="Address" EntityType="UGTU_ACTTESTModel.Address" />
+          <EntitySet Name="Campus" EntityType="UGTU_ACTTESTModel.Campus" />
+          <EntitySet Name="Destination" EntityType="UGTU_ACTTESTModel.Destination" />
+          <EntitySet Name="PersonDocumentSet" EntityType="UGTU_ACTTESTModel.PersonDocument" />
+          <EntitySet Name="Roles" EntityType="UGTU_ACTTESTModel.Roles" />
+          <EntitySet Name="Room" EntityType="UGTU_ACTTESTModel.Room" />
+          <EntitySet Name="RoomType" EntityType="UGTU_ACTTESTModel.RoomType" />
+          <AssociationSet Name="FK_Campus_Adress" Association="UGTU_ACTTESTModel.FK_Campus_Adress">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="Campus" EntitySet="Campus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Room_Campus" Association="UGTU_ACTTESTModel.FK_Room_Campus">
+            <End Role="Campus" EntitySet="Campus" />
+            <End Role="Room" EntitySet="Room" />
+          </AssociationSet>
+          <AssociationSet Name="Document_Destination_FK" Association="UGTU_ACTTESTModel.Document_Destination_FK">
+            <End Role="Destination" EntitySet="Destination" />
+            <End Role="Document1" EntitySet="PersonDocumentSet" />
+          </AssociationSet>
+          <AssociationSet Name="Document_StudGrup_FK" Association="UGTU_ACTTESTModel.Document_StudGrup_FK">
+            <End Role="StudGrup" EntitySet="StudGrup" />
+            <End Role="Document1" EntitySet="PersonDocumentSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Relation_spec_fac_Room" Association="UGTU_ACTTESTModel.FK_Relation_spec_fac_Room">
+            <End Role="Room" EntitySet="Room" />
+            <End Role="FacultyRel" EntitySet="Relation_spec_fac" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Room_RoomType" Association="UGTU_ACTTESTModel.FK_Room_RoomType">
+            <End Role="RoomType" EntitySet="RoomType" />
+            <End Role="Room" EntitySet="Room" />
+          </AssociationSet>
+          <AssociationSet Name="DocumentBase" Association="UGTU_ACTTESTModel.DocumentBase">
+            <End Role="Document1" EntitySet="PersonDocumentSet" />
+            <End Role="Document11" EntitySet="PersonDocumentSet" />
+          </AssociationSet>
+          <AssociationSet Name="Roles_Destination" Association="UGTU_ACTTESTModel.Roles_Destination">
+            <End Role="Destination" EntitySet="Destination" />
+            <End Role="Roles" EntitySet="Roles" />
+          </AssociationSet>
+          <AssociationSet Name="PersonDocument1" Association="UGTU_ACTTESTModel.PersonDocument1">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Document" EntitySet="Doc_stud" />
+          </AssociationSet>
+          <EntitySet Name="Content_UchPl" EntityType="UGTU_ACTTESTModel.Content" />
+          <EntitySet Name="discpln" EntityType="UGTU_ACTTESTModel.Discipline" />
+          <EntitySet Name="sv_disc" EntityType="UGTU_ACTTESTModel.CurriculaDisciplines" />
+          <EntitySet Name="typ_zan" EntityType="UGTU_ACTTESTModel.TutorialTypeClass" />
+          <EntitySet Name="Type_branch" EntityType="UGTU_ACTTESTModel.BrunchType" />
+          <EntitySet Name="Type_disc" EntityType="UGTU_ACTTESTModel.DisciplineType" />
+          <EntitySet Name="TutorialType" EntityType="UGTU_ACTTESTModel.TutorialType" />
+          <EntitySet Name="vid_zaniat" EntityType="UGTU_ACTTESTModel.TutorialClass" />
+          <EntitySet Name="Year_uch_pl" EntityType="UGTU_ACTTESTModel.CurriculaYear" />
+          <AssociationSet Name="FK_Content_UchPl_sv_disc" Association="UGTU_ACTTESTModel.FK_Content_UchPl_sv_disc">
+            <End Role="sv_disc" EntitySet="sv_disc" />
+            <End Role="Content_UchPl" EntitySet="Content_UchPl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Content_UchPl_vid_zaniat" Association="UGTU_ACTTESTModel.FK_Content_UchPl_vid_zaniat">
+            <End Role="vid_zaniat" EntitySet="vid_zaniat" />
+            <End Role="Content_UchPl" EntitySet="Content_UchPl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_discpln_Type_disc" Association="UGTU_ACTTESTModel.FK_discpln_Type_disc">
+            <End Role="Type_disc" EntitySet="Type_disc" />
+            <End Role="discpln" EntitySet="discpln" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sv_disc_discpln" Association="UGTU_ACTTESTModel.FK_sv_disc_discpln">
+            <End Role="discpln" EntitySet="discpln" />
+            <End Role="sv_disc" EntitySet="sv_disc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EdBranch_Type_Branch" Association="UGTU_ACTTESTModel.FK_EdBranch_Type_Branch">
+            <End Role="Type_branch" EntitySet="Type_branch" />
+            <End Role="EducationBranch" EntitySet="EducationBranch" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sv_disc_Uch_pl" Association="UGTU_ACTTESTModel.FK_sv_disc_Uch_pl">
+            <End Role="Curricula" EntitySet="Uch_pl" />
+            <End Role="sv_disc" EntitySet="sv_disc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vid_zaniat_typ_zan" Association="UGTU_ACTTESTModel.FK_vid_zaniat_typ_zan">
+            <End Role="typ_zan" EntitySet="typ_zan" />
+            <End Role="vid_zaniat" EntitySet="vid_zaniat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vid_zaniat_TypeZanyat" Association="UGTU_ACTTESTModel.FK_vid_zaniat_TypeZanyat">
+            <End Role="TypeZanyat" EntitySet="TutorialType" />
+            <End Role="vid_zaniat" EntitySet="vid_zaniat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Uch_pl_Year_uch_pl" Association="UGTU_ACTTESTModel.FK_Uch_pl_Year_uch_pl">
+            <End Role="Year_uch_pl" EntitySet="Year_uch_pl" />
+            <End Role="Curricula" EntitySet="Uch_pl" />
+          </AssociationSet>
+          <EntitySet Name="ckl_disc" EntityType="UGTU_ACTTESTModel.DisciplineCycle" />
+          <EntitySet Name="Form_ed" EntityType="UGTU_ACTTESTModel.EducationForm" />
+          <EntitySet Name="grp_disc" EntityType="UGTU_ACTTESTModel.DisciplineGroup" />
+          <AssociationSet Name="FK_sv_disc_ckl_disc" Association="UGTU_ACTTESTModel.FK_sv_disc_ckl_disc">
+            <End Role="ckl_disc" EntitySet="ckl_disc" />
+            <End Role="sv_disc" EntitySet="sv_disc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Relation_spec_fac_Form_ed" Association="UGTU_ACTTESTModel.FK_Relation_spec_fac_Form_ed">
+            <End Role="Form_ed" EntitySet="Form_ed" />
+            <End Role="FacultyRel" EntitySet="Relation_spec_fac" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Uch_pl_Form_ed" Association="UGTU_ACTTESTModel.FK_Uch_pl_Form_ed">
+            <End Role="Form_ed" EntitySet="Form_ed" />
+            <End Role="Curricula" EntitySet="Uch_pl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sv_disc_grp_disc" Association="UGTU_ACTTESTModel.FK_sv_disc_grp_disc">
+            <End Role="grp_disc" EntitySet="grp_disc" />
+            <End Role="sv_disc" EntitySet="sv_disc" />
+          </AssociationSet>
+          <EntitySet Name="TypeSupply" EntityType="UGTU_ACTTESTModel.TypeSupply" />
+          <AssociationSet Name="FK_TypeSupply_Destination" Association="UGTU_ACTTESTModel.FK_TypeSupply_Destination">
+            <End Role="TypeSupply" EntitySet="TypeSupply" />
+            <End Role="Destination" EntitySet="Destination" />
+          </AssociationSet>
+          <AssociationSet Name="Base_Destination" Association="UGTU_ACTTESTModel.Base_Destination">
+            <End Role="Destination" EntitySet="Destination" />
+            <End Role="Destination1" EntitySet="Destination" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Zach">
@@ -868,7 +1692,7 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
           <Property Name="AdmitsOn" Type="Int32" />
           <Property Name="Created" Type="DateTime" Precision="3" />
           <Property Name="DisbandedOn" Type="DateTime" Precision="3" />
-          <Property Name="SpecializationId" Type="Int32" />
+          <Property Name="ProfileId" Type="Int32" />
           <NavigationProperty Name="StudentGroup" Relationship="UGTU_ACTTESTModel.FK_StudZach_Grup" FromRole="Grup" ToRole="StudGrup" />
           <NavigationProperty Name="FacultyRel" Relationship="UGTU_ACTTESTModel.FK_Grup_Relation_spec_fac" FromRole="Grup" ToRole="Relation_spec_fac" />
           <NavigationProperty Name="Curricula" Relationship="UGTU_ACTTESTModel.FK_Grup_Uch_pl" FromRole="Grup" ToRole="Uch_pl" />
@@ -892,6 +1716,7 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
           <NavigationProperty Name="Zach" Relationship="UGTU_ACTTESTModel.FK_StudZach_Zach" FromRole="StudGrup" ToRole="Zach" />
           <NavigationProperty Name="FromReason" Relationship="UGTU_ACTTESTModel.FK_StudGrup_Pricina" FromRole="StudGrup" ToRole="Pricina" />
           <NavigationProperty Name="ToReason" Relationship="UGTU_ACTTESTModel.FK_StudGrup_Pricina1" FromRole="StudGrup" ToRole="Pricina" />
+          <NavigationProperty Name="Document" Relationship="UGTU_ACTTESTModel.Document_StudGrup_FK" FromRole="StudGrup" ToRole="Document1" />
         </EntityType>
         <Association Name="FK_StudZach_Grup">
           <End Type="UGTU_ACTTESTModel.Group" Role="Grup" Multiplicity="1" />
@@ -938,6 +1763,9 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
               <LongDescription>Определяет, есть ли на направлении группы, которые продолжают учиться или все группы уже закончили обучение</LongDescription>
             </Documentation>
           </Property>
+          <Property Name="ik_room" Type="Int32" />
+          <NavigationProperty Name="Room" Relationship="UGTU_ACTTESTModel.FK_Relation_spec_fac_Room" FromRole="FacultyRel" ToRole="Room" />
+          <NavigationProperty Name="EducationForm" Relationship="UGTU_ACTTESTModel.FK_Relation_spec_fac_Form_ed" FromRole="FacultyRel" ToRole="Form_ed" />
         </EntityType>
         <EntityType Name="Curricula">
           <Key>
@@ -959,11 +1787,14 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
           <Property Name="date_approved" Type="DateTime" Precision="0" />
           <Property Name="Nprotocol" Type="Int32" />
           <Property Name="ik_kaf" Type="Int32" />
-          <NavigationProperty Name="Group" Relationship="UGTU_ACTTESTModel.FK_Grup_Uch_pl" FromRole="Uch_pl" ToRole="Grup" />
-          <NavigationProperty Name="Uch_pl1" Relationship="UGTU_ACTTESTModel.FK_uchpl_uchpl" FromRole="Uch_pl" ToRole="Uch_pl1" />
-          <NavigationProperty Name="Uch_pl2" Relationship="UGTU_ACTTESTModel.FK_uchpl_uchpl" FromRole="Uch_pl1" ToRole="Uch_pl" />
-          <NavigationProperty Name="EducationBranch" Relationship="UGTU_ACTTESTModel.FK_Uch_pl_spclz" FromRole="Uch_pl" ToRole="EducationBranch" />
-          <NavigationProperty Name="EducationBranch1" Relationship="UGTU_ACTTESTModel.FK_Uch_pl_Spec_stud" FromRole="Uch_pl" ToRole="EducationBranch" />
+          <NavigationProperty Name="Groups" Relationship="UGTU_ACTTESTModel.FK_Grup_Uch_pl" FromRole="Uch_pl" ToRole="Grup" />
+          <NavigationProperty Name="WorkCurriculas" Relationship="UGTU_ACTTESTModel.FK_uchpl_uchpl" FromRole="Uch_pl" ToRole="Uch_pl1" />
+          <NavigationProperty Name="DirectionCurricula" Relationship="UGTU_ACTTESTModel.FK_uchpl_uchpl" FromRole="Uch_pl1" ToRole="Uch_pl" />
+          <NavigationProperty Name="Profile" Relationship="UGTU_ACTTESTModel.FK_Uch_pl_spclz" FromRole="Uch_pl" ToRole="EducationBranch" />
+          <NavigationProperty Name="Direction" Relationship="UGTU_ACTTESTModel.FK_Uch_pl_Spec_stud" FromRole="Uch_pl" ToRole="EducationBranch" />
+          <NavigationProperty Name="Disciplines" Relationship="UGTU_ACTTESTModel.FK_sv_disc_Uch_pl" FromRole="Curricula" ToRole="sv_disc" />
+          <NavigationProperty Name="Year_uch_pl" Relationship="UGTU_ACTTESTModel.FK_Uch_pl_Year_uch_pl" FromRole="Curricula" ToRole="Year_uch_pl" />
+          <NavigationProperty Name="Form_ed" Relationship="UGTU_ACTTESTModel.FK_Uch_pl_Form_ed" FromRole="Curricula" ToRole="Form_ed" />
         </EntityType>
         <Association Name="FK_Grup_Relation_spec_fac">
           <End Type="UGTU_ACTTESTModel.FacultyRel" Role="Relation_spec_fac" Multiplicity="1" />
@@ -1023,12 +1854,13 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
           <Property Name="ik_main_spec" Type="Int32" />
           <Property Name="id_parent" Type="Int32" />
           <Property Name="id_type_branch" Type="Int32" />
-          <NavigationProperty Name="EducationBranch1" Relationship="UGTU_ACTTESTModel.FK_EdBranch_EdBranch" FromRole="EducationBranch" ToRole="EducationBranch1" />
-          <NavigationProperty Name="EducationBranch2" Relationship="UGTU_ACTTESTModel.FK_EdBranch_EdBranch" FromRole="EducationBranch1" ToRole="EducationBranch" />
-          <NavigationProperty Name="Grup" Relationship="UGTU_ACTTESTModel.FK_Grup_EdBranch" FromRole="EducationBranch" ToRole="Grup" />
-          <NavigationProperty Name="Relation_spec_fac" Relationship="UGTU_ACTTESTModel.FK_Relation_spec_fac_Spec_stud" FromRole="EducationBranch" ToRole="Relation_spec_fac" />
-          <NavigationProperty Name="Uch_pl" Relationship="UGTU_ACTTESTModel.FK_Uch_pl_spclz" FromRole="EducationBranch" ToRole="Uch_pl" />
-          <NavigationProperty Name="Uch_pl1" Relationship="UGTU_ACTTESTModel.FK_Uch_pl_Spec_stud" FromRole="EducationBranch" ToRole="Uch_pl" />
+          <NavigationProperty Name="Children" Relationship="UGTU_ACTTESTModel.FK_EdBranch_EdBranch" FromRole="EducationBranch" ToRole="EducationBranch1" />
+          <NavigationProperty Name="Parent" Relationship="UGTU_ACTTESTModel.FK_EdBranch_EdBranch" FromRole="EducationBranch1" ToRole="EducationBranch" />
+          <NavigationProperty Name="Groups" Relationship="UGTU_ACTTESTModel.FK_Grup_EdBranch" FromRole="EducationBranch" ToRole="Grup" />
+          <NavigationProperty Name="Faculties" Relationship="UGTU_ACTTESTModel.FK_Relation_spec_fac_Spec_stud" FromRole="EducationBranch" ToRole="Relation_spec_fac" />
+          <NavigationProperty Name="CurriculaProfiles" Relationship="UGTU_ACTTESTModel.FK_Uch_pl_spclz" FromRole="EducationBranch" ToRole="Uch_pl" />
+          <NavigationProperty Name="CurriculaDirections" Relationship="UGTU_ACTTESTModel.FK_Uch_pl_Spec_stud" FromRole="EducationBranch" ToRole="Uch_pl" />
+          <NavigationProperty Name="Type_branch" Relationship="UGTU_ACTTESTModel.FK_EdBranch_Type_Branch" FromRole="EducationBranch" ToRole="Type_branch" />
         </EntityType>
         <Association Name="FK_EdBranch_EdBranch">
           <End Type="UGTU_ACTTESTModel.EducationBranch" Role="EducationBranch" Multiplicity="0..1" />
@@ -1050,7 +1882,7 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
               <PropertyRef Name="ik_spec" />
             </Principal>
             <Dependent Role="Grup">
-              <PropertyRef Name="SpecializationId" />
+              <PropertyRef Name="ProfileId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1161,6 +1993,10 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
           <Property Name="Rank" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Department" Relationship="UGTU_ACTTESTModel.DepartmentEmployee" FromRole="Employee" ToRole="Department" />
           <NavigationProperty Name="Manages" Relationship="UGTU_ACTTESTModel.DepartmentEmployee1" FromRole="Employee" ToRole="Department" />
+          <Property Name="DegreeSmallName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BirthDate" Type="DateTime" Precision="0" />
+          <Property Name="idEmployee" Type="Int32" />
+          <Property Name="DegreeScienceName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_DepartmentMainData_DepartmentMainData">
           <End Type="UGTU_ACTTESTModel.Department" Role="DepartmentMainData" Multiplicity="0..1" />
@@ -1185,6 +2021,7 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
           <Property Name="DepartmentUID" Type="Guid" />
           <NavigationProperty Name="FacultyRel" Relationship="UGTU_ACTTESTModel.FK_Relation_spec_fac_Fac" FromRole="Fac" ToRole="FacultyRel" />
           <NavigationProperty Name="Department" Relationship="UGTU_ACTTESTModel.DepartmentFaculty" FromRole="Faculty" ToRole="Department" />
+          <Property Name="DateDiplomDelivery" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK_Relation_spec_fac_Fac">
           <End Type="UGTU_ACTTESTModel.Faculty" Role="Fac" Multiplicity="1" />
@@ -1258,18 +2095,22 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
           <Property Name="Series" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="nCode" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <NavigationProperty Name="DocumentType" Relationship="UGTU_ACTTESTModel.FK_Doc_stud_documents" FromRole="Doc_stud" ToRole="documents" />
-          <NavigationProperty Name="Person" Relationship="UGTU_ACTTESTModel.FK_Doc_stud_Person" FromRole="Doc_stud" ToRole="Person" />
+          <Property Name="AdditionalInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IsReal" Type="Boolean" />
+          <NavigationProperty Name="Person" Relationship="UGTU_ACTTESTModel.PersonDocument1" FromRole="Document" ToRole="Person" />
         </EntityType>
         <EntityType Name="DocumentType">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="IsDefault" Type="Boolean" Nullable="false" />
           <Property Name="IsIdentity" Type="Boolean" Nullable="false" />
           <Property Name="IsEducational" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Documents" Relationship="UGTU_ACTTESTModel.FK_Doc_stud_documents" FromRole="documents" ToRole="Doc_stud" />
+          <Property Name="ik_subFB" Type="Int32" />
+          <Property Name="ik_type_grazd" Type="Int32" />
         </EntityType>
         <Association Name="FK_Doc_stud_documents">
           <End Type="UGTU_ACTTESTModel.DocumentType" Role="documents" Multiplicity="1" />
@@ -1280,18 +2121,6 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
             </Principal>
             <Dependent Role="Doc_stud">
               <PropertyRef Name="DocTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Doc_stud_Person">
-          <End Type="UGTU_ACTTESTModel.Person" Role="Person" Multiplicity="1" />
-          <End Type="UGTU_ACTTESTModel.Document" Role="Doc_stud" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Person">
-              <PropertyRef Name="nCode" />
-            </Principal>
-            <Dependent Role="Doc_stud">
-              <PropertyRef Name="nCode" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1352,6 +2181,526 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="ik_address" />
+          </Key>
+          <Property Name="ik_address" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ik_street" Type="Int32" Nullable="false" />
+          <Property Name="BuildingNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="StructNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="FlatNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="fIndex" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Campus" Relationship="UGTU_ACTTESTModel.FK_Campus_Adress" FromRole="Address" ToRole="Campus" />
+        </EntityType>
+        <EntityType Name="Campus">
+          <Key>
+            <PropertyRef Name="ik_campus" />
+          </Key>
+          <Property Name="ik_campus" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CName_campus" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="ik_address" Type="Int32" />
+          <NavigationProperty Name="Address" Relationship="UGTU_ACTTESTModel.FK_Campus_Adress" FromRole="Campus" ToRole="Address" />
+          <NavigationProperty Name="Room" Relationship="UGTU_ACTTESTModel.FK_Room_Campus" FromRole="Campus" ToRole="Room" />
+        </EntityType>
+        <EntityType Name="Destination">
+          <Key>
+            <PropertyRef Name="Ik_destination" />
+          </Key>
+          <Property Name="Ik_destination" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cNameDestination" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cShortNameDestination" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Document" Relationship="UGTU_ACTTESTModel.Document_Destination_FK" FromRole="Destination" ToRole="Document1" />
+          <NavigationProperty Name="Roles" Relationship="UGTU_ACTTESTModel.Roles_Destination" FromRole="Destination" ToRole="Roles" />
+          <Property Name="ik_typesup" Type="Int32" />
+          <Property Name="IsBase" Type="Boolean" />
+          <Property Name="DescriptionDoc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TypeSupply" Relationship="UGTU_ACTTESTModel.FK_TypeSupply_Destination" FromRole="Destination" ToRole="TypeSupply" />
+          <NavigationProperty Name="Grounds" Relationship="UGTU_ACTTESTModel.Base_Destination" FromRole="Destination" ToRole="Destination1" />
+          <NavigationProperty Name="Derived" Relationship="UGTU_ACTTESTModel.Base_Destination" FromRole="Destination1" ToRole="Destination" />
+          </EntityType>
+        <EntityType Name="PersonDocument">
+          <Key>
+            <PropertyRef Name="Ik_Document" />
+          </Key>
+          <Property Name="Ik_Document" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ik_Transfer" Type="Int32" Nullable="false" />
+          <Property Name="Ik_destination" Type="Int32" Nullable="false" />
+          <Property Name="Ik_studGrup" Type="Int32" Nullable="false" />
+          <Property Name="Num_podrazd" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NumberDoc" Type="Int32" />
+          <Property Name="DateCreate" Type="DateTime" Precision="3" />
+          <Property Name="DateReady" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Destination" Relationship="UGTU_ACTTESTModel.Document_Destination_FK" FromRole="Document1" ToRole="Destination" />
+          <NavigationProperty Name="StudGrup" Relationship="UGTU_ACTTESTModel.Document_StudGrup_FK" FromRole="Document1" ToRole="StudGrup" />
+          <NavigationProperty Name="Document11" Relationship="UGTU_ACTTESTModel.DocumentBase" FromRole="Document1" ToRole="Document11" />
+          <NavigationProperty Name="Document2" Relationship="UGTU_ACTTESTModel.DocumentBase" FromRole="Document11" ToRole="Document1" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="ik_Roles" />
+          </Key>
+          <Property Name="ik_Roles" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cNameRoles" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Destination" Relationship="UGTU_ACTTESTModel.Roles_Destination" FromRole="Roles" ToRole="Destination" />
+        </EntityType>
+        <EntityType Name="Room">
+          <Key>
+            <PropertyRef Name="ik_room" />
+          </Key>
+          <Property Name="ik_room" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cname_room" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ik_campus" Type="Int32" />
+          <Property Name="iSeatCount" Type="Byte" />
+          <Property Name="ik_room_type" Type="Int32" />
+          <Property Name="FireProtectionBy" Type="Guid" />
+          <Property Name="Timetable" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Campus" Relationship="UGTU_ACTTESTModel.FK_Room_Campus" FromRole="Room" ToRole="Campus" />
+          <NavigationProperty Name="Relation_spec_fac" Relationship="UGTU_ACTTESTModel.FK_Relation_spec_fac_Room" FromRole="Room" ToRole="FacultyRel" />
+          <NavigationProperty Name="RoomType" Relationship="UGTU_ACTTESTModel.FK_Room_RoomType" FromRole="Room" ToRole="RoomType" />
+        </EntityType>
+        <EntityType Name="RoomType">
+          <Key>
+            <PropertyRef Name="ik_room_type" />
+          </Key>
+          <Property Name="ik_room_type" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cName_room_type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Room" Relationship="UGTU_ACTTESTModel.FK_Room_RoomType" FromRole="RoomType" ToRole="Room" />
+        </EntityType>
+        <Association Name="FK_Campus_Adress">
+          <End Type="UGTU_ACTTESTModel.Address" Role="Address" Multiplicity="0..1" />
+          <End Type="UGTU_ACTTESTModel.Campus" Role="Campus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="ik_address" />
+            </Principal>
+            <Dependent Role="Campus">
+              <PropertyRef Name="ik_address" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Room_Campus">
+          <End Type="UGTU_ACTTESTModel.Campus" Role="Campus" Multiplicity="0..1" />
+          <End Type="UGTU_ACTTESTModel.Room" Role="Room" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Campus">
+              <PropertyRef Name="ik_campus" />
+            </Principal>
+            <Dependent Role="Room">
+              <PropertyRef Name="ik_campus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Document_Destination_FK">
+          <End Type="UGTU_ACTTESTModel.Destination" Role="Destination" Multiplicity="1" />
+          <End Type="UGTU_ACTTESTModel.PersonDocument" Role="Document1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Destination">
+              <PropertyRef Name="Ik_destination" />
+            </Principal>
+            <Dependent Role="Document1">
+              <PropertyRef Name="Ik_destination" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Document_StudGrup_FK">
+          <End Type="UGTU_ACTTESTModel.StudGrup" Role="StudGrup" Multiplicity="1" />
+          <End Type="UGTU_ACTTESTModel.PersonDocument" Role="Document1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudGrup">
+              <PropertyRef Name="Ik_studGrup" />
+            </Principal>
+            <Dependent Role="Document1">
+              <PropertyRef Name="Ik_studGrup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Relation_spec_fac_Room">
+          <End Type="UGTU_ACTTESTModel.Room" Role="Room" Multiplicity="0..1" />
+          <End Type="UGTU_ACTTESTModel.FacultyRel" Role="FacultyRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="ik_room" />
+            </Principal>
+            <Dependent Role="FacultyRel">
+              <PropertyRef Name="ik_room" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Room_RoomType">
+          <End Type="UGTU_ACTTESTModel.RoomType" Role="RoomType" Multiplicity="0..1" />
+          <End Type="UGTU_ACTTESTModel.Room" Role="Room" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoomType">
+              <PropertyRef Name="ik_room_type" />
+            </Principal>
+            <Dependent Role="Room">
+              <PropertyRef Name="ik_room_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DocumentBase">
+          <End Type="UGTU_ACTTESTModel.PersonDocument" Role="Document1" Multiplicity="*" />
+          <End Type="UGTU_ACTTESTModel.PersonDocument" Role="Document11" Multiplicity="*" />
+        </Association>
+        <Association Name="Roles_Destination">
+          <End Type="UGTU_ACTTESTModel.Destination" Role="Destination" Multiplicity="*" />
+          <End Type="UGTU_ACTTESTModel.Roles" Role="Roles" Multiplicity="*" />
+        </Association>
+        <Association Name="PersonDocument1">
+          <End Type="UGTU_ACTTESTModel.Person" Role="Person" Multiplicity="1" />
+          <End Type="UGTU_ACTTESTModel.Document" Role="Document" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="nCode" />
+            </Principal>
+            <Dependent Role="Document">
+              <PropertyRef Name="nCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Content">
+          <Key>
+            <PropertyRef Name="ik_upContent" />
+          </Key>
+          <Property Name="ik_upContent" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="n_sem" Type="Byte" Nullable="false" />
+          <Property Name="ik_vid_zanyat" Type="Int32" Nullable="false" />
+          <Property Name="i_hour_per_week" Type="Int32" />
+          <Property Name="ik_disc_uch_plan" Type="Int32" Nullable="false" />
+          <Property Name="ik_kaf" Type="Int32" />
+          <Property Name="n_module" Type="Byte" />
+          <Property Name="i_balls" Type="Int32" />
+          <Property Name="ik_act_off" Type="Int32" />
+          <Property Name="i_hours_per_sem" Type="Int32" />
+          <NavigationProperty Name="sv_disc" Relationship="UGTU_ACTTESTModel.FK_Content_UchPl_sv_disc" FromRole="Content_UchPl" ToRole="sv_disc" />
+          <NavigationProperty Name="vid_zaniat" Relationship="UGTU_ACTTESTModel.FK_Content_UchPl_vid_zaniat" FromRole="Content_UchPl" ToRole="vid_zaniat" />
+        </EntityType>
+        <EntityType Name="Discipline">
+          <Key>
+            <PropertyRef Name="iK_disc" />
+          </Key>
+          <Property Name="iK_disc" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cName_disc" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="cShortName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="lPract" Type="Boolean" Nullable="false" />
+          <Property Name="ik_type_disc" Type="Byte" />
+          <Property Name="DiplDiscName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Type_disc" Relationship="UGTU_ACTTESTModel.FK_discpln_Type_disc" FromRole="discpln" ToRole="Type_disc" />
+          <NavigationProperty Name="sv_disc" Relationship="UGTU_ACTTESTModel.FK_sv_disc_discpln" FromRole="discpln" ToRole="sv_disc" />
+        </EntityType>
+        <EntityType Name="CurriculaDisciplines">
+          <Key>
+            <PropertyRef Name="ik_disc_uch_plan" />
+          </Key>
+          <Property Name="ik_disc" Type="Int32" Nullable="false" />
+          <Property Name="ik_grp_disc" Type="Int32" Nullable="false" />
+          <Property Name="ik_ckl_disc" Type="Int32" Nullable="false" />
+          <Property Name="ik_podckl" Type="Int32" />
+          <Property Name="CycleName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CurriculaId" Type="Int32" Nullable="false" />
+          <Property Name="Uchet" Type="Boolean" />
+          <Property Name="iHour_gos" Type="Int32" />
+          <Property Name="ik_disc_uch_plan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ik_default_kaf" Type="Int32" />
+          <Property Name="iIndivid" Type="Int32" />
+          <Property Name="ViborGroup" Type="Int32" />
+          <Property Name="ik_pdgrp_disc" Type="Int32" />
+          <Property Name="iK_spclz" Type="Int32" />
+          <Property Name="CurriculumUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="WeekCount" Type="Double" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="WeekCountInt" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="WeekCountResidue" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Content" Relationship="UGTU_ACTTESTModel.FK_Content_UchPl_sv_disc" FromRole="sv_disc" ToRole="Content_UchPl" />
+          <NavigationProperty Name="Discipline" Relationship="UGTU_ACTTESTModel.FK_sv_disc_discpln" FromRole="sv_disc" ToRole="discpln" />
+          <NavigationProperty Name="Curricula" Relationship="UGTU_ACTTESTModel.FK_sv_disc_Uch_pl" FromRole="sv_disc" ToRole="Curricula" />
+          <NavigationProperty Name="Cycle" Relationship="UGTU_ACTTESTModel.FK_sv_disc_ckl_disc" FromRole="sv_disc" ToRole="ckl_disc" />
+          <NavigationProperty Name="Group" Relationship="UGTU_ACTTESTModel.FK_sv_disc_grp_disc" FromRole="sv_disc" ToRole="grp_disc" />
+        </EntityType>
+        <EntityType Name="TutorialTypeClass">
+          <Key>
+            <PropertyRef Name="iK_type_vz" />
+          </Key>
+          <Property Name="iK_type_vz" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cname_typ_vz" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="vid_zaniat" Relationship="UGTU_ACTTESTModel.FK_vid_zaniat_typ_zan" FromRole="typ_zan" ToRole="vid_zaniat" />
+        </EntityType>
+        <EntityType Name="BrunchType">
+          <Key>
+            <PropertyRef Name="ik_type_branch" />
+          </Key>
+          <Property Name="ik_type_branch" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cName_type_branch" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Order" Type="Int32" />
+          <NavigationProperty Name="EducationBranch" Relationship="UGTU_ACTTESTModel.FK_EdBranch_Type_Branch" FromRole="Type_branch" ToRole="EducationBranch" />
+        </EntityType>
+        <EntityType Name="DisciplineType">
+          <Key>
+            <PropertyRef Name="ik_type_disc" />
+          </Key>
+          <Property Name="ik_type_disc" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cName_type_disc" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="bit_calc_as_practice" Type="Boolean" />
+          <Property Name="ik_ed_izm" Type="Int32" />
+          <NavigationProperty Name="discpln" Relationship="UGTU_ACTTESTModel.FK_discpln_Type_disc" FromRole="Type_disc" ToRole="discpln" />
+        </EntityType>
+        <EntityType Name="TutorialType">
+          <Key>
+            <PropertyRef Name="ikTypeZanyat" />
+          </Key>
+          <Property Name="ikTypeZanyat" Type="Int32" Nullable="false" />
+          <Property Name="TypeZanyat1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="bitExam" Type="Boolean" Nullable="false" />
+          <Property Name="bitOtchetnost" Type="Boolean" Nullable="false" />
+          <Property Name="bitZach" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="vid_zaniat" Relationship="UGTU_ACTTESTModel.FK_vid_zaniat_TypeZanyat" FromRole="TypeZanyat" ToRole="vid_zaniat" />
+        </EntityType>
+        <EntityType Name="TutorialClass">
+          <Key>
+            <PropertyRef Name="iK_vid_zanyat" />
+          </Key>
+          <Property Name="iK_vid_zanyat" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ikTypeZanyat" Type="Int32" Nullable="false" />
+          <Property Name="iK_type_vz" Type="Int32" Nullable="false" />
+          <Property Name="cName_vid_zanyat" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cshort_vid_zanyat" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="lTema" Type="Boolean" />
+          <Property Name="bit_priznak_decompose" Type="Boolean" />
+          <Property Name="bit_nagr" Type="Boolean" />
+          <Property Name="bit_must_be_in_uch_plan" Type="Boolean" />
+          <Property Name="year_expire" Type="Int32" />
+          <NavigationProperty Name="Content_UchPl" Relationship="UGTU_ACTTESTModel.FK_Content_UchPl_vid_zaniat" FromRole="vid_zaniat" ToRole="Content_UchPl" />
+          <NavigationProperty Name="typ_zan" Relationship="UGTU_ACTTESTModel.FK_vid_zaniat_typ_zan" FromRole="vid_zaniat" ToRole="typ_zan" />
+          <NavigationProperty Name="TypeZanyat" Relationship="UGTU_ACTTESTModel.FK_vid_zaniat_TypeZanyat" FromRole="vid_zaniat" ToRole="TypeZanyat" />
+        </EntityType>
+        <EntityType Name="CurriculaYear">
+          <Key>
+            <PropertyRef Name="ik_year_uch_pl" />
+          </Key>
+          <Property Name="ik_year_uch_pl" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="year_value" Type="Int32" Nullable="false" />
+          <Property Name="DateDiplomDelivery" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Curriculas" Relationship="UGTU_ACTTESTModel.FK_Uch_pl_Year_uch_pl" FromRole="Year_uch_pl" ToRole="Curricula" />
+        </EntityType>
+        <Association Name="FK_Content_UchPl_sv_disc">
+          <End Type="UGTU_ACTTESTModel.CurriculaDisciplines" Role="sv_disc" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="UGTU_ACTTESTModel.Content" Role="Content_UchPl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sv_disc">
+              <PropertyRef Name="ik_disc_uch_plan" />
+            </Principal>
+            <Dependent Role="Content_UchPl">
+              <PropertyRef Name="ik_disc_uch_plan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Content_UchPl_vid_zaniat">
+          <End Type="UGTU_ACTTESTModel.TutorialClass" Role="vid_zaniat" Multiplicity="1" />
+          <End Type="UGTU_ACTTESTModel.Content" Role="Content_UchPl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vid_zaniat">
+              <PropertyRef Name="iK_vid_zanyat" />
+            </Principal>
+            <Dependent Role="Content_UchPl">
+              <PropertyRef Name="ik_vid_zanyat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_discpln_Type_disc">
+          <End Type="UGTU_ACTTESTModel.DisciplineType" Role="Type_disc" Multiplicity="0..1" />
+          <End Type="UGTU_ACTTESTModel.Discipline" Role="discpln" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_disc">
+              <PropertyRef Name="ik_type_disc" />
+            </Principal>
+            <Dependent Role="discpln">
+              <PropertyRef Name="ik_type_disc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sv_disc_discpln">
+          <End Type="UGTU_ACTTESTModel.Discipline" Role="discpln" Multiplicity="1" />
+          <End Type="UGTU_ACTTESTModel.CurriculaDisciplines" Role="sv_disc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="discpln">
+              <PropertyRef Name="iK_disc" />
+            </Principal>
+            <Dependent Role="sv_disc">
+              <PropertyRef Name="ik_disc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EdBranch_Type_Branch">
+          <End Type="UGTU_ACTTESTModel.BrunchType" Role="Type_branch" Multiplicity="0..1" />
+          <End Type="UGTU_ACTTESTModel.EducationBranch" Role="EducationBranch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_branch">
+              <PropertyRef Name="ik_type_branch" />
+            </Principal>
+            <Dependent Role="EducationBranch">
+              <PropertyRef Name="id_type_branch" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sv_disc_Uch_pl">
+          <End Type="UGTU_ACTTESTModel.Curricula" Role="Curricula" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="UGTU_ACTTESTModel.CurriculaDisciplines" Role="sv_disc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curricula">
+              <PropertyRef Name="ik_uch_plan" />
+            </Principal>
+            <Dependent Role="sv_disc">
+              <PropertyRef Name="CurriculaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vid_zaniat_typ_zan">
+          <End Type="UGTU_ACTTESTModel.TutorialTypeClass" Role="typ_zan" Multiplicity="1" />
+          <End Type="UGTU_ACTTESTModel.TutorialClass" Role="vid_zaniat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="typ_zan">
+              <PropertyRef Name="iK_type_vz" />
+            </Principal>
+            <Dependent Role="vid_zaniat">
+              <PropertyRef Name="iK_type_vz" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vid_zaniat_TypeZanyat">
+          <End Type="UGTU_ACTTESTModel.TutorialType" Role="TypeZanyat" Multiplicity="1" />
+          <End Type="UGTU_ACTTESTModel.TutorialClass" Role="vid_zaniat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeZanyat">
+              <PropertyRef Name="ikTypeZanyat" />
+            </Principal>
+            <Dependent Role="vid_zaniat">
+              <PropertyRef Name="ikTypeZanyat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Uch_pl_Year_uch_pl">
+          <End Type="UGTU_ACTTESTModel.CurriculaYear" Role="Year_uch_pl" Multiplicity="1" />
+          <End Type="UGTU_ACTTESTModel.Curricula" Role="Curricula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Year_uch_pl">
+              <PropertyRef Name="ik_year_uch_pl" />
+            </Principal>
+            <Dependent Role="Curricula">
+              <PropertyRef Name="ik_year_uch_pl" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DisciplineCycle">
+          <Key>
+            <PropertyRef Name="IK_ckl_disc" />
+          </Key>
+          <Property Name="IK_ckl_disc" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cname_ckl_disc" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Ccode_ckl_disc" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="OrderNumber" Type="Int32" />
+          <Property Name="VidGos" Type="Int32" />
+          <NavigationProperty Name="sv_disc" Relationship="UGTU_ACTTESTModel.FK_sv_disc_ckl_disc" FromRole="ckl_disc" ToRole="sv_disc" />
+        </EntityType>
+        <EntityType Name="EducationForm">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ik_FB" Type="Int32" />
+          <Property Name="ApplicationName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Relation_spec_fac" Relationship="UGTU_ACTTESTModel.FK_Relation_spec_fac_Form_ed" FromRole="Form_ed" ToRole="FacultyRel" />
+          <NavigationProperty Name="Uch_pl" Relationship="UGTU_ACTTESTModel.FK_Uch_pl_Form_ed" FromRole="Form_ed" ToRole="Curricula" />
+        </EntityType>
+        <EntityType Name="DisciplineGroup">
+          <Key>
+            <PropertyRef Name="IK_grp_disc" />
+          </Key>
+          <Property Name="IK_grp_disc" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cname_grp_disc" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Ccode_grp_disc" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="lVibor" Type="Boolean" Nullable="false" />
+          <Property Name="OrderNumber" Type="Int32" />
+          <Property Name="VidGos" Type="Int32" />
+          <NavigationProperty Name="sv_disc" Relationship="UGTU_ACTTESTModel.FK_sv_disc_grp_disc" FromRole="grp_disc" ToRole="sv_disc" />
+        </EntityType>
+        <Association Name="FK_sv_disc_ckl_disc">
+          <End Type="UGTU_ACTTESTModel.DisciplineCycle" Role="ckl_disc" Multiplicity="1" />
+          <End Type="UGTU_ACTTESTModel.CurriculaDisciplines" Role="sv_disc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ckl_disc">
+              <PropertyRef Name="IK_ckl_disc" />
+            </Principal>
+            <Dependent Role="sv_disc">
+              <PropertyRef Name="ik_ckl_disc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Relation_spec_fac_Form_ed">
+          <End Type="UGTU_ACTTESTModel.EducationForm" Role="Form_ed" Multiplicity="1" />
+          <End Type="UGTU_ACTTESTModel.FacultyRel" Role="FacultyRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form_ed">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FacultyRel">
+              <PropertyRef Name="EducationFormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Uch_pl_Form_ed">
+          <End Type="UGTU_ACTTESTModel.EducationForm" Role="Form_ed" Multiplicity="1" />
+          <End Type="UGTU_ACTTESTModel.Curricula" Role="Curricula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form_ed">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Curricula">
+              <PropertyRef Name="ik_form_ed" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sv_disc_grp_disc">
+          <End Type="UGTU_ACTTESTModel.DisciplineGroup" Role="grp_disc" Multiplicity="1" />
+          <End Type="UGTU_ACTTESTModel.CurriculaDisciplines" Role="sv_disc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="grp_disc">
+              <PropertyRef Name="IK_grp_disc" />
+            </Principal>
+            <Dependent Role="sv_disc">
+              <PropertyRef Name="ik_grp_disc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TypeSupply">
+          <Key>
+            <PropertyRef Name="ik_typesup" />
+          </Key>
+          <Property Name="ik_typesup" Type="Int32" Nullable="false" />
+          <Property Name="TypeSup" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Destination" Relationship="UGTU_ACTTESTModel.FK_TypeSupply_Destination" FromRole="TypeSupply" ToRole="Destination" />
+        </EntityType>
+        <Association Name="FK_TypeSupply_Destination">
+          <End Type="UGTU_ACTTESTModel.TypeSupply" Role="TypeSupply" Multiplicity="0..1" />
+          <End Type="UGTU_ACTTESTModel.Destination" Role="Destination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeSupply">
+              <PropertyRef Name="ik_typesup" />
+            </Principal>
+            <Dependent Role="Destination">
+              <PropertyRef Name="ik_typesup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Base_Destination">
+          <End Type="UGTU_ACTTESTModel.Destination" Role="Destination" Multiplicity="*" />
+          <End Type="UGTU_ACTTESTModel.Destination" Role="Destination1" Multiplicity="*" />
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1361,6 +2710,7 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
           <EntitySetMapping Name="Person">
             <EntityTypeMapping TypeName="UGTU_ACTTESTModel.Person">
               <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
                 <ScalarProperty Name="PersName" ColumnName="PersName" />
                 <ScalarProperty Name="PersonSmallName" ColumnName="PersonSmallName" />
                 <ScalarProperty Name="PersonFullName" ColumnName="PersonFullName" />
@@ -1427,7 +2777,7 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
           <EntitySetMapping Name="Grup">
             <EntityTypeMapping TypeName="UGTU_ACTTESTModel.Group">
               <MappingFragment StoreEntitySet="Grup">
-                <ScalarProperty Name="SpecializationId" ColumnName="ik_spclz" />
+                <ScalarProperty Name="ProfileId" ColumnName="ik_spclz" />
                 <ScalarProperty Name="DisbandedOn" ColumnName="DateExit" />
                 <ScalarProperty Name="Created" ColumnName="DateCreate" />
                 <ScalarProperty Name="AdmitsOn" ColumnName="nYear_post" />
@@ -1457,6 +2807,7 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
           <EntitySetMapping Name="Relation_spec_fac">
             <EntityTypeMapping TypeName="UGTU_ACTTESTModel.FacultyRel">
               <MappingFragment StoreEntitySet="Relation_spec_fac">
+                <ScalarProperty Name="ik_room" ColumnName="ik_room" />
                 <ScalarProperty Name="IsDisbanded" ColumnName="is_old" />
                 <ScalarProperty Name="CategoryId" ColumnName="ik_kat_zaved" />
                 <ScalarProperty Name="EducationMonthes" ColumnName="MonthObuch" />
@@ -1559,6 +2910,10 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
           <EntitySetMapping Name="KafTeachers">
             <EntityTypeMapping TypeName="UGTU_ACTTESTModel.Employee">
               <MappingFragment StoreEntitySet="KafTeachers">
+                <ScalarProperty Name="DegreeScienceName" ColumnName="DegreeScienceName" />
+                <ScalarProperty Name="idEmployee" ColumnName="idEmployee" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="DegreeSmallName" ColumnName="DegreeSmallName" />
                 <ScalarProperty Name="Rank" ColumnName="RankName" />
                 <ScalarProperty Name="itab_n" ColumnName="itab_n" />
                 <ScalarProperty Name="Degree" ColumnName="DegreeName" />
@@ -1583,6 +2938,7 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
           <EntitySetMapping Name="Fac">
             <EntityTypeMapping TypeName="UGTU_ACTTESTModel.Faculty">
               <MappingFragment StoreEntitySet="Fac">
+                <ScalarProperty Name="DateDiplomDelivery" ColumnName="DateDiplomDelivery" />
                 <ScalarProperty Name="DepartmentUID" ColumnName="DepartmentGUID" />
                 <ScalarProperty Name="DiplVklDatPadez" ColumnName="DiplVklDatPadez" />
                 <ScalarProperty Name="DiplVklExcPatternName" ColumnName="DiplVklExcPatternName" />
@@ -1594,6 +2950,8 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
           <EntitySetMapping Name="Doc_stud">
             <EntityTypeMapping TypeName="UGTU_ACTTESTModel.Document">
               <MappingFragment StoreEntitySet="Doc_stud">
+                <ScalarProperty Name="IsReal" ColumnName="IsReal" />
+                <ScalarProperty Name="AdditionalInfo" ColumnName="AdditionalInfo" />
                 <ScalarProperty Name="nCode" ColumnName="nCode" />
                 <ScalarProperty Name="Series" ColumnName="Cd_seria" />
                 <ScalarProperty Name="Number" ColumnName="Np_number" />
@@ -1607,6 +2965,8 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
           <EntitySetMapping Name="documents">
             <EntityTypeMapping TypeName="UGTU_ACTTESTModel.DocumentType">
               <MappingFragment StoreEntitySet="documents">
+                <ScalarProperty Name="ik_type_grazd" ColumnName="ik_type_grazd" />
+                <ScalarProperty Name="ik_subFB" ColumnName="ik_subFB" />
                 <ScalarProperty Name="IsEducational" ColumnName="IsEducational" />
                 <ScalarProperty Name="IsIdentity" ColumnName="IsIdentity" />
                 <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
@@ -1634,6 +2994,263 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Address">
+            <EntityTypeMapping TypeName="UGTU_ACTTESTModel.Address">
+              <MappingFragment StoreEntitySet="Address">
+                <ScalarProperty Name="fIndex" ColumnName="fIndex" />
+                <ScalarProperty Name="FlatNumber" ColumnName="FlatNumber" />
+                <ScalarProperty Name="StructNumber" ColumnName="StructNumber" />
+                <ScalarProperty Name="BuildingNumber" ColumnName="BuildingNumber" />
+                <ScalarProperty Name="Ik_street" ColumnName="Ik_street" />
+                <ScalarProperty Name="ik_address" ColumnName="ik_address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Campus">
+            <EntityTypeMapping TypeName="UGTU_ACTTESTModel.Campus">
+              <MappingFragment StoreEntitySet="Campus">
+                <ScalarProperty Name="ik_address" ColumnName="ik_address" />
+                <ScalarProperty Name="CName_campus" ColumnName="CName_campus" />
+                <ScalarProperty Name="ik_campus" ColumnName="ik_campus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Destination">
+            <EntityTypeMapping TypeName="UGTU_ACTTESTModel.Destination">
+              <MappingFragment StoreEntitySet="Destination">
+                <ScalarProperty Name="DescriptionDoc" ColumnName="DescriptionDoc" />
+                <ScalarProperty Name="IsBase" ColumnName="Base" />
+                <ScalarProperty Name="ik_typesup" ColumnName="ik_typesup" />
+                <ScalarProperty Name="cShortNameDestination" ColumnName="cShortNameDestination" />
+                <ScalarProperty Name="cNameDestination" ColumnName="cNameDestination" />
+                <ScalarProperty Name="Ik_destination" ColumnName="Ik_destination" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonDocumentSet">
+            <EntityTypeMapping TypeName="UGTU_ACTTESTModel.PersonDocument">
+              <MappingFragment StoreEntitySet="Document">
+                <ScalarProperty Name="DateReady" ColumnName="DateReady" />
+                <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
+                <ScalarProperty Name="NumberDoc" ColumnName="NumberDoc" />
+                <ScalarProperty Name="Num_podrazd" ColumnName="Num_podrazd" />
+                <ScalarProperty Name="Ik_studGrup" ColumnName="Ik_studGrup" />
+                <ScalarProperty Name="Ik_destination" ColumnName="Ik_destination" />
+                <ScalarProperty Name="Ik_Transfer" ColumnName="Ik_Transfer" />
+                <ScalarProperty Name="Ik_Document" ColumnName="Ik_Document" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="UGTU_ACTTESTModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="cNameRoles" ColumnName="cNameRoles" />
+                <ScalarProperty Name="ik_Roles" ColumnName="ik_Roles" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Room">
+            <EntityTypeMapping TypeName="UGTU_ACTTESTModel.Room">
+              <MappingFragment StoreEntitySet="Room">
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Timetable" ColumnName="Timetable" />
+                <ScalarProperty Name="FireProtectionBy" ColumnName="FireProtectionBy" />
+                <ScalarProperty Name="ik_room_type" ColumnName="ik_room_type" />
+                <ScalarProperty Name="iSeatCount" ColumnName="iSeatCount" />
+                <ScalarProperty Name="ik_campus" ColumnName="ik_campus" />
+                <ScalarProperty Name="Cname_room" ColumnName="Cname_room" />
+                <ScalarProperty Name="ik_room" ColumnName="ik_room" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoomType">
+            <EntityTypeMapping TypeName="UGTU_ACTTESTModel.RoomType">
+              <MappingFragment StoreEntitySet="RoomType">
+                <ScalarProperty Name="cName_room_type" ColumnName="cName_room_type" />
+                <ScalarProperty Name="ik_room_type" ColumnName="ik_room_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="DocumentBase" TypeName="UGTU_ACTTESTModel.DocumentBase" StoreEntitySet="DocumentBase">
+            <EndProperty Name="Document11">
+              <ScalarProperty Name="Ik_Document" ColumnName="Ik_Document_reference" />
+            </EndProperty>
+            <EndProperty Name="Document1">
+              <ScalarProperty Name="Ik_Document" ColumnName="Ik_Document_base" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Roles_Destination" TypeName="UGTU_ACTTESTModel.Roles_Destination" StoreEntitySet="Roles_Destination">
+            <EndProperty Name="Roles">
+              <ScalarProperty Name="ik_Roles" ColumnName="ik_Roles" />
+            </EndProperty>
+            <EndProperty Name="Destination">
+              <ScalarProperty Name="Ik_destination" ColumnName="ik_destination" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Content_UchPl">
+            <EntityTypeMapping TypeName="UGTU_ACTTESTModel.Content">
+              <MappingFragment StoreEntitySet="Content_UchPl">
+                <ScalarProperty Name="i_hours_per_sem" ColumnName="i_hours_per_sem" />
+                <ScalarProperty Name="ik_act_off" ColumnName="ik_act_off" />
+                <ScalarProperty Name="i_balls" ColumnName="i_balls" />
+                <ScalarProperty Name="n_module" ColumnName="n_module" />
+                <ScalarProperty Name="ik_kaf" ColumnName="ik_kaf" />
+                <ScalarProperty Name="ik_disc_uch_plan" ColumnName="ik_disc_uch_plan" />
+                <ScalarProperty Name="i_hour_per_week" ColumnName="i_hour_per_week" />
+                <ScalarProperty Name="ik_vid_zanyat" ColumnName="ik_vid_zanyat" />
+                <ScalarProperty Name="n_sem" ColumnName="n_sem" />
+                <ScalarProperty Name="ik_upContent" ColumnName="ik_upContent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="discpln">
+            <EntityTypeMapping TypeName="UGTU_ACTTESTModel.Discipline">
+              <MappingFragment StoreEntitySet="discpln">
+                <ScalarProperty Name="DiplDiscName" ColumnName="DiplDiscName" />
+                <ScalarProperty Name="ik_type_disc" ColumnName="ik_type_disc" />
+                <ScalarProperty Name="lPract" ColumnName="lPract" />
+                <ScalarProperty Name="cShortName" ColumnName="cShortName" />
+                <ScalarProperty Name="cName_disc" ColumnName="cName_disc" />
+                <ScalarProperty Name="iK_disc" ColumnName="iK_disc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sv_disc">
+            <EntityTypeMapping TypeName="UGTU_ACTTESTModel.CurriculaDisciplines">
+              <MappingFragment StoreEntitySet="sv_disc">
+                <ScalarProperty Name="WeekCountResidue" ColumnName="WeekCountResidue" />
+                <ScalarProperty Name="WeekCountInt" ColumnName="WeekCountInt" />
+                <ScalarProperty Name="WeekCount" ColumnName="WeekCount" />
+                <ScalarProperty Name="CurriculumUrl" ColumnName="url_UMKD" />
+                <ScalarProperty Name="iK_spclz" ColumnName="iK_spclz" />
+                <ScalarProperty Name="ik_pdgrp_disc" ColumnName="ik_pdgrp_disc" />
+                <ScalarProperty Name="ViborGroup" ColumnName="ViborGroup" />
+                <ScalarProperty Name="iIndivid" ColumnName="iIndivid" />
+                <ScalarProperty Name="ik_default_kaf" ColumnName="ik_default_kaf" />
+                <ScalarProperty Name="ik_disc_uch_plan" ColumnName="ik_disc_uch_plan" />
+                <ScalarProperty Name="iHour_gos" ColumnName="iHour_gos" />
+                <ScalarProperty Name="Uchet" ColumnName="Uchet" />
+                <ScalarProperty Name="CurriculaId" ColumnName="ik_uch_plan" />
+                <ScalarProperty Name="CycleName" ColumnName="cname_ckl_disc1" />
+                <ScalarProperty Name="ik_podckl" ColumnName="ik_podckl" />
+                <ScalarProperty Name="ik_ckl_disc" ColumnName="ik_ckl_disc" />
+                <ScalarProperty Name="ik_grp_disc" ColumnName="ik_grp_disc" />
+                <ScalarProperty Name="ik_disc" ColumnName="ik_disc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="typ_zan">
+            <EntityTypeMapping TypeName="UGTU_ACTTESTModel.TutorialTypeClass">
+              <MappingFragment StoreEntitySet="typ_zan">
+                <ScalarProperty Name="Cname_typ_vz" ColumnName="Cname_typ_vz" />
+                <ScalarProperty Name="iK_type_vz" ColumnName="iK_type_vz" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Type_branch">
+            <EntityTypeMapping TypeName="UGTU_ACTTESTModel.BrunchType">
+              <MappingFragment StoreEntitySet="Type_branch">
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="cName_type_branch" ColumnName="cName_type_branch" />
+                <ScalarProperty Name="ik_type_branch" ColumnName="ik_type_branch" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Type_disc">
+            <EntityTypeMapping TypeName="UGTU_ACTTESTModel.DisciplineType">
+              <MappingFragment StoreEntitySet="Type_disc">
+                <ScalarProperty Name="ik_ed_izm" ColumnName="ik_ed_izm" />
+                <ScalarProperty Name="bit_calc_as_practice" ColumnName="bit_calc_as_practice" />
+                <ScalarProperty Name="cName_type_disc" ColumnName="cName_type_disc" />
+                <ScalarProperty Name="ik_type_disc" ColumnName="ik_type_disc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TutorialType">
+            <EntityTypeMapping TypeName="UGTU_ACTTESTModel.TutorialType">
+              <MappingFragment StoreEntitySet="TypeZanyat">
+                <ScalarProperty Name="bitZach" ColumnName="bitZach" />
+                <ScalarProperty Name="bitOtchetnost" ColumnName="bitOtchetnost" />
+                <ScalarProperty Name="bitExam" ColumnName="bitExam" />
+                <ScalarProperty Name="TypeZanyat1" ColumnName="TypeZanyat" />
+                <ScalarProperty Name="ikTypeZanyat" ColumnName="ikTypeZanyat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vid_zaniat">
+            <EntityTypeMapping TypeName="UGTU_ACTTESTModel.TutorialClass">
+              <MappingFragment StoreEntitySet="vid_zaniat">
+                <ScalarProperty Name="year_expire" ColumnName="year_expire" />
+                <ScalarProperty Name="bit_must_be_in_uch_plan" ColumnName="bit_must_be_in_uch_plan" />
+                <ScalarProperty Name="bit_nagr" ColumnName="bit_nagr" />
+                <ScalarProperty Name="bit_priznak_decompose" ColumnName="bit_priznak_decompose" />
+                <ScalarProperty Name="lTema" ColumnName="lTema" />
+                <ScalarProperty Name="cshort_vid_zanyat" ColumnName="cshort_vid_zanyat" />
+                <ScalarProperty Name="cName_vid_zanyat" ColumnName="cName_vid_zanyat" />
+                <ScalarProperty Name="iK_type_vz" ColumnName="iK_type_vz" />
+                <ScalarProperty Name="ikTypeZanyat" ColumnName="ikTypeZanyat" />
+                <ScalarProperty Name="iK_vid_zanyat" ColumnName="iK_vid_zanyat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Year_uch_pl">
+            <EntityTypeMapping TypeName="UGTU_ACTTESTModel.CurriculaYear">
+              <MappingFragment StoreEntitySet="Year_uch_pl">
+                <ScalarProperty Name="DateDiplomDelivery" ColumnName="DateDiplomDelivery" />
+                <ScalarProperty Name="year_value" ColumnName="year_value" />
+                <ScalarProperty Name="ik_year_uch_pl" ColumnName="ik_year_uch_pl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ckl_disc">
+            <EntityTypeMapping TypeName="UGTU_ACTTESTModel.DisciplineCycle">
+              <MappingFragment StoreEntitySet="ckl_disc">
+                <ScalarProperty Name="VidGos" ColumnName="VidGos" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+                <ScalarProperty Name="Ccode_ckl_disc" ColumnName="Ccode_ckl_disc" />
+                <ScalarProperty Name="Cname_ckl_disc" ColumnName="Cname_ckl_disc" />
+                <ScalarProperty Name="IK_ckl_disc" ColumnName="IK_ckl_disc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Form_ed">
+            <EntityTypeMapping TypeName="UGTU_ACTTESTModel.EducationForm">
+              <MappingFragment StoreEntitySet="Form_ed">
+                <ScalarProperty Name="ApplicationName" ColumnName="Cname_form_pril" />
+                <ScalarProperty Name="ik_FB" ColumnName="ik_FB" />
+                <ScalarProperty Name="Name" ColumnName="Cname_form_ed" />
+                <ScalarProperty Name="Id" ColumnName="Ik_form_ed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="grp_disc">
+            <EntityTypeMapping TypeName="UGTU_ACTTESTModel.DisciplineGroup">
+              <MappingFragment StoreEntitySet="grp_disc">
+                <ScalarProperty Name="VidGos" ColumnName="VidGos" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+                <ScalarProperty Name="lVibor" ColumnName="lVibor" />
+                <ScalarProperty Name="Ccode_grp_disc" ColumnName="Ccode_grp_disc" />
+                <ScalarProperty Name="Cname_grp_disc" ColumnName="Cname_grp_disc" />
+                <ScalarProperty Name="IK_grp_disc" ColumnName="IK_grp_disc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeSupply">
+            <EntityTypeMapping TypeName="UGTU_ACTTESTModel.TypeSupply">
+              <MappingFragment StoreEntitySet="TypeSupply">
+                <ScalarProperty Name="TypeSup" ColumnName="TypeSup" />
+                <ScalarProperty Name="ik_typesup" ColumnName="ik_typesup" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Base_Destination" TypeName="UGTU_ACTTESTModel.Base_Destination" StoreEntitySet="Base_Destination">
+            <EndProperty Name="Destination1">
+              <ScalarProperty Name="Ik_destination" ColumnName="Ik_destination2" />
+            </EndProperty>
+            <EndProperty Name="Destination">
+              <ScalarProperty Name="Ik_destination" ColumnName="Ik_destination1" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

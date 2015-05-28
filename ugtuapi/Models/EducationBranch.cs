@@ -16,11 +16,11 @@ namespace ugtuapi.Models
     {
         public EducationBranch()
         {
-            this.EducationBranch1 = new HashSet<EducationBranch>();
-            this.Grup = new HashSet<Group>();
-            this.Relation_spec_fac = new HashSet<FacultyRel>();
-            this.Uch_pl = new HashSet<Curricula>();
-            this.Uch_pl1 = new HashSet<Curricula>();
+            this.Children = new HashSet<EducationBranch>();
+            this.Groups = new HashSet<Group>();
+            this.Faculties = new HashSet<FacultyRel>();
+            this.CurriculaProfiles = new HashSet<Curricula>();
+            this.CurriculaDirections = new HashSet<Curricula>();
         }
     
         public int ik_spec { get; set; }
@@ -40,11 +40,12 @@ namespace ugtuapi.Models
         public Nullable<int> id_parent { get; set; }
         public Nullable<int> id_type_branch { get; set; }
     
-        public virtual ICollection<EducationBranch> EducationBranch1 { get; set; }
-        public virtual EducationBranch EducationBranch2 { get; set; }
-        public virtual ICollection<Group> Grup { get; set; }
-        public virtual ICollection<FacultyRel> Relation_spec_fac { get; set; }
-        public virtual ICollection<Curricula> Uch_pl { get; set; }
-        public virtual ICollection<Curricula> Uch_pl1 { get; set; }
+        public virtual ICollection<EducationBranch> Children { get; set; }
+        public virtual EducationBranch Parent { get; set; }
+        public virtual ICollection<Group> Groups { get; set; }
+        public virtual ICollection<FacultyRel> Faculties { get; set; }
+        public virtual ICollection<Curricula> CurriculaProfiles { get; set; }
+        public virtual ICollection<Curricula> CurriculaDirections { get; set; }
+        public virtual BrunchType Type_branch { get; set; }
     }
 }

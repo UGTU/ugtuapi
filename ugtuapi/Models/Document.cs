@@ -21,6 +21,8 @@ namespace ugtuapi.Models
         public string Number { get; set; }
         public string Series { get; set; }
         public decimal nCode { get; set; }
+        public string AdditionalInfo { get; set; }
+        public Nullable<bool> IsReal { get; set; }
     
         public virtual DocumentType DocumentType { get; set; }
         public virtual Person Person { get; set; }

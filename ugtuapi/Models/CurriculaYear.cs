@@ -12,21 +12,17 @@ namespace ugtuapi.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Faculty
+    public partial class CurriculaYear
     {
-        public Faculty()
+        public CurriculaYear()
         {
-            this.FacultyRel = new HashSet<FacultyRel>();
+            this.Curriculas = new HashSet<Curricula>();
         }
     
-        public int Id { get; set; }
-        public string DiplExcPatternName { get; set; }
-        public string DiplVklExcPatternName { get; set; }
-        public Nullable<bool> DiplVklDatPadez { get; set; }
-        public Nullable<System.Guid> DepartmentUID { get; set; }
+        public int ik_year_uch_pl { get; set; }
+        public int year_value { get; set; }
         public Nullable<System.DateTime> DateDiplomDelivery { get; set; }
     
-        public virtual ICollection<FacultyRel> FacultyRel { get; set; }
-        public virtual Department Department { get; set; }
+        public virtual ICollection<Curricula> Curriculas { get; set; }
     }
 }

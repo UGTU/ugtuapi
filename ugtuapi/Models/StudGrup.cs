@@ -14,6 +14,11 @@ namespace ugtuapi.Models
     
     public partial class StudGrup
     {
+        public StudGrup()
+        {
+            this.Document = new HashSet<PersonDocument>();
+        }
+    
         public int Ik_grup { get; set; }
         public int Ik_zach { get; set; }
         public int ik_kat_zach { get; set; }
@@ -29,5 +34,6 @@ namespace ugtuapi.Models
         public virtual Zach Zach { get; set; }
         public virtual Reason FromReason { get; set; }
         public virtual Reason ToReason { get; set; }
+        public virtual ICollection<PersonDocument> Document { get; set; }
     }
 }

@@ -16,8 +16,9 @@ namespace ugtuapi.Models
     {
         public Curricula()
         {
-            this.Group = new HashSet<Group>();
-            this.Uch_pl1 = new HashSet<Curricula>();
+            this.Groups = new HashSet<Group>();
+            this.WorkCurriculas = new HashSet<Curricula>();
+            this.Disciplines = new HashSet<CurriculaDisciplines>();
         }
     
         public int ik_uch_plan { get; set; }
@@ -37,10 +38,13 @@ namespace ugtuapi.Models
         public Nullable<int> Nprotocol { get; set; }
         public Nullable<int> ik_kaf { get; set; }
     
-        public virtual ICollection<Group> Group { get; set; }
-        public virtual ICollection<Curricula> Uch_pl1 { get; set; }
-        public virtual Curricula Uch_pl2 { get; set; }
-        public virtual EducationBranch EducationBranch { get; set; }
-        public virtual EducationBranch EducationBranch1 { get; set; }
+        public virtual ICollection<Group> Groups { get; set; }
+        public virtual ICollection<Curricula> WorkCurriculas { get; set; }
+        public virtual Curricula DirectionCurricula { get; set; }
+        public virtual EducationBranch Profile { get; set; }
+        public virtual EducationBranch Direction { get; set; }
+        public virtual ICollection<CurriculaDisciplines> Disciplines { get; set; }
+        public virtual CurriculaYear Year_uch_pl { get; set; }
+        public virtual EducationForm Form_ed { get; set; }
     }
 }

@@ -12,21 +12,16 @@ namespace ugtuapi.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class DocumentType
+    public partial class TypeSupply
     {
-        public DocumentType()
+        public TypeSupply()
         {
-            this.Documents = new HashSet<Document>();
+            this.Destination = new HashSet<Destination>();
         }
     
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public bool IsDefault { get; set; }
-        public bool IsIdentity { get; set; }
-        public bool IsEducational { get; set; }
-        public Nullable<int> ik_subFB { get; set; }
-        public Nullable<int> ik_type_grazd { get; set; }
+        public int ik_typesup { get; set; }
+        public string TypeSup { get; set; }
     
-        public virtual ICollection<Document> Documents { get; set; }
+        public virtual ICollection<Destination> Destination { get; set; }
     }
 }

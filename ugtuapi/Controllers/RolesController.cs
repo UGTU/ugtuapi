@@ -21,35 +21,30 @@ namespace ugtuapi.Controllers
     using System.Web.Http.OData.Extensions;
     using ugtuapi.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-    builder.EntitySet<StudentInfo>("StudentInfoes");
+    builder.EntitySet<Roles>("Roles");
+    builder.EntitySet<Destination>("Destination"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
-    public class StudentInfoesController : ODataController
+    public class RolesController : ODataController
     {
-        private readonly UGTUEntities _db;
+        private readonly UGTUEntities _db = new UGTUEntities();
 
-        // GET: odata/StudentInfoes
-        [EnableQuery(MaxExpansionDepth = 5)]
-        public IQueryable<StudentInfo> GetStudentInfoes()
+        // GET: odata/Roles
+        [EnableQuery]
+        public IQueryable<Roles> GetRoles()
         {
-            return _db.StudInfo;
+            return _db.Roles;
         }
 
-        public StudentInfoesController()
+        // GET: odata/Roles(5)
+        [EnableQuery]
+        public SingleResult<Roles> GetRoles([FromODataUri] int key)
         {
-            _db = new UGTUEntities();
-            _db.Configuration.ProxyCreationEnabled = false;
+            return SingleResult.Create(_db.Roles.Where(roles => roles.ik_Roles == key));
         }
 
-        // GET: odata/StudentInfoes(5)
-        [EnableQuery(MaxExpansionDepth = 5)]
-        public SingleResult<StudentInfo> GetStudentInfo([FromODataUri] decimal key)
-        {
-            return SingleResult.Create(_db.StudInfo.Where(studentInfo => studentInfo.nCode == key));
-        }
-
-        // PUT: odata/StudentInfoes(5)
-        //public IHttpActionResult Put([FromODataUri] decimal key, Delta<StudentInfo> patch)
+        // PUT: odata/Roles(5)
+        //public IHttpActionResult Put([FromODataUri] int key, Delta<Roles> patch)
         //{
         //    Validate(patch.GetEntity());
 
@@ -58,13 +53,13 @@ namespace ugtuapi.Controllers
         //        return BadRequest(ModelState);
         //    }
 
-        //    StudentInfo studentInfo = _db.StudInfo.Find(key);
-        //    if (studentInfo == null)
+        //    var roles = _db.Roles.Find(key);
+        //    if (roles == null)
         //    {
         //        return NotFound();
         //    }
 
-        //    patch.Put(studentInfo);
+        //    patch.Put(roles);
 
         //    try
         //    {
@@ -72,7 +67,7 @@ namespace ugtuapi.Controllers
         //    }
         //    catch (DbUpdateConcurrencyException)
         //    {
-        //        if (!StudentInfoExists(key))
+        //        if (!RolesExists(key))
         //        {
         //            return NotFound();
         //        }
@@ -82,41 +77,26 @@ namespace ugtuapi.Controllers
         //        }
         //    }
 
-        //    return Updated(studentInfo);
+        //    return Updated(roles);
         //}
 
-        //// POST: odata/StudentInfoes
-        //public IHttpActionResult Post(StudentInfo studentInfo)
+        // POST: odata/Roles
+        //public IHttpActionResult Post(Roles roles)
         //{
         //    if (!ModelState.IsValid)
         //    {
         //        return BadRequest(ModelState);
         //    }
 
-        //    _db.StudInfo.Add(studentInfo);
+        //    _db.Roles.Add(roles);
+        //    _db.SaveChanges();
 
-        //    try
-        //    {
-        //        _db.SaveChanges();
-        //    }
-        //    catch (DbUpdateException)
-        //    {
-        //        if (StudentInfoExists(studentInfo.nCode))
-        //        {
-        //            return Conflict();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return Created(studentInfo);
+        //    return Created(roles);
         //}
 
-        //// PATCH: odata/StudentInfoes(5)
-        //[AcceptVerbs("PATCH", "MERGE")]
-        //public IHttpActionResult Patch([FromODataUri] decimal key, Delta<StudentInfo> patch)
+        // PATCH: odata/Roles(5)
+        [AcceptVerbs("PATCH", "MERGE")]
+        //public IHttpActionResult Patch([FromODataUri] int key, Delta<Roles> patch)
         //{
         //    Validate(patch.GetEntity());
 
@@ -125,13 +105,13 @@ namespace ugtuapi.Controllers
         //        return BadRequest(ModelState);
         //    }
 
-        //    StudentInfo studentInfo = _db.StudInfo.Find(key);
-        //    if (studentInfo == null)
+        //    Roles roles = _db.Roles.Find(key);
+        //    if (roles == null)
         //    {
         //        return NotFound();
         //    }
 
-        //    patch.Patch(studentInfo);
+        //    patch.Patch(roles);
 
         //    try
         //    {
@@ -139,7 +119,7 @@ namespace ugtuapi.Controllers
         //    }
         //    catch (DbUpdateConcurrencyException)
         //    {
-        //        if (!StudentInfoExists(key))
+        //        if (!RolesExists(key))
         //        {
         //            return NotFound();
         //        }
@@ -149,23 +129,30 @@ namespace ugtuapi.Controllers
         //        }
         //    }
 
-        //    return Updated(studentInfo);
+        //    return Updated(roles);
         //}
 
-        //// DELETE: odata/StudentInfoes(5)
-        //public IHttpActionResult Delete([FromODataUri] decimal key)
+        // DELETE: odata/Roles(5)
+        //public IHttpActionResult Delete([FromODataUri] int key)
         //{
-        //    StudentInfo studentInfo = _db.StudInfo.Find(key);
-        //    if (studentInfo == null)
+        //    Roles roles = _db.Roles.Find(key);
+        //    if (roles == null)
         //    {
         //        return NotFound();
         //    }
 
-        //    _db.StudInfo.Remove(studentInfo);
+        //    _db.Roles.Remove(roles);
         //    _db.SaveChanges();
 
         //    return StatusCode(HttpStatusCode.NoContent);
         //}
+
+        // GET: odata/Roles(5)/Destination
+        [EnableQuery]
+        public IQueryable<Destination> GetDestination([FromODataUri] int key)
+        {
+            return _db.Roles.Where(m => m.ik_Roles == key).SelectMany(m => m.Destination);
+        }
 
         protected override void Dispose(bool disposing)
         {
@@ -176,9 +163,9 @@ namespace ugtuapi.Controllers
             base.Dispose(disposing);
         }
 
-        private bool StudentInfoExists(decimal key)
-        {
-            return _db.StudInfo.Count(e => e.nCode == key) > 0;
-        }
+        //private bool RolesExists(int key)
+        //{
+        //    return _db.Roles.Count(e => e.ik_Roles == key) > 0;
+        //}
     }
 }

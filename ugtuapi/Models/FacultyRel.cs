@@ -28,9 +28,12 @@ namespace ugtuapi.Models
         public int EducationMonthes { get; set; }
         public int CategoryId { get; set; }
         public Nullable<bool> IsDisbanded { get; set; }
+        public Nullable<int> ik_room { get; set; }
     
         public virtual ICollection<Group> Group { get; set; }
         public virtual EducationBranch EducationBranch { get; set; }
         public virtual Faculty Faculty { get; set; }
+        public virtual Room Room { get; set; }
+        public virtual EducationForm EducationForm { get; set; }
     }
 }

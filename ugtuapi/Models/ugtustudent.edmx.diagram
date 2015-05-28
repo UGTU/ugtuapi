@@ -4,24 +4,24 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d17fbe027a574732add2d6e6ef4cc420" Name="Diagram1" ZoomLevel="82">
-        <EntityTypeShape EntityType="UGTU_ACTTESTModel.Person" Width="1.5" PointX="1.625" PointY="25.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="UGTU_ACTTESTModel.Student" Width="1.5" PointX="3.875" PointY="25.75" IsExpanded="true" />
+      <Diagram DiagramId="d17fbe027a574732add2d6e6ef4cc420" Name="Diagram1" ZoomLevel="85">
+        <EntityTypeShape EntityType="UGTU_ACTTESTModel.Person" Width="1.5" PointX="12" PointY="23" IsExpanded="true" />
+        <EntityTypeShape EntityType="UGTU_ACTTESTModel.Student" Width="1.5" PointX="4.75" PointY="24" IsExpanded="true" />
         <AssociationConnector Association="UGTU_ACTTESTModel.FK_Student_Person" ManuallyRouted="false" >
         </AssociationConnector>
-        <EntityTypeShape EntityType="UGTU_ACTTESTModel.Zach" Width="1.5" PointX="6.125" PointY="27.125" />
+        <EntityTypeShape EntityType="UGTU_ACTTESTModel.Zach" Width="1.5" PointX="8.5" PointY="26.625" />
         <AssociationConnector Association="UGTU_ACTTESTModel.FK_Zach_Stud" />
         <EntityTypeShape EntityType="UGTU_ACTTESTModel.Group" Width="1.5" PointX="6.125" PointY="10.5" />
         <EntityTypeShape EntityType="UGTU_ACTTESTModel.StudGrup" Width="1.5" PointX="8.375" PointY="10.5" />
         <AssociationConnector Association="UGTU_ACTTESTModel.FK_StudZach_Grup" />
         <AssociationConnector Association="UGTU_ACTTESTModel.FK_StudZach_Zach" />
-        <EntityTypeShape EntityType="UGTU_ACTTESTModel.FacultyRel" Width="2.25" PointX="3.875" PointY="5.375" />
+        <EntityTypeShape EntityType="UGTU_ACTTESTModel.FacultyRel" Width="2.25" PointX="5.5" PointY="5.25" />
         <EntityTypeShape EntityType="UGTU_ACTTESTModel.Curricula" Width="1.5" PointX="3.875" PointY="13.75" />
         <AssociationConnector Association="UGTU_ACTTESTModel.FK_Grup_Relation_spec_fac" />
         <AssociationConnector Association="UGTU_ACTTESTModel.FK_Grup_Uch_pl" ManuallyRouted="false" >
         </AssociationConnector>
         <AssociationConnector Association="UGTU_ACTTESTModel.FK_uchpl_uchpl" />
-        <EntityTypeShape EntityType="UGTU_ACTTESTModel.EducationBranch" Width="1.5" PointX="1.625" PointY="5.5" />
+        <EntityTypeShape EntityType="UGTU_ACTTESTModel.EducationBranch" Width="1.5" PointX="0.75" PointY="5.125" />
         <AssociationConnector Association="UGTU_ACTTESTModel.FK_EdBranch_EdBranch" />
         <AssociationConnector Association="UGTU_ACTTESTModel.FK_Grup_EdBranch" ManuallyRouted="false" >
         </AssociationConnector>
@@ -39,15 +39,58 @@
         <AssociationConnector Association="UGTU_ACTTESTModel.DepartmentEmployee" />
         <AssociationConnector Association="UGTU_ACTTESTModel.DepartmentEmployee1" />
         <AssociationConnector Association="UGTU_ACTTESTModel.StudentStudentInfo" />
-        <EntityTypeShape EntityType="UGTU_ACTTESTModel.Document" Width="1.5" PointX="6.875" PointY="22.75" />
-        <EntityTypeShape EntityType="UGTU_ACTTESTModel.DocumentType" Width="1.5" PointX="4.625" PointY="22" />
+        <EntityTypeShape EntityType="UGTU_ACTTESTModel.Document" Width="1.5" PointX="19.625" PointY="23.875" />
+        <EntityTypeShape EntityType="UGTU_ACTTESTModel.DocumentType" Width="1.5" PointX="17.375" PointY="23.125" />
         <AssociationConnector Association="UGTU_ACTTESTModel.FK_Doc_stud_documents" />
-        <AssociationConnector Association="UGTU_ACTTESTModel.FK_Doc_stud_Person" />
         <EntityTypeShape EntityType="UGTU_ACTTESTModel.Reason" Width="1.5" PointX="3" PointY="1" />
         <EntityTypeShape EntityType="UGTU_ACTTESTModel.ReasonType" Width="1.5" PointX="0.75" PointY="1.25" />
         <AssociationConnector Association="UGTU_ACTTESTModel.FK_Pricina_TypePricina" />
         <AssociationConnector Association="UGTU_ACTTESTModel.FK_StudGrup_Pricina" />
         <AssociationConnector Association="UGTU_ACTTESTModel.FK_StudGrup_Pricina1" />
+        <EntityTypeShape EntityType="UGTU_ACTTESTModel.Address" Width="1.5" PointX="15.875" PointY="16" />
+        <EntityTypeShape EntityType="UGTU_ACTTESTModel.Campus" Width="1.5" PointX="15.875" PointY="12.625" />
+        <EntityTypeShape EntityType="UGTU_ACTTESTModel.Destination" Width="1.5" PointX="24.875" PointY="5.75" />
+        <EntityTypeShape EntityType="UGTU_ACTTESTModel.PersonDocument" Width="1.5" PointX="21" PointY="3.125" />
+        <EntityTypeShape EntityType="UGTU_ACTTESTModel.Roles" Width="1.5" PointX="24.75" PointY="2.5" />
+        <EntityTypeShape EntityType="UGTU_ACTTESTModel.Room" Width="1.5" PointX="18.125" PointY="10.875" />
+        <EntityTypeShape EntityType="UGTU_ACTTESTModel.RoomType" Width="1.5" PointX="15.875" PointY="10.125" />
+        <AssociationConnector Association="UGTU_ACTTESTModel.FK_Campus_Adress" />
+        <AssociationConnector Association="UGTU_ACTTESTModel.FK_Room_Campus" />
+        <AssociationConnector Association="UGTU_ACTTESTModel.Document_Destination_FK" />
+        <AssociationConnector Association="UGTU_ACTTESTModel.Document_StudGrup_FK" />
+        <AssociationConnector Association="UGTU_ACTTESTModel.FK_Relation_spec_fac_Room" />
+        <AssociationConnector Association="UGTU_ACTTESTModel.FK_Room_RoomType" />
+        <AssociationConnector Association="UGTU_ACTTESTModel.DocumentBase" />
+        <AssociationConnector Association="UGTU_ACTTESTModel.Roles_Destination" />
+        <AssociationConnector Association="UGTU_ACTTESTModel.PersonDocument1" />
+        <EntityTypeShape EntityType="UGTU_ACTTESTModel.Content" Width="1.5" PointX="17.5" PointY="2.125" />
+        <EntityTypeShape EntityType="UGTU_ACTTESTModel.Discipline" Width="1.5" PointX="13" PointY="45.875" />
+        <EntityTypeShape EntityType="UGTU_ACTTESTModel.CurriculaDisciplines" Width="1.5" PointX="15.25" PointY="44.625" />
+        <EntityTypeShape EntityType="UGTU_ACTTESTModel.TutorialTypeClass" Width="1.5" PointX="13" PointY="3" />
+        <EntityTypeShape EntityType="UGTU_ACTTESTModel.BrunchType" Width="1.5" PointX="3.75" PointY="8.375" />
+        <EntityTypeShape EntityType="UGTU_ACTTESTModel.DisciplineType" Width="1.5" PointX="10.75" PointY="46.125" />
+        <EntityTypeShape EntityType="UGTU_ACTTESTModel.TutorialType" Width="1.5" PointX="13" PointY="16.625" />
+        <EntityTypeShape EntityType="UGTU_ACTTESTModel.TutorialClass" Width="1.5" PointX="15.25" PointY="2" />
+        <EntityTypeShape EntityType="UGTU_ACTTESTModel.CurriculaYear" Width="1.5" PointX="6.25" PointY="16.625" />
+        <AssociationConnector Association="UGTU_ACTTESTModel.FK_Content_UchPl_sv_disc" />
+        <AssociationConnector Association="UGTU_ACTTESTModel.FK_Content_UchPl_vid_zaniat" />
+        <AssociationConnector Association="UGTU_ACTTESTModel.FK_discpln_Type_disc" />
+        <AssociationConnector Association="UGTU_ACTTESTModel.FK_sv_disc_discpln" />
+        <AssociationConnector Association="UGTU_ACTTESTModel.FK_EdBranch_Type_Branch" />
+        <AssociationConnector Association="UGTU_ACTTESTModel.FK_sv_disc_Uch_pl" />
+        <AssociationConnector Association="UGTU_ACTTESTModel.FK_vid_zaniat_typ_zan" />
+        <AssociationConnector Association="UGTU_ACTTESTModel.FK_vid_zaniat_TypeZanyat" />
+        <AssociationConnector Association="UGTU_ACTTESTModel.FK_Uch_pl_Year_uch_pl" />
+        <EntityTypeShape EntityType="UGTU_ACTTESTModel.DisciplineCycle" Width="1.5" PointX="13" PointY="49.25" />
+        <EntityTypeShape EntityType="UGTU_ACTTESTModel.EducationForm" Width="1.5" PointX="2" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="UGTU_ACTTESTModel.DisciplineGroup" Width="1.5" PointX="5.375" PointY="1" />
+        <AssociationConnector Association="UGTU_ACTTESTModel.FK_sv_disc_ckl_disc" />
+        <AssociationConnector Association="UGTU_ACTTESTModel.FK_Relation_spec_fac_Form_ed" />
+        <AssociationConnector Association="UGTU_ACTTESTModel.FK_Uch_pl_Form_ed" />
+        <AssociationConnector Association="UGTU_ACTTESTModel.FK_sv_disc_grp_disc" />
+        <EntityTypeShape EntityType="UGTU_ACTTESTModel.TypeSupply" Width="1.5" PointX="24.25" PointY="9.625" />
+        <AssociationConnector Association="UGTU_ACTTESTModel.FK_TypeSupply_Destination" />
+        <AssociationConnector Association="UGTU_ACTTESTModel.Base_Destination" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

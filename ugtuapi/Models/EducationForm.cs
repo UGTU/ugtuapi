@@ -12,21 +12,20 @@ namespace ugtuapi.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Faculty
+    public partial class EducationForm
     {
-        public Faculty()
+        public EducationForm()
         {
-            this.FacultyRel = new HashSet<FacultyRel>();
+            this.Relation_spec_fac = new HashSet<FacultyRel>();
+            this.Uch_pl = new HashSet<Curricula>();
         }
     
         public int Id { get; set; }
-        public string DiplExcPatternName { get; set; }
-        public string DiplVklExcPatternName { get; set; }
-        public Nullable<bool> DiplVklDatPadez { get; set; }
-        public Nullable<System.Guid> DepartmentUID { get; set; }
-        public Nullable<System.DateTime> DateDiplomDelivery { get; set; }
+        public string Name { get; set; }
+        public Nullable<int> ik_FB { get; set; }
+        public string ApplicationName { get; set; }
     
-        public virtual ICollection<FacultyRel> FacultyRel { get; set; }
-        public virtual Department Department { get; set; }
+        public virtual ICollection<FacultyRel> Relation_spec_fac { get; set; }
+        public virtual ICollection<Curricula> Uch_pl { get; set; }
     }
 }

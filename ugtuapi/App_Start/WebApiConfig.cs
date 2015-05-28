@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Formatting;
-using System.ServiceModel.Syndication;
-using System.Web.Http;
+﻿using System.Web.Http;
 using System.Web.Http.OData.Builder;
 using System.Web.Http.OData.Extensions;
-using System.Web.Http.OData.Formatter;
 using Microsoft.Owin.Security.OAuth;
-using Newtonsoft.Json.Serialization;
 using ugtuapi.Models;
+using WebApiContrib.Formatting.Jsonp;
 
 namespace ugtuapi
 {
@@ -27,15 +20,14 @@ namespace ugtuapi
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
-            config.Formatters.Add(new JsonMediaTypeFormatter());
-            config.Formatters.Add(new XmlMediaTypeFormatter());            
+                name: "API Default",
+                routeTemplate: "content/{controller}/{action}/{id}"                
+            );            
 
-            var builder = new ODataConventionModelBuilder();            
-            builder.EntitySet<Person>("Persons");
+            config.AddJsonpFormatter();
+                                               
+            var builder = new ODataConventionModelBuilder();
+            
             builder.EntitySet<Student>("Students");
             builder.EntitySet<Zach>("Zach");
             builder.EntitySet<StudGrup>("StudentGroups");
@@ -51,11 +43,49 @@ namespace ugtuapi
             builder.EntitySet<DocumentType>("DocumentTypes");
             builder.EntitySet<Reason>("Reasons");
             builder.EntitySet<ReasonType>("ReasonTypes");
+            builder.EntitySet<Roles>("Roles");
+            
+            builder.EntitySet<Room>("Rooms");
+            builder.EntitySet<RoomType>("RoomTypes");
+            builder.EntitySet<Campus>("Campuses");
+            builder.EntitySet<PersonDocument>("PersonDocuments");
+            builder.EntitySet<Destination>("Destinations");
+            builder.EntitySet<Address>("Addresses");
+            builder.EntitySet<BrunchType>("BrunchTypes");
+            builder.EntitySet<EducationForm>("EducationForms");
+            
+            builder.EntitySet<CurriculaYear>("CurriculaYears");
+            builder.EntitySet<CurriculaDisciplines>("CurriculaDisciplines");
+            builder.EntitySet<Content>("Content");
+            builder.EntitySet<Discipline>("Disciplines");
+            builder.EntitySet<DisciplineCycle>("Cycles");
+            builder.EntitySet<DisciplineType>("DisciplineTypes");
+            builder.EntitySet<TutorialClass>("TutorialClasses");
+            builder.EntitySet<TutorialTypeClass>("TutorialTypeClasses");
+            builder.EntitySet<TutorialType>("TutorialType");
+            builder.EntitySet<DisciplineGroup>("DisciplineGroups");
+            builder.EntitySet<TypeSupply>("TypeSupplies");
+            
+
+
+            var persons = builder.EntitySet<Person>("People");
+            persons.EntityType.Ignore(x => x.Photo);
+            //var model = builder.GetEdmModel() as EdmModel;
+            //var container = model.EntityContainers().First();
+            //var people = container.FindEntitySet("People");
+            //var photoUrl = people.ElementType.FindProperty("PhotoUrl");
+            //var annotation =
+            //    new EdmValueAnnotation(
+            //        photoUrl, new EdmValueTerm("Org.OData.Core.V1", "Computed", EdmPrimitiveTypeKind.String),
+            //    new EdmStringConstant(string.Empty));
+
+            //model.AddVocabularyAnnotation(annotation);
+                
             SetupPrimaryKeys(builder);
             config.Routes.MapODataServiceRoute("odata", null, builder.GetEdmModel());            
         }
 
-        private static void SetupPrimaryKeys(ODataConventionModelBuilder builder)
+        private static void SetupPrimaryKeys(ODataModelBuilder builder)
         {
             builder.Entity<Person>().HasKey(x => x.nCode);
             builder.Entity<Student>().HasKey(x => x.nCode);
@@ -69,13 +99,19 @@ namespace ugtuapi
             builder.Entity<FacultyRel>().HasKey(x => x.ID);
             builder.Entity<EducationBranch>().HasKey(x => x.ik_spec);
             builder.Entity<Faculty>().HasKey(x => x.Id);
-            builder.Entity<Document>().HasKey(x => x.Id);
+            builder.Entity<TypeSupply>().HasKey(x => x.ik_typesup);
+            
             builder.Entity<DocumentType>().HasKey(x => x.Id);
             builder.Entity<Reason>().HasKey(x => x.Id);
             builder.Entity<ReasonType>().HasKey(x => x.Id);
             
-            
-            
+            builder.Entity<Roles>().HasKey(x => x.ik_Roles);
+            builder.Entity<Room>().HasKey(x => x.ik_room);
+            builder.Entity<RoomType>().HasKey(x => x.ik_room_type);
+            builder.Entity<Campus>().HasKey(x => x.ik_campus);
+            builder.Entity<PersonDocument>().HasKey(x => x.Ik_Document);
+            builder.Entity<Destination>().HasKey(x => x.Ik_destination);
+            builder.Entity<Address>().HasKey(x => x.ik_address);
         }
     }
 }

@@ -40,6 +40,7 @@ namespace ugtuapi.Models
         public string PersonFullName { get; set; }
         public string PersonSmallName { get; set; }
         public string PersName { get; set; }
+        public byte[] Photo { get; set; }
     
         public PersonName Name { get; set; }
         public Contact Contact { get; set; }
