@@ -232,6 +232,7 @@
     <Compile Include="Controllers\EducationBranchesController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\FacultiesController.cs" />
+    <Compile Include="Controllers\GradebooksController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PeopleController.cs" />
     <Compile Include="Controllers\ImagesController.cs" />
@@ -239,6 +240,7 @@
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\StudentInfoesController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
+    <Compile Include="Controllers\WebOrdersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -305,6 +307,9 @@
       <DependentUpon>ugtustudent.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\FacultyRel.cs">
+      <DependentUpon>ugtustudent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetMagazineDocWeb_Result.cs">
       <DependentUpon>ugtustudent.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Group.cs">
@@ -425,6 +430,7 @@
     <Content Include="Models\ugtustudent.edmx.diagram">
       <DependentUpon>ugtustudent.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\Local IIS.pubxml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

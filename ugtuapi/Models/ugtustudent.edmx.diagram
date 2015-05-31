@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d17fbe027a574732add2d6e6ef4cc420" Name="Diagram1" ZoomLevel="85">
+      <Diagram DiagramId="d17fbe027a574732add2d6e6ef4cc420" Name="Diagram1" ZoomLevel="94">
         <EntityTypeShape EntityType="UGTU_ACTTESTModel.Person" Width="1.5" PointX="12" PointY="23" IsExpanded="true" />
         <EntityTypeShape EntityType="UGTU_ACTTESTModel.Student" Width="1.5" PointX="4.75" PointY="24" IsExpanded="true" />
         <AssociationConnector Association="UGTU_ACTTESTModel.FK_Student_Person" ManuallyRouted="false" >
@@ -46,7 +46,16 @@
         <EntityTypeShape EntityType="UGTU_ACTTESTModel.ReasonType" Width="1.5" PointX="0.75" PointY="1.25" />
         <AssociationConnector Association="UGTU_ACTTESTModel.FK_Pricina_TypePricina" />
         <AssociationConnector Association="UGTU_ACTTESTModel.FK_StudGrup_Pricina" />
-        <AssociationConnector Association="UGTU_ACTTESTModel.FK_StudGrup_Pricina1" />
+        <AssociationConnector Association="UGTU_ACTTESTModel.FK_StudGrup_Pricina1" ManuallyRouted="true" >
+          <ConnectorPoint PointX="4.4757692307692309" PointY="3.364889322916667" />
+          <ConnectorPoint PointX="4.4757692307692309" PointY="3.4886393229166672" />
+          <ConnectorPoint PointX="3.6681450838580689" PointY="3.4886393229166672" />
+          <ConnectorPoint PointX="4.0431450838580689" PointY="3.7398893229166674" />
+          <ConnectorPoint PointX="3.6982869171265875" PointY="3.7398893229166674" />
+          <ConnectorPoint PointX="3.6982869171265875" PointY="4.1507935686569795" />
+          <ConnectorPoint PointX="9.125" PointY="4.1507935686569795" />
+          <ConnectorPoint PointX="9.125" PointY="10.5" />
+        </AssociationConnector>
         <EntityTypeShape EntityType="UGTU_ACTTESTModel.Address" Width="1.5" PointX="15.875" PointY="16" />
         <EntityTypeShape EntityType="UGTU_ACTTESTModel.Campus" Width="1.5" PointX="15.875" PointY="12.625" />
         <EntityTypeShape EntityType="UGTU_ACTTESTModel.Destination" Width="1.5" PointX="24.875" PointY="5.75" />
@@ -63,17 +72,18 @@
         <AssociationConnector Association="UGTU_ACTTESTModel.DocumentBase" />
         <AssociationConnector Association="UGTU_ACTTESTModel.Roles_Destination" />
         <AssociationConnector Association="UGTU_ACTTESTModel.PersonDocument1" />
-        <EntityTypeShape EntityType="UGTU_ACTTESTModel.Content" Width="1.5" PointX="17.5" PointY="2.125" />
+        <EntityTypeShape EntityType="UGTU_ACTTESTModel.Content" Width="1.5" PointX="18.5" PointY="2.125" />
         <EntityTypeShape EntityType="UGTU_ACTTESTModel.Discipline" Width="1.5" PointX="13" PointY="45.875" />
         <EntityTypeShape EntityType="UGTU_ACTTESTModel.CurriculaDisciplines" Width="1.5" PointX="15.25" PointY="44.625" />
-        <EntityTypeShape EntityType="UGTU_ACTTESTModel.TutorialTypeClass" Width="1.5" PointX="13" PointY="3" />
+        <EntityTypeShape EntityType="UGTU_ACTTESTModel.TutorialTypeClass" Width="1.5" PointX="11.875" PointY="1.5" />
         <EntityTypeShape EntityType="UGTU_ACTTESTModel.BrunchType" Width="1.5" PointX="3.75" PointY="8.375" />
         <EntityTypeShape EntityType="UGTU_ACTTESTModel.DisciplineType" Width="1.5" PointX="10.75" PointY="46.125" />
         <EntityTypeShape EntityType="UGTU_ACTTESTModel.TutorialType" Width="1.5" PointX="13" PointY="16.625" />
         <EntityTypeShape EntityType="UGTU_ACTTESTModel.TutorialClass" Width="1.5" PointX="15.25" PointY="2" />
         <EntityTypeShape EntityType="UGTU_ACTTESTModel.CurriculaYear" Width="1.5" PointX="6.25" PointY="16.625" />
         <AssociationConnector Association="UGTU_ACTTESTModel.FK_Content_UchPl_sv_disc" />
-        <AssociationConnector Association="UGTU_ACTTESTModel.FK_Content_UchPl_vid_zaniat" />
+        <AssociationConnector Association="UGTU_ACTTESTModel.FK_Content_UchPl_vid_zaniat" ManuallyRouted="false" >
+        </AssociationConnector>
         <AssociationConnector Association="UGTU_ACTTESTModel.FK_discpln_Type_disc" />
         <AssociationConnector Association="UGTU_ACTTESTModel.FK_sv_disc_discpln" />
         <AssociationConnector Association="UGTU_ACTTESTModel.FK_EdBranch_Type_Branch" />
@@ -87,7 +97,15 @@
         <AssociationConnector Association="UGTU_ACTTESTModel.FK_sv_disc_ckl_disc" />
         <AssociationConnector Association="UGTU_ACTTESTModel.FK_Relation_spec_fac_Form_ed" />
         <AssociationConnector Association="UGTU_ACTTESTModel.FK_Uch_pl_Form_ed" />
-        <AssociationConnector Association="UGTU_ACTTESTModel.FK_sv_disc_grp_disc" />
+        <AssociationConnector Association="UGTU_ACTTESTModel.FK_sv_disc_grp_disc" ManuallyRouted="true" >
+          <ConnectorPoint PointX="6.875" PointY="1.9687505" />
+          <ConnectorPoint PointX="9.55625" PointY="1.9687505" />
+          <ConnectorPoint PointX="9.55625" PointY="3.8845306368746693" />
+          <ConnectorPoint PointX="15" PointY="3.8845306368746693" />
+          <ConnectorPoint PointX="15" PointY="44.25" />
+          <ConnectorPoint PointX="15.593747999999998" PointY="44.25" />
+          <ConnectorPoint PointX="15.593747999999998" PointY="44.625" />
+        </AssociationConnector>
         <EntityTypeShape EntityType="UGTU_ACTTESTModel.TypeSupply" Width="1.5" PointX="24.25" PointY="9.625" />
         <AssociationConnector Association="UGTU_ACTTESTModel.FK_TypeSupply_Destination" />
         <AssociationConnector Association="UGTU_ACTTESTModel.Base_Destination" />

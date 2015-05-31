@@ -1096,6 +1096,9 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="GetMagazineDocWeb" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Ik_zach" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="UGTU_ACTTESTModelStoreContainer">
           <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Campus" EntityType="Self.Campus" Schema="dbo" store:Type="Tables" />
@@ -1648,6 +1651,9 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
             <End Role="Destination" EntitySet="Destination" />
             <End Role="Destination1" EntitySet="Destination" />
           </AssociationSet>
+          <FunctionImport Name="GetMagazineDocWeb" ReturnType="Collection(UGTU_ACTTESTModel.GetMagazineDocWeb_Result)">
+          <Parameter Name="Ik_zach" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="Zach">
           <Key>
@@ -2701,6 +2707,17 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
           <End Type="UGTU_ACTTESTModel.Destination" Role="Destination" Multiplicity="*" />
           <End Type="UGTU_ACTTESTModel.Destination" Role="Destination1" Multiplicity="*" />
         </Association>
+        <ComplexType Name="GetMagazineDocWeb_Result">
+          <Property Type="Int32" Name="NumberDoc" Nullable="true" />
+          <Property Type="Int32" Name="Ik_Document" Nullable="false" />
+          <Property Type="String" Name="cNameDestination" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Ik_destination" Nullable="true" />
+          <Property Type="DateTime" Name="DateCreate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="DateReady" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="229" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Timetable" Nullable="true" MaxLength="70" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3251,6 +3268,21 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
               <ScalarProperty Name="Ik_destination" ColumnName="Ik_destination1" />
             </EndProperty>
           </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="GetMagazineDocWeb" FunctionName="UGTU_ACTTESTModel.Store.GetMagazineDocWeb">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UGTU_ACTTESTModel.GetMagazineDocWeb_Result">
+                <ScalarProperty Name="NumberDoc" ColumnName="NumberDoc" />
+                <ScalarProperty Name="Ik_Document" ColumnName="Ik_Document" />
+                <ScalarProperty Name="cNameDestination" ColumnName="cNameDestination" />
+                <ScalarProperty Name="Ik_destination" ColumnName="Ik_destination" />
+                <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
+                <ScalarProperty Name="DateReady" ColumnName="DateReady" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Timetable" ColumnName="Timetable" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

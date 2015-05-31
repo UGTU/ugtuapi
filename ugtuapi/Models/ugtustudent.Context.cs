@@ -12,6 +12,8 @@ namespace ugtuapi.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class UGTUEntities : DbContext
     {
@@ -61,5 +63,14 @@ namespace ugtuapi.Models
         public virtual DbSet<EducationForm> Form_ed { get; set; }
         public virtual DbSet<DisciplineGroup> grp_disc { get; set; }
         public virtual DbSet<TypeSupply> TypeSupply { get; set; }
+    
+        public virtual ObjectResult<GetMagazineDocWeb_Result> GetMagazineDocWeb(Nullable<int> ik_zach)
+        {
+            var ik_zachParameter = ik_zach.HasValue ?
+                new ObjectParameter("Ik_zach", ik_zach) :
+                new ObjectParameter("Ik_zach", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetMagazineDocWeb_Result>("GetMagazineDocWeb", ik_zachParameter);
+        }
     }
 }

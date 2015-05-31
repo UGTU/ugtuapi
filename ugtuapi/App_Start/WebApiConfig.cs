@@ -1,7 +1,12 @@
-﻿using System.Web.Http;
+﻿using System.ComponentModel;
+using System.Linq;
+using System.Net.Http.Headers;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
+using System.Web.Http;
 using System.Web.Http.OData.Builder;
 using System.Web.Http.OData.Extensions;
 using Microsoft.Owin.Security.OAuth;
+using Newtonsoft.Json.Converters;
 using ugtuapi.Models;
 using WebApiContrib.Formatting.Jsonp;
 
@@ -21,15 +26,18 @@ namespace ugtuapi
 
             config.Routes.MapHttpRoute(
                 name: "API Default",
-                routeTemplate: "content/{controller}/{action}/{id}"                
-            );            
+                routeTemplate: "services/{controller}/{action}/{id}"                
+            );          
 
             config.AddJsonpFormatter();
-                                               
+            config.Formatters.JsonFormatter.UseDataContractJsonSerializer = true;
+            //var appXmlType = config.Formatters.XmlFormatter.SupportedMediaTypes.FirstOrDefault(t => t.MediaType == "application/xml");
+            //config.Formatters.XmlFormatter.SupportedMediaTypes.Remove(appXmlType);
+
             var builder = new ODataConventionModelBuilder();
             
             builder.EntitySet<Student>("Students");
-            builder.EntitySet<Zach>("Zach");
+            builder.EntitySet<Zach>("Gradebooks");
             builder.EntitySet<StudGrup>("StudentGroups");
             builder.EntitySet<Group>("Groups");
             builder.EntitySet<Curricula>("Plans");
@@ -65,11 +73,16 @@ namespace ugtuapi
             builder.EntitySet<TutorialType>("TutorialType");
             builder.EntitySet<DisciplineGroup>("DisciplineGroups");
             builder.EntitySet<TypeSupply>("TypeSupplies");
-            
+            builder.EntitySet<GetMagazineDocWeb_Result>("MagazineDocWeb");
 
+            //builder.Entity<Zach>().Action("DocumentOrders")
+            //    .ReturnsCollectionFromEntitySet<GetMagazineDocWeb_Result>("MagazineResult")
+            //    .Parameter<int>("key");
 
             var persons = builder.EntitySet<Person>("People");
             persons.EntityType.Ignore(x => x.Photo);
+            
+            
             //var model = builder.GetEdmModel() as EdmModel;
             //var container = model.EntityContainers().First();
             //var people = container.FindEntitySet("People");
