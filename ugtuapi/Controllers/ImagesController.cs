@@ -12,7 +12,7 @@ using ugtuapi.Models;
 
 namespace ugtuapi.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class ImagesController : ApiController
     {
         private readonly UGTUEntities _db = new UGTUEntities();

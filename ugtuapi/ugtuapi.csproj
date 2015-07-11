@@ -227,10 +227,15 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CountriesController.cs" />
     <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\DestinationsController.cs" />
+    <Compile Include="Controllers\EdBranchesController.cs" />
     <Compile Include="Controllers\EducationBranchesController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
+    <Compile Include="Controllers\EnrollerPeopleController.cs" />
+    <Compile Include="Controllers\EnrollersController.cs" />
+    <Compile Include="Controllers\EnrollmentsController.cs" />
     <Compile Include="Controllers\FacultiesController.cs" />
     <Compile Include="Controllers\GradebooksController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -249,6 +254,9 @@
     <Compile Include="Models\Address.cs">
       <DependentUpon>ugtustudent.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Area.cs">
+      <DependentUpon>UgtuAddresses.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\BrunchType.cs">
       <DependentUpon>ugtustudent.tt</DependentUpon>
     </Compile>
@@ -260,6 +268,9 @@
     </Compile>
     <Compile Include="Models\Content.cs">
       <DependentUpon>ugtustudent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Country.cs">
+      <DependentUpon>UgtuAddresses.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Curricula.cs">
       <DependentUpon>ugtustudent.tt</DependentUpon>
@@ -303,6 +314,78 @@
     <Compile Include="Models\Employee.cs">
       <DependentUpon>ugtustudent.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Enrolleeies\Bonus.cs">
+      <DependentUpon>UgtuEnrolleeies.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Enrolleeies\CategoryType.cs">
+      <DependentUpon>UgtuEnrolleeies.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Enrolleeies\DirectionRequirement.cs">
+      <DependentUpon>UgtuEnrolleeies.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Enrolleeies\EdBranch.cs">
+      <DependentUpon>UgtuEnrolleeies.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Enrolleeies\EdDirection.cs">
+      <DependentUpon>UgtuEnrolleeies.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Enrolleeies\EdForm.cs">
+      <DependentUpon>UgtuEnrolleeies.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Enrolleeies\Enroller.cs">
+      <DependentUpon>UgtuEnrolleeies.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Enrolleeies\EnrollerPerson.cs">
+      <DependentUpon>UgtuEnrolleeies.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Enrolleeies\EnrollerPersonDocument.cs">
+      <DependentUpon>UgtuEnrolleeies.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Enrolleeies\Enrollment.cs">
+      <DependentUpon>UgtuEnrolleeies.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Enrolleeies\EnrollmentCategory.cs">
+      <DependentUpon>UgtuEnrolleeies.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Enrolleeies\EnrollmentDocumentType.cs">
+      <DependentUpon>UgtuEnrolleeies.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Enrolleeies\EnrollmentProperty.cs">
+      <DependentUpon>UgtuEnrolleeies.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Enrolleeies\EnrollmentState.cs">
+      <DependentUpon>UgtuEnrolleeies.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Enrolleeies\EnrollmentType.cs">
+      <DependentUpon>UgtuEnrolleeies.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Enrolleeies\Institute.cs">
+      <DependentUpon>UgtuEnrolleeies.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Enrolleeies\InstituteDirection.cs">
+      <DependentUpon>UgtuEnrolleeies.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Enrolleeies\Test.cs">
+      <DependentUpon>UgtuEnrolleeies.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Enrolleeies\TestResult.cs">
+      <DependentUpon>UgtuEnrolleeies.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Enrolleeies\UgtuEnrolleeies.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UgtuEnrolleeies.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Enrolleeies\UgtuEnrolleeies.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UgtuEnrolleeies.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Enrolleeies\UgtuEnrolleeies.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UgtuEnrolleeies.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\Faculty.cs">
       <DependentUpon>ugtustudent.tt</DependentUpon>
     </Compile>
@@ -316,6 +399,12 @@
       <DependentUpon>ugtustudent.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Locality.cs">
+      <DependentUpon>UgtuAddresses.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LocalityType.cs">
+      <DependentUpon>UgtuAddresses.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Person.cs">
       <DependentUpon>ugtustudent.tt</DependentUpon>
     </Compile>
@@ -341,6 +430,9 @@
     <Compile Include="Models\RoomType.cs">
       <DependentUpon>ugtustudent.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Street.cs">
+      <DependentUpon>UgtuAddresses.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Student.cs">
       <DependentUpon>ugtustudent.tt</DependentUpon>
     </Compile>
@@ -349,6 +441,9 @@
     </Compile>
     <Compile Include="Models\StudGrup.cs">
       <DependentUpon>ugtustudent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SubArea.cs">
+      <DependentUpon>UgtuAddresses.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TutorialClass.cs">
       <DependentUpon>ugtustudent.tt</DependentUpon>
@@ -361,6 +456,21 @@
     </Compile>
     <Compile Include="Models\TypeSupply.cs">
       <DependentUpon>ugtustudent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UgtuAddresses.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UgtuAddresses.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UgtuAddresses.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UgtuAddresses.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UgtuAddresses.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UgtuAddresses.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ugtustudent.Context.cs">
       <AutoGen>True</AutoGen>
@@ -392,6 +502,26 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Models\Enrolleeies\UgtuEnrolleeies.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UgtuEnrolleeies.edmx</DependentUpon>
+      <LastGenOutput>UgtuEnrolleeies.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Enrolleeies\UgtuEnrolleeies.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UgtuEnrolleeies.edmx</DependentUpon>
+      <LastGenOutput>UgtuEnrolleeies.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\UgtuAddresses.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UgtuAddresses.edmx</DependentUpon>
+      <LastGenOutput>UgtuAddresses.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\UgtuAddresses.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UgtuAddresses.edmx</DependentUpon>
+      <LastGenOutput>UgtuAddresses.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\ugtustudent.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ugtustudent.edmx</DependentUpon>
@@ -429,6 +559,20 @@
     </EntityDeploy>
     <Content Include="Models\ugtustudent.edmx.diagram">
       <DependentUpon>ugtustudent.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\UgtuAddresses.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>UgtuAddresses.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\UgtuAddresses.edmx.diagram">
+      <DependentUpon>UgtuAddresses.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\Enrolleeies\UgtuEnrolleeies.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>UgtuEnrolleeies.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Enrolleeies\UgtuEnrolleeies.edmx.diagram">
+      <DependentUpon>UgtuEnrolleeies.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\Local IIS.pubxml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />

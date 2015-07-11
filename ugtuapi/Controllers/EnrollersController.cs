@@ -1,7 +1,16 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.ModelBinding;
 using System.Web.Http.OData;
-using ugtuapi.Models;
+using System.Web.Http.OData.Routing;
+using ugtuapi.Models.Enrolleeies;
 
 namespace ugtuapi.Controllers
 {
@@ -10,35 +19,33 @@ namespace ugtuapi.Controllers
 
     using System.Web.Http.OData.Builder;
     using System.Web.Http.OData.Extensions;
-    using ugtuapi.Models;
+    using ugtuapi.Models.Enrolleeies;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-    builder.EntitySet<Student>("Students");
-    builder.EntitySet<Person>("Person"); 
-    builder.EntitySet<Zach>("Zach"); 
+    builder.EntitySet<Enroller>("Enrollers");
+    builder.EntitySet<Enrollment>("ABIT_postup"); 
+    builder.EntitySet<EnrollerPerson>("Person"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
-    public class StudentsController : ODataController
+    public class EnrollersController : ODataController
     {
-        private readonly UGTUEntities _db = new UGTUEntities() {Configuration = {ProxyCreationEnabled = false}};
+        private readonly UGTUEnrolleeies _db = new UGTUEnrolleeies();
 
-        // GET: odata/Students
-        [EnableQuery(MaxExpansionDepth = 5)]
-        public IQueryable<Student> GetStudents()
+        // GET: odata/Enrollers
+        [EnableQuery(MaxExpansionDepth = 8)]
+        public IQueryable<Enroller> GetEnrollers()
         {
             return _db.Student;
         }
 
-
-        // GET: odata/Students(5)
-        [EnableQuery(MaxExpansionDepth = 5)]
-        
-        public SingleResult<Student> GetStudent([FromODataUri] decimal key)
-        {            
-            return SingleResult.Create(_db.Student.Where(student => student.nCode == key));            
+        // GET: odata/Enrollers(5)
+        [EnableQuery(MaxExpansionDepth = 8)]
+        public SingleResult<Enroller> GetEnroller([FromODataUri] decimal key)
+        {
+            return SingleResult.Create(_db.Student.Where(enroller => enroller.nCode == key));
         }
 
-        // PUT: odata/Students(5)
-        //public IHttpActionResult Put([FromODataUri] decimal key, Delta<Student> patch)
+        // PUT: odata/Enrollers(5)
+        //public IHttpActionResult Put([FromODataUri] decimal key, Delta<Enroller> patch)
         //{
         //    Validate(patch.GetEntity());
 
@@ -47,13 +54,13 @@ namespace ugtuapi.Controllers
         //        return BadRequest(ModelState);
         //    }
 
-        //    Student student = _db.Student.Find(key);
-        //    if (student == null)
+        //    Enroller enroller = _db.Student.Find(key);
+        //    if (enroller == null)
         //    {
         //        return NotFound();
         //    }
 
-        //    patch.Put(student);
+        //    patch.Put(enroller);
 
         //    try
         //    {
@@ -61,7 +68,7 @@ namespace ugtuapi.Controllers
         //    }
         //    catch (DbUpdateConcurrencyException)
         //    {
-        //        if (!StudentExists(key))
+        //        if (!EnrollerExists(key))
         //        {
         //            return NotFound();
         //        }
@@ -71,18 +78,18 @@ namespace ugtuapi.Controllers
         //        }
         //    }
 
-        //    return Updated(student);
+        //    return Updated(enroller);
         //}
 
-        // POST: odata/Students
-        //public IHttpActionResult Post(Student student)
+        //// POST: odata/Enrollers
+        //public IHttpActionResult Post(Enroller enroller)
         //{
         //    if (!ModelState.IsValid)
         //    {
         //        return BadRequest(ModelState);
         //    }
 
-        //    _db.Student.Add(student);
+        //    _db.Student.Add(enroller);
 
         //    try
         //    {
@@ -90,7 +97,7 @@ namespace ugtuapi.Controllers
         //    }
         //    catch (DbUpdateException)
         //    {
-        //        if (StudentExists(student.nCode))
+        //        if (EnrollerExists(enroller.nCode))
         //        {
         //            return Conflict();
         //        }
@@ -100,12 +107,12 @@ namespace ugtuapi.Controllers
         //        }
         //    }
 
-        //    return Created(student);
+        //    return Created(enroller);
         //}
 
-        // PATCH: odata/Students(5)
+        //// PATCH: odata/Enrollers(5)
         //[AcceptVerbs("PATCH", "MERGE")]
-        //public IHttpActionResult Patch([FromODataUri] decimal key, Delta<Student> patch)
+        //public IHttpActionResult Patch([FromODataUri] decimal key, Delta<Enroller> patch)
         //{
         //    Validate(patch.GetEntity());
 
@@ -114,13 +121,13 @@ namespace ugtuapi.Controllers
         //        return BadRequest(ModelState);
         //    }
 
-        //    Student student = _db.Student.Find(key);
-        //    if (student == null)
+        //    Enroller enroller = _db.Student.Find(key);
+        //    if (enroller == null)
         //    {
         //        return NotFound();
         //    }
 
-        //    patch.Patch(student);
+        //    patch.Patch(enroller);
 
         //    try
         //    {
@@ -128,7 +135,7 @@ namespace ugtuapi.Controllers
         //    }
         //    catch (DbUpdateConcurrencyException)
         //    {
-        //        if (!StudentExists(key))
+        //        if (!EnrollerExists(key))
         //        {
         //            return NotFound();
         //        }
@@ -138,39 +145,37 @@ namespace ugtuapi.Controllers
         //        }
         //    }
 
-        //    return Updated(student);
+        //    return Updated(enroller);
         //}
 
-        // DELETE: odata/Students(5)
+        //// DELETE: odata/Enrollers(5)
         //public IHttpActionResult Delete([FromODataUri] decimal key)
         //{
-        //    Student student = _db.Student.Find(key);
-        //    if (student == null)
+        //    Enroller enroller = _db.Student.Find(key);
+        //    if (enroller == null)
         //    {
         //        return NotFound();
         //    }
 
-        //    _db.Student.Remove(student);
+        //    _db.Student.Remove(enroller);
         //    _db.SaveChanges();
 
         //    return StatusCode(HttpStatusCode.NoContent);
         //}
 
-        // GET: odata/Students(5)/Person
-        [EnableQuery(MaxExpansionDepth = 5)]
-        public SingleResult<Person> GetPerson([FromODataUri] decimal key)
+        // GET: odata/Enrollers(5)/Enrollments
+        [EnableQuery(MaxExpansionDepth = 8)]
+        public IQueryable<Enrollment> GetEnrollments([FromODataUri] decimal key)
         {
-            return SingleResult.Create(_db.Student.Where(m => m.nCode == key).Select(m => m.Person));
+            return _db.Student.Where(m => m.nCode == key).SelectMany(m => m.Enrollments);
         }
 
-        // GET: odata/Students(5)/Zach
-        [EnableQuery(MaxExpansionDepth = 5)]
-        public IQueryable<Zach> GetZach([FromODataUri] decimal key)
+        // GET: odata/Enrollers(5)/EnrollerPerson
+        [EnableQuery]
+        public SingleResult<EnrollerPerson> GetEnrollerPerson([FromODataUri] decimal key)
         {
-            return _db.Student.Where(m => m.nCode == key).SelectMany(m => m.Zach);
+            return SingleResult.Create(_db.Student.Where(m => m.nCode == key).Select(m => m.EnrollerPerson));
         }
-        
-        
 
         protected override void Dispose(bool disposing)
         {
@@ -181,9 +186,9 @@ namespace ugtuapi.Controllers
             base.Dispose(disposing);
         }
 
-        private bool StudentExists(decimal key)
-        {
-            return _db.Student.Count(e => e.nCode == key) > 0;
-        }
+        //private bool EnrollerExists(decimal key)
+        //{
+        //    return _db.Student.Count(e => e.nCode == key) > 0;
+        //}
     }
 }

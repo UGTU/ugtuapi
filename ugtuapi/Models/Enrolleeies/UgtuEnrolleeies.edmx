@@ -1,0 +1,1640 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="UGTUEnrolleeiesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Abit_Bonuses">
+          <Key>
+            <PropertyRef Name="ik_doc" />
+          </Key>
+          <Property Name="ik_doc" Type="int" Nullable="false" />
+          <Property Name="balls" Type="int" Nullable="false" />
+          <Property Name="ik_disc" Type="int" />
+        </EntityType>
+        <EntityType Name="ABIT_Diapazon_Disc">
+          <Key>
+            <PropertyRef Name="ik_disc_nabor" />
+          </Key>
+          <Property Name="ik_disc_nabor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NNrecord" Type="int" Nullable="false" />
+          <Property Name="ik_disc" Type="int" Nullable="false" />
+          <Property Name="Min_ball" Type="int" />
+          <Property Name="bit_Profil" Type="bit" />
+          <Property Name="bit_Concurs" Type="bit" />
+        </EntityType>
+        <EntityType Name="ABIT_Diapazon_spec_fac">
+          <Key>
+            <PropertyRef Name="NNrecord" />
+          </Key>
+          <Property Name="NNrecord" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ik_spec_fac" Type="int" Nullable="false" />
+          <Property Name="BeginDiapazon" Type="int" />
+          <Property Name="EndDiapazon" Type="int" />
+          <Property Name="NNyear" Type="int" Nullable="false" />
+          <Property Name="MestCKP" Type="int" />
+          <Property Name="MestBudjet" Type="int" />
+          <Property Name="MestKontrakt" Type="int" />
+          <Property Name="Ready" Type="int" />
+          <Property Name="lRussian" Type="bit" />
+          <Property Name="MestLgot" Type="int" />
+        </EntityType>
+        <EntityType Name="ABIT_Disc">
+          <Key>
+            <PropertyRef Name="ik_disc" />
+          </Key>
+          <Property Name="ik_disc" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="сname_disc" Type="char" MaxLength="50" Nullable="false" />
+          <Property Name="OutDate" Type="datetime" />
+          <Property Name="OrderNumber" Type="int" />
+          <Property Name="ik_FB" Type="int" />
+        </EntityType>
+        <EntityType Name="ABIT_postup">
+          <Key>
+            <PropertyRef Name="NN_abit" />
+          </Key>
+          <Property Name="NN_abit" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RegNomer" Type="int" Nullable="false" />
+          <Property Name="nCode" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="NNrecord" Type="int" Nullable="false" />
+          <Property Name="ik_zach" Type="int" />
+          <Property Name="ik_kat_zach" Type="int" Nullable="false" />
+          <Property Name="dd_pod_zayav" Type="datetime" Nullable="false" />
+          <Property Name="dd_vozvr_zayav" Type="datetime" />
+          <Property Name="Realy_postup" Type="bit" Nullable="false" />
+          <Property Name="IsMain" Type="bit" Nullable="false" />
+          <Property Name="dd_vvoda_zayav" Type="datetime" />
+          <Property Name="dd_online" Type="datetime" />
+          <Property Name="SchoolAverMark" Type="float" />
+        </EntityType>
+        <EntityType Name="ABIT_sost_zach">
+          <Key>
+            <PropertyRef Name="ik_zach" />
+          </Key>
+          <Property Name="ik_zach" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cname_zach" Type="char" MaxLength="30" Nullable="false" />
+          <Property Name="ik_type_zach" Type="int" />
+          <Property Name="ik_FB" Type="int" />
+        </EntityType>
+        <EntityType Name="ABIT_type_zach">
+          <Key>
+            <PropertyRef Name="ik_type_zach" />
+          </Key>
+          <Property Name="ik_type_zach" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cname_type_zach" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="IsCurrent" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ABIT_Vstup_exam">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cosenka" Type="int" />
+          <Property Name="NN_abit" Type="int" Nullable="false" />
+          <Property Name="ik_disc" Type="int" Nullable="false" />
+          <Property Name="ik_sdach" Type="int" Nullable="false" />
+          <Property Name="id_rasp_kab" Type="int" />
+          <Property Name="NNvedom" Type="char" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Direction">
+          <Key>
+            <PropertyRef Name="ik_direction" />
+          </Key>
+          <Property Name="ik_direction" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cName_direction" Type="varchar" MaxLength="50" />
+          <Property Name="cShort_name_direction" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ThesisName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="ExcelPatternName" Type="varchar" MaxLength="30" />
+          <Property Name="DiplExcPatternName" Type="varchar" MaxLength="30" />
+          <Property Name="ik_FB" Type="int" />
+          <Property Name="SortOrder" Type="int" />
+          <Property Name="Podgot" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Doc_stud">
+          <Key>
+            <PropertyRef Name="Ik_doc" />
+          </Key>
+          <Property Name="Ik_doc" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Dd_vidan" Type="datetime" />
+          <Property Name="Cd_kem_vidan" Type="varchar" MaxLength="500" />
+          <Property Name="Ik_vid_doc" Type="int" Nullable="false" />
+          <Property Name="Np_number" Type="varchar" MaxLength="15" />
+          <Property Name="Cd_seria" Type="varchar" MaxLength="10" />
+          <Property Name="nCode" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="AdditionalInfo" Type="varchar(max)" />
+          <Property Name="IsReal" Type="bit" />
+        </EntityType>
+        <EntityType Name="documents">
+          <Key>
+            <PropertyRef Name="ik_vid_doc" />
+          </Key>
+          <Property Name="ik_vid_doc" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cvid_doc" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="IsDefault" Type="bit" Nullable="false" />
+          <Property Name="IsIdentity" Type="bit" Nullable="false" />
+          <Property Name="IsEducational" Type="bit" Nullable="false" />
+          <Property Name="ik_FB" Type="int" />
+          <Property Name="ik_subFB" Type="int" />
+          <Property Name="ik_type_grazd" Type="int" />
+        </EntityType>
+        <EntityType Name="EducationBranch">
+          <Key>
+            <PropertyRef Name="ik_spec" />
+          </Key>
+          <Property Name="ik_spec" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cname_spec" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="Cshort_spec" Type="varchar" MaxLength="20" />
+          <Property Name="Sh_spec" Type="varchar" MaxLength="10" />
+          <Property Name="ik_direction" Type="int" />
+          <Property Name="Ik_vip_dep" Type="int" />
+          <Property Name="dDate_spec" Type="datetime" />
+          <Property Name="nN_prikaz" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="spDateExit" Type="datetime" />
+          <Property Name="Cname_qualif" Type="varchar" MaxLength="500" />
+          <Property Name="SpecСategory" Type="varchar" MaxLength="50" />
+          <Property Name="QualifShortName" Type="varchar" MaxLength="300" />
+          <Property Name="ik_FB" Type="int" />
+          <Property Name="ik_main_spec" Type="int" />
+          <Property Name="id_parent" Type="int" />
+          <Property Name="id_type_branch" Type="int" />
+          <Property Name="YearNormObuch" Type="int" />
+        </EntityType>
+        <EntityType Name="Fac">
+          <Key>
+            <PropertyRef Name="Ik_fac" />
+          </Key>
+          <Property Name="Ik_fac" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cname_fac" Type="varchar" MaxLength="500" />
+          <Property Name="Cshort_name_fac" Type="varchar" MaxLength="500" />
+          <Property Name="fDateExit" Type="datetime" />
+          <Property Name="bit_calc_nagr" Type="bit" />
+          <Property Name="ManagerPostName" Type="varchar" MaxLength="50" />
+          <Property Name="DiplExcPatternName" Type="varchar" MaxLength="30" />
+          <Property Name="DiplVklExcPatternName" Type="varchar" MaxLength="30" />
+          <Property Name="DiplVklDatPadez" Type="bit" />
+          <Property Name="DepartmentGUID" Type="uniqueidentifier" />
+          <Property Name="Cname_fac_rod_pad" Type="varchar" MaxLength="500" />
+          <Property Name="Dep_Index" Type="varchar" MaxLength="500" />
+          <Property Name="ik_type_department" Type="int" />
+          <Property Name="Cname_fac_small" Type="varchar" MaxLength="500" />
+          <Property Name="DateDiplomDelivery" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Form_ed">
+          <Key>
+            <PropertyRef Name="Ik_form_ed" />
+          </Key>
+          <Property Name="Ik_form_ed" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cname_form_ed" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ik_FB" Type="int" />
+          <Property Name="Cname_form_pril" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Kat_zach">
+          <Key>
+            <PropertyRef Name="Ik_kat_zach" />
+          </Key>
+          <Property Name="Ik_kat_zach" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cname_kat_zach" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ik_type_kat" Type="int" Nullable="false" />
+          <Property Name="bit_Lgota" Type="bit" />
+          <Property Name="OutDate" Type="datetime" />
+          <Property Name="IsRussOlimpWinner" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="nCode" />
+          </Key>
+          <Property Name="nCode" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Clastname" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Cfirstname" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Cotch" Type="varchar" MaxLength="30" />
+          <Property Name="Dd_birth" Type="datetime" />
+          <Property Name="Cplacebirth" Type="varchar" MaxLength="300" />
+          <Property Name="Linval" Type="bit" />
+          <Property Name="Ldeti" Type="bit" />
+          <Property Name="Lrab" Type="bit" />
+          <Property Name="lSex" Type="bit" />
+          <Property Name="Lobchegit" Type="bit" />
+          <Property Name="cSotTel" Type="varchar" MaxLength="500" />
+          <Property Name="ctelefon" Type="varchar" MaxLength="20" />
+          <Property Name="cEmail" Type="varchar" MaxLength="50" />
+          <Property Name="Photo" Type="image" />
+          <Property Name="Ik_grazd" Type="int" />
+          <Property Name="Ik_sem_pol" Type="int" />
+          <Property Name="cInn" Type="varchar" MaxLength="20" />
+          <Property Name="cStrax" Type="varchar" MaxLength="20" />
+          <Property Name="ik_voen_zvanie" Type="int" />
+          <Property Name="itab_n" Type="int" />
+          <Property Name="ik_nac" Type="int" />
+          <Property Name="PersonGUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PersonFullName" Type="varchar" MaxLength="92" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="PersonSmallName" Type="varchar" MaxLength="34" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="PersName" Type="varchar" MaxLength="92" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Relation_spec_fac">
+          <Key>
+            <PropertyRef Name="ik_spec_fac" />
+          </Key>
+          <Property Name="ik_spec_fac" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ik_spec" Type="int" Nullable="false" />
+          <Property Name="ik_fac" Type="int" Nullable="false" />
+          <Property Name="YearObuch" Type="int" />
+          <Property Name="ik_rule" Type="int" />
+          <Property Name="Ik_form_ed" Type="int" Nullable="false" />
+          <Property Name="ik_kat_zaved" Type="int" Nullable="false" />
+          <Property Name="VidGos" Type="int" />
+          <Property Name="MonthObuch" Type="int" Nullable="false" />
+          <Property Name="DepartmentGUID" Type="uniqueidentifier" />
+          <Property Name="is_short" Type="bit" />
+          <Property Name="is_old" Type="bit" />
+          <Property Name="ik_room" Type="int" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="nCode" />
+          </Key>
+          <Property Name="nCode" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Nn_abit" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="ik_medal" Type="int" Nullable="false" />
+          <Property Name="Ik_vid_pens" Type="int" />
+          <Property Name="Ik_podg" Type="int" />
+          <Property Name="Ik_ob_rab" Type="int" />
+          <Property Name="Ik_special_uchet" Type="int" />
+          <Property Name="Ik_zaved" Type="int" />
+          <Property Name="Ngodokon" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Cdopsved" Type="varchar" MaxLength="2000" />
+          <Property Name="ik_pred" Type="int" />
+          <Property Name="cDolgnost" Type="varchar" MaxLength="50" />
+          <Property Name="StazYear" Type="int" />
+          <Property Name="StazMonth" Type="int" />
+          <Property Name="cLgot" Type="varchar" MaxLength="500" />
+          <Property Name="cOsnovan" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TypeKatZach">
+          <Key>
+            <PropertyRef Name="ik_type_kat" />
+          </Key>
+          <Property Name="ik_type_kat" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CType_kat" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ik_FB" Type="int" />
+        </EntityType>
+        <Association Name="FK_Abit_Bonuses_ABIT_Disc">
+          <End Role="ABIT_Disc" Type="Self.ABIT_Disc" Multiplicity="0..1" />
+          <End Role="Abit_Bonuses" Type="Self.Abit_Bonuses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ABIT_Disc">
+              <PropertyRef Name="ik_disc" />
+            </Principal>
+            <Dependent Role="Abit_Bonuses">
+              <PropertyRef Name="ik_disc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Abit_Bonuses_Doc_stud">
+          <End Role="Doc_stud" Type="Self.Doc_stud" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Abit_Bonuses" Type="Self.Abit_Bonuses" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Doc_stud">
+              <PropertyRef Name="Ik_doc" />
+            </Principal>
+            <Dependent Role="Abit_Bonuses">
+              <PropertyRef Name="ik_doc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ABIT_Diapazon_Disc_ABIT_Diapazon_spec_fac">
+          <End Role="ABIT_Diapazon_spec_fac" Type="Self.ABIT_Diapazon_spec_fac" Multiplicity="1" />
+          <End Role="ABIT_Diapazon_Disc" Type="Self.ABIT_Diapazon_Disc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ABIT_Diapazon_spec_fac">
+              <PropertyRef Name="NNrecord" />
+            </Principal>
+            <Dependent Role="ABIT_Diapazon_Disc">
+              <PropertyRef Name="NNrecord" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ABIT_Diapazon_Disc_ABIT_Disc">
+          <End Role="ABIT_Disc" Type="Self.ABIT_Disc" Multiplicity="1" />
+          <End Role="ABIT_Diapazon_Disc" Type="Self.ABIT_Diapazon_Disc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ABIT_Disc">
+              <PropertyRef Name="ik_disc" />
+            </Principal>
+            <Dependent Role="ABIT_Diapazon_Disc">
+              <PropertyRef Name="ik_disc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ABIT_postup_ABIT_Diapazon_spec_fac">
+          <End Role="ABIT_Diapazon_spec_fac" Type="Self.ABIT_Diapazon_spec_fac" Multiplicity="1" />
+          <End Role="ABIT_postup" Type="Self.ABIT_postup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ABIT_Diapazon_spec_fac">
+              <PropertyRef Name="NNrecord" />
+            </Principal>
+            <Dependent Role="ABIT_postup">
+              <PropertyRef Name="NNrecord" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ABIT_postup_ABIT_sost_zach">
+          <End Role="ABIT_sost_zach" Type="Self.ABIT_sost_zach" Multiplicity="0..1" />
+          <End Role="ABIT_postup" Type="Self.ABIT_postup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ABIT_sost_zach">
+              <PropertyRef Name="ik_zach" />
+            </Principal>
+            <Dependent Role="ABIT_postup">
+              <PropertyRef Name="ik_zach" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ABIT_postup_Kat_zach">
+          <End Role="Kat_zach" Type="Self.Kat_zach" Multiplicity="1" />
+          <End Role="ABIT_postup" Type="Self.ABIT_postup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kat_zach">
+              <PropertyRef Name="Ik_kat_zach" />
+            </Principal>
+            <Dependent Role="ABIT_postup">
+              <PropertyRef Name="ik_kat_zach" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ABIT_postup_Stud">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="ABIT_postup" Type="Self.ABIT_postup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="nCode" />
+            </Principal>
+            <Dependent Role="ABIT_postup">
+              <PropertyRef Name="nCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ABIT_sost_zach_ABIT_type_zach">
+          <End Role="ABIT_type_zach" Type="Self.ABIT_type_zach" Multiplicity="0..1" />
+          <End Role="ABIT_sost_zach" Type="Self.ABIT_sost_zach" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ABIT_type_zach">
+              <PropertyRef Name="ik_type_zach" />
+            </Principal>
+            <Dependent Role="ABIT_sost_zach">
+              <PropertyRef Name="ik_type_zach" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Diapazon_spec_fac_abit_Relation_spec_fac">
+          <End Role="Relation_spec_fac" Type="Self.Relation_spec_fac" Multiplicity="1" />
+          <End Role="ABIT_Diapazon_spec_fac" Type="Self.ABIT_Diapazon_spec_fac" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Relation_spec_fac">
+              <PropertyRef Name="ik_spec_fac" />
+            </Principal>
+            <Dependent Role="ABIT_Diapazon_spec_fac">
+              <PropertyRef Name="ik_spec_fac" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Doc_stud_documents">
+          <End Role="documents" Type="Self.documents" Multiplicity="1" />
+          <End Role="Doc_stud" Type="Self.Doc_stud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="documents">
+              <PropertyRef Name="ik_vid_doc" />
+            </Principal>
+            <Dependent Role="Doc_stud">
+              <PropertyRef Name="Ik_vid_doc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Doc_stud_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="Doc_stud" Type="Self.Doc_stud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="nCode" />
+            </Principal>
+            <Dependent Role="Doc_stud">
+              <PropertyRef Name="nCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EdBranch_EdBranch">
+          <End Role="EducationBranch" Type="Self.EducationBranch" Multiplicity="0..1" />
+          <End Role="EducationBranch1" Type="Self.EducationBranch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EducationBranch">
+              <PropertyRef Name="ik_spec" />
+            </Principal>
+            <Dependent Role="EducationBranch1">
+              <PropertyRef Name="id_parent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kat_zach_TypeKatZach">
+          <End Role="TypeKatZach" Type="Self.TypeKatZach" Multiplicity="1" />
+          <End Role="Kat_zach" Type="Self.Kat_zach" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeKatZach">
+              <PropertyRef Name="ik_type_kat" />
+            </Principal>
+            <Dependent Role="Kat_zach">
+              <PropertyRef Name="ik_type_kat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Relation_spec_fac_Fac">
+          <End Role="Fac" Type="Self.Fac" Multiplicity="1" />
+          <End Role="Relation_spec_fac" Type="Self.Relation_spec_fac" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fac">
+              <PropertyRef Name="Ik_fac" />
+            </Principal>
+            <Dependent Role="Relation_spec_fac">
+              <PropertyRef Name="ik_fac" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Relation_spec_fac_Form_ed">
+          <End Role="Form_ed" Type="Self.Form_ed" Multiplicity="1" />
+          <End Role="Relation_spec_fac" Type="Self.Relation_spec_fac" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form_ed">
+              <PropertyRef Name="Ik_form_ed" />
+            </Principal>
+            <Dependent Role="Relation_spec_fac">
+              <PropertyRef Name="Ik_form_ed" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Relation_spec_fac_Spec_stud">
+          <End Role="EducationBranch" Type="Self.EducationBranch" Multiplicity="1" />
+          <End Role="Relation_spec_fac" Type="Self.Relation_spec_fac" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EducationBranch">
+              <PropertyRef Name="ik_spec" />
+            </Principal>
+            <Dependent Role="Relation_spec_fac">
+              <PropertyRef Name="ik_spec" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Spec_stud_Direction">
+          <End Role="Direction" Type="Self.Direction" Multiplicity="0..1" />
+          <End Role="EducationBranch" Type="Self.EducationBranch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Direction">
+              <PropertyRef Name="ik_direction" />
+            </Principal>
+            <Dependent Role="EducationBranch">
+              <PropertyRef Name="ik_direction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="nCode" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="nCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vstup_exam_abit_Disc_abit">
+          <End Role="ABIT_Disc" Type="Self.ABIT_Disc" Multiplicity="1" />
+          <End Role="ABIT_Vstup_exam" Type="Self.ABIT_Vstup_exam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ABIT_Disc">
+              <PropertyRef Name="ik_disc" />
+            </Principal>
+            <Dependent Role="ABIT_Vstup_exam">
+              <PropertyRef Name="ik_disc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vstup_exam_abit_postup_abit">
+          <End Role="ABIT_postup" Type="Self.ABIT_postup" Multiplicity="1" />
+          <End Role="ABIT_Vstup_exam" Type="Self.ABIT_Vstup_exam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ABIT_postup">
+              <PropertyRef Name="NN_abit" />
+            </Principal>
+            <Dependent Role="ABIT_Vstup_exam">
+              <PropertyRef Name="NN_abit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="UGTUEnrolleeiesModelStoreContainer">
+          <EntitySet Name="Abit_Bonuses" EntityType="Self.Abit_Bonuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ABIT_Diapazon_Disc" EntityType="Self.ABIT_Diapazon_Disc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ABIT_Diapazon_spec_fac" EntityType="Self.ABIT_Diapazon_spec_fac" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ABIT_Disc" EntityType="Self.ABIT_Disc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ABIT_postup" EntityType="Self.ABIT_postup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ABIT_sost_zach" EntityType="Self.ABIT_sost_zach" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ABIT_type_zach" EntityType="Self.ABIT_type_zach" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ABIT_Vstup_exam" EntityType="Self.ABIT_Vstup_exam" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Direction" EntityType="Self.Direction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Doc_stud" EntityType="Self.Doc_stud" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="documents" EntityType="Self.documents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EducationBranch" EntityType="Self.EducationBranch" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fac" EntityType="Self.Fac" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Form_ed" EntityType="Self.Form_ed" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kat_zach" EntityType="Self.Kat_zach" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Relation_spec_fac" EntityType="Self.Relation_spec_fac" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeKatZach" EntityType="Self.TypeKatZach" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Abit_Bonuses_ABIT_Disc" Association="Self.FK_Abit_Bonuses_ABIT_Disc">
+            <End Role="ABIT_Disc" EntitySet="ABIT_Disc" />
+            <End Role="Abit_Bonuses" EntitySet="Abit_Bonuses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Abit_Bonuses_Doc_stud" Association="Self.FK_Abit_Bonuses_Doc_stud">
+            <End Role="Doc_stud" EntitySet="Doc_stud" />
+            <End Role="Abit_Bonuses" EntitySet="Abit_Bonuses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ABIT_Diapazon_Disc_ABIT_Diapazon_spec_fac" Association="Self.FK_ABIT_Diapazon_Disc_ABIT_Diapazon_spec_fac">
+            <End Role="ABIT_Diapazon_spec_fac" EntitySet="ABIT_Diapazon_spec_fac" />
+            <End Role="ABIT_Diapazon_Disc" EntitySet="ABIT_Diapazon_Disc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ABIT_Diapazon_Disc_ABIT_Disc" Association="Self.FK_ABIT_Diapazon_Disc_ABIT_Disc">
+            <End Role="ABIT_Disc" EntitySet="ABIT_Disc" />
+            <End Role="ABIT_Diapazon_Disc" EntitySet="ABIT_Diapazon_Disc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ABIT_postup_ABIT_Diapazon_spec_fac" Association="Self.FK_ABIT_postup_ABIT_Diapazon_spec_fac">
+            <End Role="ABIT_Diapazon_spec_fac" EntitySet="ABIT_Diapazon_spec_fac" />
+            <End Role="ABIT_postup" EntitySet="ABIT_postup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ABIT_postup_ABIT_sost_zach" Association="Self.FK_ABIT_postup_ABIT_sost_zach">
+            <End Role="ABIT_sost_zach" EntitySet="ABIT_sost_zach" />
+            <End Role="ABIT_postup" EntitySet="ABIT_postup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ABIT_postup_Kat_zach" Association="Self.FK_ABIT_postup_Kat_zach">
+            <End Role="Kat_zach" EntitySet="Kat_zach" />
+            <End Role="ABIT_postup" EntitySet="ABIT_postup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ABIT_postup_Stud" Association="Self.FK_ABIT_postup_Stud">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="ABIT_postup" EntitySet="ABIT_postup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ABIT_sost_zach_ABIT_type_zach" Association="Self.FK_ABIT_sost_zach_ABIT_type_zach">
+            <End Role="ABIT_type_zach" EntitySet="ABIT_type_zach" />
+            <End Role="ABIT_sost_zach" EntitySet="ABIT_sost_zach" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Diapazon_spec_fac_abit_Relation_spec_fac" Association="Self.FK_Diapazon_spec_fac_abit_Relation_spec_fac">
+            <End Role="Relation_spec_fac" EntitySet="Relation_spec_fac" />
+            <End Role="ABIT_Diapazon_spec_fac" EntitySet="ABIT_Diapazon_spec_fac" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Doc_stud_documents" Association="Self.FK_Doc_stud_documents">
+            <End Role="documents" EntitySet="documents" />
+            <End Role="Doc_stud" EntitySet="Doc_stud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Doc_stud_Person" Association="Self.FK_Doc_stud_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Doc_stud" EntitySet="Doc_stud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EdBranch_EdBranch" Association="Self.FK_EdBranch_EdBranch">
+            <End Role="EducationBranch" EntitySet="EducationBranch" />
+            <End Role="EducationBranch1" EntitySet="EducationBranch" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kat_zach_TypeKatZach" Association="Self.FK_Kat_zach_TypeKatZach">
+            <End Role="TypeKatZach" EntitySet="TypeKatZach" />
+            <End Role="Kat_zach" EntitySet="Kat_zach" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Relation_spec_fac_Fac" Association="Self.FK_Relation_spec_fac_Fac">
+            <End Role="Fac" EntitySet="Fac" />
+            <End Role="Relation_spec_fac" EntitySet="Relation_spec_fac" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Relation_spec_fac_Form_ed" Association="Self.FK_Relation_spec_fac_Form_ed">
+            <End Role="Form_ed" EntitySet="Form_ed" />
+            <End Role="Relation_spec_fac" EntitySet="Relation_spec_fac" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Relation_spec_fac_Spec_stud" Association="Self.FK_Relation_spec_fac_Spec_stud">
+            <End Role="EducationBranch" EntitySet="EducationBranch" />
+            <End Role="Relation_spec_fac" EntitySet="Relation_spec_fac" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Spec_stud_Direction" Association="Self.FK_Spec_stud_Direction">
+            <End Role="Direction" EntitySet="Direction" />
+            <End Role="EducationBranch" EntitySet="EducationBranch" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Person" Association="Self.FK_Student_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vstup_exam_abit_Disc_abit" Association="Self.FK_Vstup_exam_abit_Disc_abit">
+            <End Role="ABIT_Disc" EntitySet="ABIT_Disc" />
+            <End Role="ABIT_Vstup_exam" EntitySet="ABIT_Vstup_exam" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vstup_exam_abit_postup_abit" Association="Self.FK_Vstup_exam_abit_postup_abit">
+            <End Role="ABIT_postup" EntitySet="ABIT_postup" />
+            <End Role="ABIT_Vstup_exam" EntitySet="ABIT_Vstup_exam" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="UGTUEnrolleeiesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Bonus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ExtraMark" Type="Int32" Nullable="false" />
+          <Property Name="TestId" Type="Int32" />
+          <NavigationProperty Name="Tests" Relationship="Self.FK_Abit_Bonuses_ABIT_Disc" FromRole="Abit_Bonuses" ToRole="ABIT_Disc" />
+          <NavigationProperty Name="EnrollerPersonDocument" Relationship="Self.FK_Abit_Bonuses_Doc_stud" FromRole="Abit_Bonuses" ToRole="Doc_stud" />
+        </EntityType>
+        <EntityType Name="DirectionRequirement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NNrecord" Type="Int32" Nullable="false" />
+          <Property Name="TestId" Type="Int32" Nullable="false" />
+          <Property Name="MinMark" Type="Int32" />
+          <Property Name="IsProfile" Type="Boolean" />
+          <Property Name="IsContest" Type="Boolean" />
+          <NavigationProperty Name="EnrollmentProprty" Relationship="Self.FK_ABIT_Diapazon_Disc_ABIT_Diapazon_spec_fac" FromRole="ABIT_Diapazon_Disc" ToRole="ABIT_Diapazon_spec_fac" />
+          <NavigationProperty Name="Test" Relationship="Self.FK_ABIT_Diapazon_Disc_ABIT_Disc" FromRole="ABIT_Diapazon_Disc" ToRole="ABIT_Disc" />
+        </EntityType>
+        <EntityType Name="EnrollmentProperty">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InstituteDirectionId" Type="Int32" Nullable="false" />
+          <Property Name="BeginDiapazon" Type="Int32" />
+          <Property Name="EndDiapazon" Type="Int32" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+          <Property Name="MestCKP" Type="Int32" />
+          <Property Name="MestBudjet" Type="Int32" />
+          <Property Name="MestKontrakt" Type="Int32" />
+          <Property Name="Ready" Type="Int32" />
+          <Property Name="lRussian" Type="Boolean" />
+          <Property Name="MestLgot" Type="Int32" />
+          <NavigationProperty Name="DirectionRequirements" Relationship="Self.FK_ABIT_Diapazon_Disc_ABIT_Diapazon_spec_fac" FromRole="ABIT_Diapazon_spec_fac" ToRole="ABIT_Diapazon_Disc" />
+          <NavigationProperty Name="Enrollments" Relationship="Self.FK_ABIT_postup_ABIT_Diapazon_spec_fac" FromRole="ABIT_Diapazon_spec_fac" ToRole="ABIT_postup" />
+          <NavigationProperty Name="InstituteDirection" Relationship="Self.FK_Diapazon_spec_fac_abit_Relation_spec_fac" FromRole="ABIT_Diapazon_spec_fac" ToRole="Relation_spec_fac" />
+        </EntityType>
+        <EntityType Name="Test">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="CancelDate" Type="DateTime" Precision="3" />
+          <Property Name="OrderNumber" Type="Int32" />
+          <Property Name="ik_FB" Type="Int32" />
+          <NavigationProperty Name="Bonuses" Relationship="Self.FK_Abit_Bonuses_ABIT_Disc" FromRole="ABIT_Disc" ToRole="Abit_Bonuses" />
+          <NavigationProperty Name="DirectionRequirements" Relationship="Self.FK_ABIT_Diapazon_Disc_ABIT_Disc" FromRole="ABIT_Disc" ToRole="ABIT_Diapazon_Disc" />
+          <NavigationProperty Name="TestResults" Relationship="Self.FK_Vstup_exam_abit_Disc_abit" FromRole="ABIT_Disc" ToRole="ABIT_Vstup_exam" />
+        </EntityType>
+        <EntityType Name="Enrollment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegNomer" Type="Int32" Nullable="false" />
+          <Property Name="nCode" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="NNrecord" Type="Int32" Nullable="false" />
+          <Property Name="ik_zach" Type="Int32" />
+          <Property Name="ik_kat_zach" Type="Int32" Nullable="false" />
+          <Property Name="dd_pod_zayav" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="dd_vozvr_zayav" Type="DateTime" Precision="3" />
+          <Property Name="Realy_postup" Type="Boolean" Nullable="false" />
+          <Property Name="IsMain" Type="Boolean" Nullable="false" />
+          <Property Name="dd_vvoda_zayav" Type="DateTime" Precision="3" />
+          <Property Name="dd_online" Type="DateTime" Precision="3" />
+          <Property Name="SchoolAverMark" Type="Double" />
+          <NavigationProperty Name="EnrollmentProperty" Relationship="Self.FK_ABIT_postup_ABIT_Diapazon_spec_fac" FromRole="ABIT_postup" ToRole="ABIT_Diapazon_spec_fac" />
+          <NavigationProperty Name="EnrollmentState" Relationship="Self.FK_ABIT_postup_ABIT_sost_zach" FromRole="ABIT_postup" ToRole="ABIT_sost_zach" />
+          <NavigationProperty Name="EnrollmentCategory" Relationship="Self.FK_ABIT_postup_Kat_zach" FromRole="ABIT_postup" ToRole="Kat_zach" />
+          <NavigationProperty Name="Enroller" Relationship="Self.FK_ABIT_postup_Stud" FromRole="ABIT_postup" ToRole="Student" />
+          <NavigationProperty Name="TestResults" Relationship="Self.FK_Vstup_exam_abit_postup_abit" FromRole="ABIT_postup" ToRole="ABIT_Vstup_exam" />
+        </EntityType>
+        <EntityType Name="EnrollmentState">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="EnrollmentTypeId" Type="Int32" />
+          <Property Name="ik_FB" Type="Int32" />
+          <NavigationProperty Name="Enrollments" Relationship="Self.FK_ABIT_postup_ABIT_sost_zach" FromRole="ABIT_sost_zach" ToRole="ABIT_postup" />
+          <NavigationProperty Name="EnrollmentType" Relationship="Self.FK_ABIT_sost_zach_ABIT_type_zach" FromRole="ABIT_sost_zach" ToRole="ABIT_type_zach" />
+        </EntityType>
+        <EntityType Name="EnrollmentType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="IsCurrent" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="States" Relationship="Self.FK_ABIT_sost_zach_ABIT_type_zach" FromRole="ABIT_type_zach" ToRole="ABIT_sost_zach" />
+        </EntityType>
+        <EntityType Name="TestResult">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Mark" Type="Int32" />
+          <Property Name="EnrollmentId" Type="Int32" Nullable="false" />
+          <Property Name="TestId" Type="Int32" Nullable="false" />
+          <Property Name="ik_sdach" Type="Int32" Nullable="false" />
+          <Property Name="id_rasp_kab" Type="Int32" />
+          <Property Name="NNvedom" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Test" Relationship="Self.FK_Vstup_exam_abit_Disc_abit" FromRole="ABIT_Vstup_exam" ToRole="ABIT_Disc" />
+          <NavigationProperty Name="Enrollment" Relationship="Self.FK_Vstup_exam_abit_postup_abit" FromRole="ABIT_Vstup_exam" ToRole="ABIT_postup" />
+        </EntityType>
+        <EntityType Name="EdDirection">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ShortName" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ThesisName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ExcelPatternName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="DiplExcPatternName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ik_FB" Type="Int32" />
+          <Property Name="SortOrder" Type="Int32" />
+          <Property Name="Podgot" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EducationBranch" Relationship="Self.FK_Spec_stud_Direction" FromRole="Direction" ToRole="EducationBranch" />
+        </EntityType>
+        <EntityType Name="EnrollerPersonDocument">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Issued" Type="DateTime" Precision="3" />
+          <Property Name="Authority" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DocumentTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Number" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Series" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="nCode" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="AdditionalInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IsReal" Type="Boolean" />
+          <NavigationProperty Name="Bonuses" Relationship="Self.FK_Abit_Bonuses_Doc_stud" FromRole="Doc_stud" ToRole="Abit_Bonuses" />
+          <NavigationProperty Name="EnrollmentDocumentType" Relationship="Self.FK_Doc_stud_documents" FromRole="Doc_stud" ToRole="documents" />
+          <NavigationProperty Name="EnrollerPerson" Relationship="Self.FK_Doc_stud_Person" FromRole="Doc_stud" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="EnrollmentDocumentType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsDefault" Type="Boolean" Nullable="false" />
+          <Property Name="IsIdentity" Type="Boolean" Nullable="false" />
+          <Property Name="IsEducational" Type="Boolean" Nullable="false" />
+          <Property Name="ik_FB" Type="Int32" />
+          <Property Name="ik_subFB" Type="Int32" />
+          <Property Name="ik_type_grazd" Type="Int32" />
+          <NavigationProperty Name="EnrollerDocuments" Relationship="Self.FK_Doc_stud_documents" FromRole="documents" ToRole="Doc_stud" />
+        </EntityType>
+        <EntityType Name="EdBranch">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ShortName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Sh_spec" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ik_direction" Type="Int32" />
+          <Property Name="Ik_vip_dep" Type="Int32" />
+          <Property Name="dDate_spec" Type="DateTime" Precision="3" />
+          <Property Name="nN_prikaz" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="spDateExit" Type="DateTime" Precision="3" />
+          <Property Name="Cname_qualif" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="SpecСategory" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="QualifShortName" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="ik_FB" Type="Int32" />
+          <Property Name="ik_main_spec" Type="Int32" />
+          <Property Name="id_parent" Type="Int32" />
+          <Property Name="id_type_branch" Type="Int32" />
+          <Property Name="YearNormObuch" Type="Int32" />
+          <NavigationProperty Name="Direction" Relationship="Self.FK_Spec_stud_Direction" FromRole="EducationBranch" ToRole="Direction" />
+          <NavigationProperty Name="EducationBranch1" Relationship="Self.FK_EdBranch_EdBranch" FromRole="EducationBranch" ToRole="EducationBranch1" />
+          <NavigationProperty Name="EducationBranch2" Relationship="Self.FK_EdBranch_EdBranch" FromRole="EducationBranch1" ToRole="EducationBranch" />
+          <NavigationProperty Name="InstituteDirections" Relationship="Self.FK_Relation_spec_fac_Spec_stud" FromRole="EducationBranch" ToRole="Relation_spec_fac" />
+        </EntityType>
+        <EntityType Name="Institute">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ShortName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="fDateExit" Type="DateTime" Precision="3" />
+          <Property Name="bit_calc_nagr" Type="Boolean" />
+          <Property Name="ManagerPostName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DiplExcPatternName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="DiplVklExcPatternName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="DiplVklDatPadez" Type="Boolean" />
+          <Property Name="DepartmentGUID" Type="Guid" />
+          <Property Name="Cname_fac_rod_pad" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Dep_Index" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ik_type_department" Type="Int32" />
+          <Property Name="Cname_fac_small" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DateDiplomDelivery" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Directions" Relationship="Self.FK_Relation_spec_fac_Fac" FromRole="Fac" ToRole="Relation_spec_fac" />
+        </EntityType>
+        <EntityType Name="EdForm">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ik_FB" Type="Int32" />
+          <Property Name="Cname_form_pril" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="InstituteDirections" Relationship="Self.FK_Relation_spec_fac_Form_ed" FromRole="Form_ed" ToRole="Relation_spec_fac" />
+        </EntityType>
+        <EntityType Name="EnrollmentCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CategoryTypeId" Type="Int32" Nullable="false" />
+          <Property Name="IsBenefit" Type="Boolean" />
+          <Property Name="CancelDate" Type="DateTime" Precision="3" />
+          <Property Name="IsRussOlimpWinner" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Enrollments" Relationship="Self.FK_ABIT_postup_Kat_zach" FromRole="Kat_zach" ToRole="ABIT_postup" />
+          <NavigationProperty Name="CategoryType" Relationship="Self.FK_Kat_zach_TypeKatZach" FromRole="Kat_zach" ToRole="TypeKatZach" />
+        </EntityType>
+        <EntityType Name="EnrollerPerson">
+          <Key>
+            <PropertyRef Name="nCode" />
+          </Key>
+          <Property Name="nCode" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Clastname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cfirstname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cotch" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Dd_birth" Type="DateTime" Precision="3" />
+          <Property Name="Cplacebirth" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Linval" Type="Boolean" />
+          <Property Name="Ldeti" Type="Boolean" />
+          <Property Name="Lrab" Type="Boolean" />
+          <Property Name="lSex" Type="Boolean" />
+          <Property Name="Lobchegit" Type="Boolean" />
+          <Property Name="cSotTel" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ctelefon" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="cEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Ik_grazd" Type="Int32" />
+          <Property Name="Ik_sem_pol" Type="Int32" />
+          <Property Name="cInn" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="cStrax" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ik_voen_zvanie" Type="Int32" />
+          <Property Name="itab_n" Type="Int32" />
+          <Property Name="ik_nac" Type="Int32" />
+          <Property Name="PersonGUID" Type="Guid" Nullable="false" />
+          <Property Name="PersonFullName" Type="String" MaxLength="92" FixedLength="false" Unicode="false" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="PersonSmallName" Type="String" MaxLength="34" FixedLength="false" Unicode="false" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="PersName" Type="String" MaxLength="92" FixedLength="false" Unicode="false" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="EnrollerPersonDocuments" Relationship="Self.FK_Doc_stud_Person" FromRole="Person" ToRole="Doc_stud" />
+          <NavigationProperty Name="Enroller" Relationship="Self.FK_Student_Person" FromRole="Person" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="InstituteDirection">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EducationBrunchId" Type="Int32" Nullable="false" />
+          <Property Name="InstituteId" Type="Int32" Nullable="false" />
+          <Property Name="YearObuch" Type="Int32" />
+          <Property Name="ik_rule" Type="Int32" />
+          <Property Name="EducationFormId" Type="Int32" Nullable="false" />
+          <Property Name="ik_kat_zaved" Type="Int32" Nullable="false" />
+          <Property Name="VidGos" Type="Int32" />
+          <Property Name="MonthObuch" Type="Int32" Nullable="false" />
+          <Property Name="DepartmentGUID" Type="Guid" />
+          <Property Name="is_short" Type="Boolean" />
+          <Property Name="is_old" Type="Boolean" />
+          <Property Name="ik_room" Type="Int32" />
+          <NavigationProperty Name="EnrollmentProperties" Relationship="Self.FK_Diapazon_spec_fac_abit_Relation_spec_fac" FromRole="Relation_spec_fac" ToRole="ABIT_Diapazon_spec_fac" />
+          <NavigationProperty Name="EducationBranch" Relationship="Self.FK_Relation_spec_fac_Spec_stud" FromRole="Relation_spec_fac" ToRole="EducationBranch" />
+          <NavigationProperty Name="Institute" Relationship="Self.FK_Relation_spec_fac_Fac" FromRole="Relation_spec_fac" ToRole="Fac" />
+          <NavigationProperty Name="EducationForm" Relationship="Self.FK_Relation_spec_fac_Form_ed" FromRole="Relation_spec_fac" ToRole="Form_ed" />
+        </EntityType>
+        <EntityType Name="Enroller">
+          <Key>
+            <PropertyRef Name="nCode" />
+          </Key>
+          <Property Name="nCode" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Nn_abit" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ik_medal" Type="Int32" Nullable="false" />
+          <Property Name="Ik_vid_pens" Type="Int32" />
+          <Property Name="Ik_podg" Type="Int32" />
+          <Property Name="Ik_ob_rab" Type="Int32" />
+          <Property Name="Ik_special_uchet" Type="Int32" />
+          <Property Name="Ik_zaved" Type="Int32" />
+          <Property Name="Ngodokon" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Cdopsved" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="ik_pred" Type="Int32" />
+          <Property Name="cDolgnost" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StazYear" Type="Int32" />
+          <Property Name="StazMonth" Type="Int32" />
+          <Property Name="cLgot" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="cOsnovan" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Enrollments" Relationship="Self.FK_ABIT_postup_Stud" FromRole="Student" ToRole="ABIT_postup" />
+          <NavigationProperty Name="EnrollerPerson" Relationship="Self.FK_Student_Person" FromRole="Student" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="CategoryType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ik_FB" Type="Int32" />
+          <NavigationProperty Name="Categories" Relationship="Self.FK_Kat_zach_TypeKatZach" FromRole="TypeKatZach" ToRole="Kat_zach" />
+        </EntityType>
+        <Association Name="FK_Abit_Bonuses_ABIT_Disc">
+          <End Role="ABIT_Disc" Type="UGTUEnrolleeiesModel.Test" Multiplicity="0..1" />
+          <End Role="Abit_Bonuses" Type="UGTUEnrolleeiesModel.Bonus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ABIT_Disc">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Abit_Bonuses">
+              <PropertyRef Name="TestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Abit_Bonuses_Doc_stud">
+          <End Role="Doc_stud" Type="UGTUEnrolleeiesModel.EnrollerPersonDocument" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Abit_Bonuses" Type="UGTUEnrolleeiesModel.Bonus" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Doc_stud">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Abit_Bonuses">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ABIT_Diapazon_Disc_ABIT_Diapazon_spec_fac">
+          <End Role="ABIT_Diapazon_spec_fac" Type="UGTUEnrolleeiesModel.EnrollmentProperty" Multiplicity="1" />
+          <End Role="ABIT_Diapazon_Disc" Type="UGTUEnrolleeiesModel.DirectionRequirement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ABIT_Diapazon_spec_fac">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ABIT_Diapazon_Disc">
+              <PropertyRef Name="NNrecord" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ABIT_Diapazon_Disc_ABIT_Disc">
+          <End Role="ABIT_Disc" Type="UGTUEnrolleeiesModel.Test" Multiplicity="1" />
+          <End Role="ABIT_Diapazon_Disc" Type="UGTUEnrolleeiesModel.DirectionRequirement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ABIT_Disc">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ABIT_Diapazon_Disc">
+              <PropertyRef Name="TestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ABIT_postup_ABIT_Diapazon_spec_fac">
+          <End Role="ABIT_Diapazon_spec_fac" Type="UGTUEnrolleeiesModel.EnrollmentProperty" Multiplicity="1" />
+          <End Role="ABIT_postup" Type="UGTUEnrolleeiesModel.Enrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ABIT_Diapazon_spec_fac">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ABIT_postup">
+              <PropertyRef Name="NNrecord" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Diapazon_spec_fac_abit_Relation_spec_fac">
+          <End Role="Relation_spec_fac" Type="UGTUEnrolleeiesModel.InstituteDirection" Multiplicity="1" />
+          <End Role="ABIT_Diapazon_spec_fac" Type="UGTUEnrolleeiesModel.EnrollmentProperty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Relation_spec_fac">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ABIT_Diapazon_spec_fac">
+              <PropertyRef Name="InstituteDirectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vstup_exam_abit_Disc_abit">
+          <End Role="ABIT_Disc" Type="UGTUEnrolleeiesModel.Test" Multiplicity="1" />
+          <End Role="ABIT_Vstup_exam" Type="UGTUEnrolleeiesModel.TestResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ABIT_Disc">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ABIT_Vstup_exam">
+              <PropertyRef Name="TestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ABIT_postup_ABIT_sost_zach">
+          <End Role="ABIT_sost_zach" Type="UGTUEnrolleeiesModel.EnrollmentState" Multiplicity="0..1" />
+          <End Role="ABIT_postup" Type="UGTUEnrolleeiesModel.Enrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ABIT_sost_zach">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ABIT_postup">
+              <PropertyRef Name="ik_zach" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ABIT_postup_Kat_zach">
+          <End Role="Kat_zach" Type="UGTUEnrolleeiesModel.EnrollmentCategory" Multiplicity="1" />
+          <End Role="ABIT_postup" Type="UGTUEnrolleeiesModel.Enrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kat_zach">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ABIT_postup">
+              <PropertyRef Name="ik_kat_zach" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ABIT_postup_Stud">
+          <End Role="Student" Type="UGTUEnrolleeiesModel.Enroller" Multiplicity="1" />
+          <End Role="ABIT_postup" Type="UGTUEnrolleeiesModel.Enrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="nCode" />
+            </Principal>
+            <Dependent Role="ABIT_postup">
+              <PropertyRef Name="nCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vstup_exam_abit_postup_abit">
+          <End Role="ABIT_postup" Type="UGTUEnrolleeiesModel.Enrollment" Multiplicity="1" />
+          <End Role="ABIT_Vstup_exam" Type="UGTUEnrolleeiesModel.TestResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ABIT_postup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ABIT_Vstup_exam">
+              <PropertyRef Name="EnrollmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ABIT_sost_zach_ABIT_type_zach">
+          <End Role="ABIT_type_zach" Type="UGTUEnrolleeiesModel.EnrollmentType" Multiplicity="0..1" />
+          <End Role="ABIT_sost_zach" Type="UGTUEnrolleeiesModel.EnrollmentState" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ABIT_type_zach">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ABIT_sost_zach">
+              <PropertyRef Name="EnrollmentTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Spec_stud_Direction">
+          <End Role="Direction" Type="UGTUEnrolleeiesModel.EdDirection" Multiplicity="0..1" />
+          <End Role="EducationBranch" Type="UGTUEnrolleeiesModel.EdBranch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Direction">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EducationBranch">
+              <PropertyRef Name="ik_direction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Doc_stud_documents">
+          <End Role="documents" Type="UGTUEnrolleeiesModel.EnrollmentDocumentType" Multiplicity="1" />
+          <End Role="Doc_stud" Type="UGTUEnrolleeiesModel.EnrollerPersonDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="documents">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Doc_stud">
+              <PropertyRef Name="DocumentTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Doc_stud_Person">
+          <End Role="Person" Type="UGTUEnrolleeiesModel.EnrollerPerson" Multiplicity="1" />
+          <End Role="Doc_stud" Type="UGTUEnrolleeiesModel.EnrollerPersonDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="nCode" />
+            </Principal>
+            <Dependent Role="Doc_stud">
+              <PropertyRef Name="nCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EdBranch_EdBranch">
+          <End Role="EducationBranch" Type="UGTUEnrolleeiesModel.EdBranch" Multiplicity="0..1" />
+          <End Role="EducationBranch1" Type="UGTUEnrolleeiesModel.EdBranch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EducationBranch">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EducationBranch1">
+              <PropertyRef Name="id_parent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Relation_spec_fac_Spec_stud">
+          <End Role="EducationBranch" Type="UGTUEnrolleeiesModel.EdBranch" Multiplicity="1" />
+          <End Role="Relation_spec_fac" Type="UGTUEnrolleeiesModel.InstituteDirection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EducationBranch">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Relation_spec_fac">
+              <PropertyRef Name="EducationBrunchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Relation_spec_fac_Fac">
+          <End Role="Fac" Type="UGTUEnrolleeiesModel.Institute" Multiplicity="1" />
+          <End Role="Relation_spec_fac" Type="UGTUEnrolleeiesModel.InstituteDirection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fac">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Relation_spec_fac">
+              <PropertyRef Name="InstituteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Relation_spec_fac_Form_ed">
+          <End Role="Form_ed" Type="UGTUEnrolleeiesModel.EdForm" Multiplicity="1" />
+          <End Role="Relation_spec_fac" Type="UGTUEnrolleeiesModel.InstituteDirection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form_ed">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Relation_spec_fac">
+              <PropertyRef Name="EducationFormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kat_zach_TypeKatZach">
+          <End Role="TypeKatZach" Type="UGTUEnrolleeiesModel.CategoryType" Multiplicity="1" />
+          <End Role="Kat_zach" Type="UGTUEnrolleeiesModel.EnrollmentCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeKatZach">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Kat_zach">
+              <PropertyRef Name="CategoryTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_Person">
+          <End Role="Person" Type="UGTUEnrolleeiesModel.EnrollerPerson" Multiplicity="1" />
+          <End Role="Student" Type="UGTUEnrolleeiesModel.Enroller" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="nCode" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="nCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="UGTUEnrolleeies" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Abit_Bonuses" EntityType="UGTUEnrolleeiesModel.Bonus" />
+          <EntitySet Name="ABIT_Diapazon_Disc" EntityType="UGTUEnrolleeiesModel.DirectionRequirement" />
+          <EntitySet Name="ABIT_Diapazon_spec_fac" EntityType="UGTUEnrolleeiesModel.EnrollmentProperty" />
+          <EntitySet Name="ABIT_Disc" EntityType="UGTUEnrolleeiesModel.Test" />
+          <EntitySet Name="ABIT_postup" EntityType="UGTUEnrolleeiesModel.Enrollment" />
+          <EntitySet Name="ABIT_sost_zach" EntityType="UGTUEnrolleeiesModel.EnrollmentState" />
+          <EntitySet Name="ABIT_type_zach" EntityType="UGTUEnrolleeiesModel.EnrollmentType" />
+          <EntitySet Name="ABIT_Vstup_exam" EntityType="UGTUEnrolleeiesModel.TestResult" />
+          <EntitySet Name="Direction" EntityType="UGTUEnrolleeiesModel.EdDirection" />
+          <EntitySet Name="Doc_stud" EntityType="UGTUEnrolleeiesModel.EnrollerPersonDocument" />
+          <EntitySet Name="documents" EntityType="UGTUEnrolleeiesModel.EnrollmentDocumentType" />
+          <EntitySet Name="EducationBranch" EntityType="UGTUEnrolleeiesModel.EdBranch" />
+          <EntitySet Name="Fac" EntityType="UGTUEnrolleeiesModel.Institute" />
+          <EntitySet Name="Form_ed" EntityType="UGTUEnrolleeiesModel.EdForm" />
+          <EntitySet Name="Kat_zach" EntityType="UGTUEnrolleeiesModel.EnrollmentCategory" />
+          <EntitySet Name="Person" EntityType="UGTUEnrolleeiesModel.EnrollerPerson" />
+          <EntitySet Name="Relation_spec_fac" EntityType="UGTUEnrolleeiesModel.InstituteDirection" />
+          <EntitySet Name="Student" EntityType="UGTUEnrolleeiesModel.Enroller" />
+          <EntitySet Name="TypeKatZach" EntityType="UGTUEnrolleeiesModel.CategoryType" />
+          <AssociationSet Name="FK_Abit_Bonuses_ABIT_Disc" Association="Self.FK_Abit_Bonuses_ABIT_Disc">
+            <End Role="ABIT_Disc" EntitySet="ABIT_Disc" />
+            <End Role="Abit_Bonuses" EntitySet="Abit_Bonuses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Abit_Bonuses_Doc_stud" Association="Self.FK_Abit_Bonuses_Doc_stud">
+            <End Role="Doc_stud" EntitySet="Doc_stud" />
+            <End Role="Abit_Bonuses" EntitySet="Abit_Bonuses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ABIT_Diapazon_Disc_ABIT_Diapazon_spec_fac" Association="Self.FK_ABIT_Diapazon_Disc_ABIT_Diapazon_spec_fac">
+            <End Role="ABIT_Diapazon_spec_fac" EntitySet="ABIT_Diapazon_spec_fac" />
+            <End Role="ABIT_Diapazon_Disc" EntitySet="ABIT_Diapazon_Disc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ABIT_Diapazon_Disc_ABIT_Disc" Association="Self.FK_ABIT_Diapazon_Disc_ABIT_Disc">
+            <End Role="ABIT_Disc" EntitySet="ABIT_Disc" />
+            <End Role="ABIT_Diapazon_Disc" EntitySet="ABIT_Diapazon_Disc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ABIT_postup_ABIT_Diapazon_spec_fac" Association="Self.FK_ABIT_postup_ABIT_Diapazon_spec_fac">
+            <End Role="ABIT_Diapazon_spec_fac" EntitySet="ABIT_Diapazon_spec_fac" />
+            <End Role="ABIT_postup" EntitySet="ABIT_postup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Diapazon_spec_fac_abit_Relation_spec_fac" Association="Self.FK_Diapazon_spec_fac_abit_Relation_spec_fac">
+            <End Role="Relation_spec_fac" EntitySet="Relation_spec_fac" />
+            <End Role="ABIT_Diapazon_spec_fac" EntitySet="ABIT_Diapazon_spec_fac" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vstup_exam_abit_Disc_abit" Association="Self.FK_Vstup_exam_abit_Disc_abit">
+            <End Role="ABIT_Disc" EntitySet="ABIT_Disc" />
+            <End Role="ABIT_Vstup_exam" EntitySet="ABIT_Vstup_exam" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ABIT_postup_ABIT_sost_zach" Association="Self.FK_ABIT_postup_ABIT_sost_zach">
+            <End Role="ABIT_sost_zach" EntitySet="ABIT_sost_zach" />
+            <End Role="ABIT_postup" EntitySet="ABIT_postup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ABIT_postup_Kat_zach" Association="Self.FK_ABIT_postup_Kat_zach">
+            <End Role="Kat_zach" EntitySet="Kat_zach" />
+            <End Role="ABIT_postup" EntitySet="ABIT_postup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ABIT_postup_Stud" Association="Self.FK_ABIT_postup_Stud">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="ABIT_postup" EntitySet="ABIT_postup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vstup_exam_abit_postup_abit" Association="Self.FK_Vstup_exam_abit_postup_abit">
+            <End Role="ABIT_postup" EntitySet="ABIT_postup" />
+            <End Role="ABIT_Vstup_exam" EntitySet="ABIT_Vstup_exam" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ABIT_sost_zach_ABIT_type_zach" Association="Self.FK_ABIT_sost_zach_ABIT_type_zach">
+            <End Role="ABIT_type_zach" EntitySet="ABIT_type_zach" />
+            <End Role="ABIT_sost_zach" EntitySet="ABIT_sost_zach" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Spec_stud_Direction" Association="Self.FK_Spec_stud_Direction">
+            <End Role="Direction" EntitySet="Direction" />
+            <End Role="EducationBranch" EntitySet="EducationBranch" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Doc_stud_documents" Association="Self.FK_Doc_stud_documents">
+            <End Role="documents" EntitySet="documents" />
+            <End Role="Doc_stud" EntitySet="Doc_stud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Doc_stud_Person" Association="Self.FK_Doc_stud_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Doc_stud" EntitySet="Doc_stud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EdBranch_EdBranch" Association="Self.FK_EdBranch_EdBranch">
+            <End Role="EducationBranch" EntitySet="EducationBranch" />
+            <End Role="EducationBranch1" EntitySet="EducationBranch" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Relation_spec_fac_Spec_stud" Association="Self.FK_Relation_spec_fac_Spec_stud">
+            <End Role="EducationBranch" EntitySet="EducationBranch" />
+            <End Role="Relation_spec_fac" EntitySet="Relation_spec_fac" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Relation_spec_fac_Fac" Association="Self.FK_Relation_spec_fac_Fac">
+            <End Role="Fac" EntitySet="Fac" />
+            <End Role="Relation_spec_fac" EntitySet="Relation_spec_fac" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Relation_spec_fac_Form_ed" Association="Self.FK_Relation_spec_fac_Form_ed">
+            <End Role="Form_ed" EntitySet="Form_ed" />
+            <End Role="Relation_spec_fac" EntitySet="Relation_spec_fac" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kat_zach_TypeKatZach" Association="Self.FK_Kat_zach_TypeKatZach">
+            <End Role="TypeKatZach" EntitySet="TypeKatZach" />
+            <End Role="Kat_zach" EntitySet="Kat_zach" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Person" Association="Self.FK_Student_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="UGTUEnrolleeiesModelStoreContainer" CdmEntityContainer="UGTUEnrolleeies">
+          <EntitySetMapping Name="Abit_Bonuses">
+            <EntityTypeMapping TypeName="UGTUEnrolleeiesModel.Bonus">
+              <MappingFragment StoreEntitySet="Abit_Bonuses">
+                <ScalarProperty Name="Id" ColumnName="ik_doc" />
+                <ScalarProperty Name="ExtraMark" ColumnName="balls" />
+                <ScalarProperty Name="TestId" ColumnName="ik_disc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ABIT_Diapazon_Disc">
+            <EntityTypeMapping TypeName="UGTUEnrolleeiesModel.DirectionRequirement">
+              <MappingFragment StoreEntitySet="ABIT_Diapazon_Disc">
+                <ScalarProperty Name="Id" ColumnName="ik_disc_nabor" />
+                <ScalarProperty Name="NNrecord" ColumnName="NNrecord" />
+                <ScalarProperty Name="TestId" ColumnName="ik_disc" />
+                <ScalarProperty Name="MinMark" ColumnName="Min_ball" />
+                <ScalarProperty Name="IsProfile" ColumnName="bit_Profil" />
+                <ScalarProperty Name="IsContest" ColumnName="bit_Concurs" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ABIT_Diapazon_spec_fac">
+            <EntityTypeMapping TypeName="UGTUEnrolleeiesModel.EnrollmentProperty">
+              <MappingFragment StoreEntitySet="ABIT_Diapazon_spec_fac">
+                <ScalarProperty Name="Id" ColumnName="NNrecord" />
+                <ScalarProperty Name="InstituteDirectionId" ColumnName="ik_spec_fac" />
+                <ScalarProperty Name="BeginDiapazon" ColumnName="BeginDiapazon" />
+                <ScalarProperty Name="EndDiapazon" ColumnName="EndDiapazon" />
+                <ScalarProperty Name="Year" ColumnName="NNyear" />
+                <ScalarProperty Name="MestCKP" ColumnName="MestCKP" />
+                <ScalarProperty Name="MestBudjet" ColumnName="MestBudjet" />
+                <ScalarProperty Name="MestKontrakt" ColumnName="MestKontrakt" />
+                <ScalarProperty Name="Ready" ColumnName="Ready" />
+                <ScalarProperty Name="lRussian" ColumnName="lRussian" />
+                <ScalarProperty Name="MestLgot" ColumnName="MestLgot" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ABIT_Disc">
+            <EntityTypeMapping TypeName="UGTUEnrolleeiesModel.Test">
+              <MappingFragment StoreEntitySet="ABIT_Disc">
+                <ScalarProperty Name="Id" ColumnName="ik_disc" />
+                <ScalarProperty Name="Name" ColumnName="сname_disc" />
+                <ScalarProperty Name="CancelDate" ColumnName="OutDate" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+                <ScalarProperty Name="ik_FB" ColumnName="ik_FB" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ABIT_postup">
+            <EntityTypeMapping TypeName="UGTUEnrolleeiesModel.Enrollment">
+              <MappingFragment StoreEntitySet="ABIT_postup">
+                <ScalarProperty Name="Id" ColumnName="NN_abit" />
+                <ScalarProperty Name="RegNomer" ColumnName="RegNomer" />
+                <ScalarProperty Name="nCode" ColumnName="nCode" />
+                <ScalarProperty Name="NNrecord" ColumnName="NNrecord" />
+                <ScalarProperty Name="ik_zach" ColumnName="ik_zach" />
+                <ScalarProperty Name="ik_kat_zach" ColumnName="ik_kat_zach" />
+                <ScalarProperty Name="dd_pod_zayav" ColumnName="dd_pod_zayav" />
+                <ScalarProperty Name="dd_vozvr_zayav" ColumnName="dd_vozvr_zayav" />
+                <ScalarProperty Name="Realy_postup" ColumnName="Realy_postup" />
+                <ScalarProperty Name="IsMain" ColumnName="IsMain" />
+                <ScalarProperty Name="dd_vvoda_zayav" ColumnName="dd_vvoda_zayav" />
+                <ScalarProperty Name="dd_online" ColumnName="dd_online" />
+                <ScalarProperty Name="SchoolAverMark" ColumnName="SchoolAverMark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ABIT_sost_zach">
+            <EntityTypeMapping TypeName="UGTUEnrolleeiesModel.EnrollmentState">
+              <MappingFragment StoreEntitySet="ABIT_sost_zach">
+                <ScalarProperty Name="Id" ColumnName="ik_zach" />
+                <ScalarProperty Name="Name" ColumnName="cname_zach" />
+                <ScalarProperty Name="EnrollmentTypeId" ColumnName="ik_type_zach" />
+                <ScalarProperty Name="ik_FB" ColumnName="ik_FB" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ABIT_type_zach">
+            <EntityTypeMapping TypeName="UGTUEnrolleeiesModel.EnrollmentType">
+              <MappingFragment StoreEntitySet="ABIT_type_zach">
+                <ScalarProperty Name="Id" ColumnName="ik_type_zach" />
+                <ScalarProperty Name="Name" ColumnName="Cname_type_zach" />
+                <ScalarProperty Name="IsCurrent" ColumnName="IsCurrent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ABIT_Vstup_exam">
+            <EntityTypeMapping TypeName="UGTUEnrolleeiesModel.TestResult">
+              <MappingFragment StoreEntitySet="ABIT_Vstup_exam">
+                <ScalarProperty Name="Id" ColumnName="id" />
+                <ScalarProperty Name="Mark" ColumnName="cosenka" />
+                <ScalarProperty Name="EnrollmentId" ColumnName="NN_abit" />
+                <ScalarProperty Name="TestId" ColumnName="ik_disc" />
+                <ScalarProperty Name="ik_sdach" ColumnName="ik_sdach" />
+                <ScalarProperty Name="id_rasp_kab" ColumnName="id_rasp_kab" />
+                <ScalarProperty Name="NNvedom" ColumnName="NNvedom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Direction">
+            <EntityTypeMapping TypeName="UGTUEnrolleeiesModel.EdDirection">
+              <MappingFragment StoreEntitySet="Direction">
+                <ScalarProperty Name="Id" ColumnName="ik_direction" />
+                <ScalarProperty Name="Name" ColumnName="cName_direction" />
+                <ScalarProperty Name="ShortName" ColumnName="cShort_name_direction" />
+                <ScalarProperty Name="ThesisName" ColumnName="ThesisName" />
+                <ScalarProperty Name="ExcelPatternName" ColumnName="ExcelPatternName" />
+                <ScalarProperty Name="DiplExcPatternName" ColumnName="DiplExcPatternName" />
+                <ScalarProperty Name="ik_FB" ColumnName="ik_FB" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="Podgot" ColumnName="Podgot" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Doc_stud">
+            <EntityTypeMapping TypeName="UGTUEnrolleeiesModel.EnrollerPersonDocument">
+              <MappingFragment StoreEntitySet="Doc_stud">
+                <ScalarProperty Name="Id" ColumnName="Ik_doc" />
+                <ScalarProperty Name="Issued" ColumnName="Dd_vidan" />
+                <ScalarProperty Name="Authority" ColumnName="Cd_kem_vidan" />
+                <ScalarProperty Name="DocumentTypeId" ColumnName="Ik_vid_doc" />
+                <ScalarProperty Name="Number" ColumnName="Np_number" />
+                <ScalarProperty Name="Series" ColumnName="Cd_seria" />
+                <ScalarProperty Name="nCode" ColumnName="nCode" />
+                <ScalarProperty Name="AdditionalInfo" ColumnName="AdditionalInfo" />
+                <ScalarProperty Name="IsReal" ColumnName="IsReal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="documents">
+            <EntityTypeMapping TypeName="UGTUEnrolleeiesModel.EnrollmentDocumentType">
+              <MappingFragment StoreEntitySet="documents">
+                <ScalarProperty Name="Id" ColumnName="ik_vid_doc" />
+                <ScalarProperty Name="Name" ColumnName="cvid_doc" />
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+                <ScalarProperty Name="IsIdentity" ColumnName="IsIdentity" />
+                <ScalarProperty Name="IsEducational" ColumnName="IsEducational" />
+                <ScalarProperty Name="ik_FB" ColumnName="ik_FB" />
+                <ScalarProperty Name="ik_subFB" ColumnName="ik_subFB" />
+                <ScalarProperty Name="ik_type_grazd" ColumnName="ik_type_grazd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EducationBranch">
+            <EntityTypeMapping TypeName="UGTUEnrolleeiesModel.EdBranch">
+              <MappingFragment StoreEntitySet="EducationBranch">
+                <ScalarProperty Name="Id" ColumnName="ik_spec" />
+                <ScalarProperty Name="Name" ColumnName="Cname_spec" />
+                <ScalarProperty Name="ShortName" ColumnName="Cshort_spec" />
+                <ScalarProperty Name="Sh_spec" ColumnName="Sh_spec" />
+                <ScalarProperty Name="ik_direction" ColumnName="ik_direction" />
+                <ScalarProperty Name="Ik_vip_dep" ColumnName="Ik_vip_dep" />
+                <ScalarProperty Name="dDate_spec" ColumnName="dDate_spec" />
+                <ScalarProperty Name="nN_prikaz" ColumnName="nN_prikaz" />
+                <ScalarProperty Name="spDateExit" ColumnName="spDateExit" />
+                <ScalarProperty Name="Cname_qualif" ColumnName="Cname_qualif" />
+                <ScalarProperty Name="SpecСategory" ColumnName="SpecСategory" />
+                <ScalarProperty Name="QualifShortName" ColumnName="QualifShortName" />
+                <ScalarProperty Name="ik_FB" ColumnName="ik_FB" />
+                <ScalarProperty Name="ik_main_spec" ColumnName="ik_main_spec" />
+                <ScalarProperty Name="id_parent" ColumnName="id_parent" />
+                <ScalarProperty Name="id_type_branch" ColumnName="id_type_branch" />
+                <ScalarProperty Name="YearNormObuch" ColumnName="YearNormObuch" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fac">
+            <EntityTypeMapping TypeName="UGTUEnrolleeiesModel.Institute">
+              <MappingFragment StoreEntitySet="Fac">
+                <ScalarProperty Name="Id" ColumnName="Ik_fac" />
+                <ScalarProperty Name="Name" ColumnName="Cname_fac" />
+                <ScalarProperty Name="ShortName" ColumnName="Cshort_name_fac" />
+                <ScalarProperty Name="fDateExit" ColumnName="fDateExit" />
+                <ScalarProperty Name="bit_calc_nagr" ColumnName="bit_calc_nagr" />
+                <ScalarProperty Name="ManagerPostName" ColumnName="ManagerPostName" />
+                <ScalarProperty Name="DiplExcPatternName" ColumnName="DiplExcPatternName" />
+                <ScalarProperty Name="DiplVklExcPatternName" ColumnName="DiplVklExcPatternName" />
+                <ScalarProperty Name="DiplVklDatPadez" ColumnName="DiplVklDatPadez" />
+                <ScalarProperty Name="DepartmentGUID" ColumnName="DepartmentGUID" />
+                <ScalarProperty Name="Cname_fac_rod_pad" ColumnName="Cname_fac_rod_pad" />
+                <ScalarProperty Name="Dep_Index" ColumnName="Dep_Index" />
+                <ScalarProperty Name="ik_type_department" ColumnName="ik_type_department" />
+                <ScalarProperty Name="Cname_fac_small" ColumnName="Cname_fac_small" />
+                <ScalarProperty Name="DateDiplomDelivery" ColumnName="DateDiplomDelivery" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Form_ed">
+            <EntityTypeMapping TypeName="UGTUEnrolleeiesModel.EdForm">
+              <MappingFragment StoreEntitySet="Form_ed">
+                <ScalarProperty Name="Id" ColumnName="Ik_form_ed" />
+                <ScalarProperty Name="Name" ColumnName="Cname_form_ed" />
+                <ScalarProperty Name="ik_FB" ColumnName="ik_FB" />
+                <ScalarProperty Name="Cname_form_pril" ColumnName="Cname_form_pril" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kat_zach">
+            <EntityTypeMapping TypeName="UGTUEnrolleeiesModel.EnrollmentCategory">
+              <MappingFragment StoreEntitySet="Kat_zach">
+                <ScalarProperty Name="Id" ColumnName="Ik_kat_zach" />
+                <ScalarProperty Name="Name" ColumnName="Cname_kat_zach" />
+                <ScalarProperty Name="CategoryTypeId" ColumnName="ik_type_kat" />
+                <ScalarProperty Name="IsBenefit" ColumnName="bit_Lgota" />
+                <ScalarProperty Name="CancelDate" ColumnName="OutDate" />
+                <ScalarProperty Name="IsRussOlimpWinner" ColumnName="IsRussOlimpWinner" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Person">
+            <EntityTypeMapping TypeName="UGTUEnrolleeiesModel.EnrollerPerson">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="nCode" ColumnName="nCode" />
+                <ScalarProperty Name="Clastname" ColumnName="Clastname" />
+                <ScalarProperty Name="Cfirstname" ColumnName="Cfirstname" />
+                <ScalarProperty Name="Cotch" ColumnName="Cotch" />
+                <ScalarProperty Name="Dd_birth" ColumnName="Dd_birth" />
+                <ScalarProperty Name="Cplacebirth" ColumnName="Cplacebirth" />
+                <ScalarProperty Name="Linval" ColumnName="Linval" />
+                <ScalarProperty Name="Ldeti" ColumnName="Ldeti" />
+                <ScalarProperty Name="Lrab" ColumnName="Lrab" />
+                <ScalarProperty Name="lSex" ColumnName="lSex" />
+                <ScalarProperty Name="Lobchegit" ColumnName="Lobchegit" />
+                <ScalarProperty Name="cSotTel" ColumnName="cSotTel" />
+                <ScalarProperty Name="ctelefon" ColumnName="ctelefon" />
+                <ScalarProperty Name="cEmail" ColumnName="cEmail" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Ik_grazd" ColumnName="Ik_grazd" />
+                <ScalarProperty Name="Ik_sem_pol" ColumnName="Ik_sem_pol" />
+                <ScalarProperty Name="cInn" ColumnName="cInn" />
+                <ScalarProperty Name="cStrax" ColumnName="cStrax" />
+                <ScalarProperty Name="ik_voen_zvanie" ColumnName="ik_voen_zvanie" />
+                <ScalarProperty Name="itab_n" ColumnName="itab_n" />
+                <ScalarProperty Name="ik_nac" ColumnName="ik_nac" />
+                <ScalarProperty Name="PersonGUID" ColumnName="PersonGUID" />
+                <ScalarProperty Name="PersonFullName" ColumnName="PersonFullName" />
+                <ScalarProperty Name="PersonSmallName" ColumnName="PersonSmallName" />
+                <ScalarProperty Name="PersName" ColumnName="PersName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Relation_spec_fac">
+            <EntityTypeMapping TypeName="UGTUEnrolleeiesModel.InstituteDirection">
+              <MappingFragment StoreEntitySet="Relation_spec_fac">
+                <ScalarProperty Name="Id" ColumnName="ik_spec_fac" />
+                <ScalarProperty Name="EducationBrunchId" ColumnName="ik_spec" />
+                <ScalarProperty Name="InstituteId" ColumnName="ik_fac" />
+                <ScalarProperty Name="YearObuch" ColumnName="YearObuch" />
+                <ScalarProperty Name="ik_rule" ColumnName="ik_rule" />
+                <ScalarProperty Name="EducationFormId" ColumnName="Ik_form_ed" />
+                <ScalarProperty Name="ik_kat_zaved" ColumnName="ik_kat_zaved" />
+                <ScalarProperty Name="VidGos" ColumnName="VidGos" />
+                <ScalarProperty Name="MonthObuch" ColumnName="MonthObuch" />
+                <ScalarProperty Name="DepartmentGUID" ColumnName="DepartmentGUID" />
+                <ScalarProperty Name="is_short" ColumnName="is_short" />
+                <ScalarProperty Name="is_old" ColumnName="is_old" />
+                <ScalarProperty Name="ik_room" ColumnName="ik_room" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Student">
+            <EntityTypeMapping TypeName="UGTUEnrolleeiesModel.Enroller">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="nCode" ColumnName="nCode" />
+                <ScalarProperty Name="Nn_abit" ColumnName="Nn_abit" />
+                <ScalarProperty Name="ik_medal" ColumnName="ik_medal" />
+                <ScalarProperty Name="Ik_vid_pens" ColumnName="Ik_vid_pens" />
+                <ScalarProperty Name="Ik_podg" ColumnName="Ik_podg" />
+                <ScalarProperty Name="Ik_ob_rab" ColumnName="Ik_ob_rab" />
+                <ScalarProperty Name="Ik_special_uchet" ColumnName="Ik_special_uchet" />
+                <ScalarProperty Name="Ik_zaved" ColumnName="Ik_zaved" />
+                <ScalarProperty Name="Ngodokon" ColumnName="Ngodokon" />
+                <ScalarProperty Name="Cdopsved" ColumnName="Cdopsved" />
+                <ScalarProperty Name="ik_pred" ColumnName="ik_pred" />
+                <ScalarProperty Name="cDolgnost" ColumnName="cDolgnost" />
+                <ScalarProperty Name="StazYear" ColumnName="StazYear" />
+                <ScalarProperty Name="StazMonth" ColumnName="StazMonth" />
+                <ScalarProperty Name="cLgot" ColumnName="cLgot" />
+                <ScalarProperty Name="cOsnovan" ColumnName="cOsnovan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeKatZach">
+            <EntityTypeMapping TypeName="UGTUEnrolleeiesModel.CategoryType">
+              <MappingFragment StoreEntitySet="TypeKatZach">
+                <ScalarProperty Name="Id" ColumnName="ik_type_kat" />
+                <ScalarProperty Name="Name" ColumnName="CType_kat" />
+                <ScalarProperty Name="ik_FB" ColumnName="ik_FB" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

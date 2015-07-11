@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a0d8e2a1ab414761affb5060237b5d09" Name="Diagram1" ZoomLevel="98">
+        <EntityTypeShape EntityType="UGTUEnrolleeiesModel.Bonus" Width="1.5" PointX="6.875" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="UGTUEnrolleeiesModel.DirectionRequirement" Width="2.375" PointX="12.125" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="UGTUEnrolleeiesModel.EnrollmentProperty" Width="2.125" PointX="7.625" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UGTUEnrolleeiesModel.Test" Width="2.375" PointX="25.5" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="UGTUEnrolleeiesModel.Enrollment" Width="2.125" PointX="16.5" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UGTUEnrolleeiesModel.EnrollmentState" Width="1.5" PointX="24.625" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="UGTUEnrolleeiesModel.EnrollmentType" Width="1.5" PointX="31.75" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="UGTUEnrolleeiesModel.TestResult" Width="2" PointX="20.375" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="UGTUEnrolleeiesModel.EdDirection" Width="1.5" PointX="17.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UGTUEnrolleeiesModel.EnrollerPersonDocument" Width="1.875" PointX="4.25" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="UGTUEnrolleeiesModel.EnrollmentDocumentType" Width="1.5" PointX="4.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="UGTUEnrolleeiesModel.EdBranch" Width="1.625" PointX="13.25" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="UGTUEnrolleeiesModel.Institute" Width="1.5" PointX="1.75" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="UGTUEnrolleeiesModel.EdForm" Width="1.5" PointX="3.75" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UGTUEnrolleeiesModel.EnrollmentCategory" Width="2.125" PointX="21.875" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UGTUEnrolleeiesModel.EnrollerPerson" Width="1.5" PointX="0.875" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="UGTUEnrolleeiesModel.InstituteDirection" Width="2.125" PointX="7.625" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UGTUEnrolleeiesModel.Enroller" Width="1.5" PointX="11.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="UGTUEnrolleeiesModel.CategoryType" Width="1.5" PointX="27.25" PointY="9.25" IsExpanded="true" />
+        <AssociationConnector Association="UGTUEnrolleeiesModel.FK_Abit_Bonuses_ABIT_Disc" ManuallyRouted="false" />
+        <AssociationConnector Association="UGTUEnrolleeiesModel.FK_Abit_Bonuses_Doc_stud" ManuallyRouted="false" />
+        <AssociationConnector Association="UGTUEnrolleeiesModel.FK_ABIT_Diapazon_Disc_ABIT_Diapazon_spec_fac" ManuallyRouted="false" />
+        <AssociationConnector Association="UGTUEnrolleeiesModel.FK_ABIT_Diapazon_Disc_ABIT_Disc" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="UGTUEnrolleeiesModel.FK_ABIT_postup_ABIT_Diapazon_spec_fac" ManuallyRouted="false" />
+        <AssociationConnector Association="UGTUEnrolleeiesModel.FK_Diapazon_spec_fac_abit_Relation_spec_fac" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="UGTUEnrolleeiesModel.FK_Vstup_exam_abit_Disc_abit" ManuallyRouted="false" />
+        <AssociationConnector Association="UGTUEnrolleeiesModel.FK_ABIT_postup_ABIT_sost_zach" ManuallyRouted="false" />
+        <AssociationConnector Association="UGTUEnrolleeiesModel.FK_ABIT_postup_Kat_zach" ManuallyRouted="false" />
+        <AssociationConnector Association="UGTUEnrolleeiesModel.FK_ABIT_postup_Stud" ManuallyRouted="false" />
+        <AssociationConnector Association="UGTUEnrolleeiesModel.FK_Vstup_exam_abit_postup_abit" ManuallyRouted="false" />
+        <AssociationConnector Association="UGTUEnrolleeiesModel.FK_ABIT_sost_zach_ABIT_type_zach" ManuallyRouted="false" />
+        <AssociationConnector Association="UGTUEnrolleeiesModel.FK_Spec_stud_Direction" ManuallyRouted="false" />
+        <AssociationConnector Association="UGTUEnrolleeiesModel.FK_Doc_stud_documents" ManuallyRouted="false" />
+        <AssociationConnector Association="UGTUEnrolleeiesModel.FK_Doc_stud_Person" ManuallyRouted="false" />
+        <AssociationConnector Association="UGTUEnrolleeiesModel.FK_EdBranch_EdBranch" ManuallyRouted="false" />
+        <AssociationConnector Association="UGTUEnrolleeiesModel.FK_Relation_spec_fac_Spec_stud" ManuallyRouted="false" />
+        <AssociationConnector Association="UGTUEnrolleeiesModel.FK_Relation_spec_fac_Fac" ManuallyRouted="false" />
+        <AssociationConnector Association="UGTUEnrolleeiesModel.FK_Relation_spec_fac_Form_ed" ManuallyRouted="false" />
+        <AssociationConnector Association="UGTUEnrolleeiesModel.FK_Kat_zach_TypeKatZach" ManuallyRouted="false" />
+        <AssociationConnector Association="UGTUEnrolleeiesModel.FK_Student_Person" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

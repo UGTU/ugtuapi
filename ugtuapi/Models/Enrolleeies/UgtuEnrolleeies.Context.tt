@@ -2,7 +2,7 @@
 <#@ include file="EF6.Utility.CS.ttinclude"#><#@
  output extension=".cs"#><#
 
-const string inputFile = @"ugtustudent.edmx";
+const string inputFile = @"UgtuEnrolleeies.edmx";
 var textTransform = DynamicTextTransformation.Create(this);
 var code = new CodeGenerationTools(this);
 var ef = new MetadataTools(this);
@@ -58,7 +58,6 @@ using System.Linq;
     public <#=code.Escape(container)#>()
         : base("name=<#=container.Name#>")
     {
-		this.Configuration.ProxyCreationEnabled = false;
 <#
 if (!loader.IsLazyLoadingEnabled(container))
 {

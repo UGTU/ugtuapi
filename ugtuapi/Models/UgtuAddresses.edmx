@@ -1,0 +1,404 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="UGTUModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Gorod">
+          <Key>
+            <PropertyRef Name="Ik_gorod" />
+          </Key>
+          <Property Name="Ik_gorod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cgorod" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Ik_raion" Type="int" Nullable="false" />
+          <Property Name="CIndex" Type="varchar" MaxLength="20" />
+          <Property Name="ik_type_gorod" Type="int" />
+          <Property Name="Latitude" Type="numeric" Precision="18" Scale="6" />
+          <Property Name="Longitude" Type="numeric" Precision="18" Scale="6" />
+          <Property Name="Location" Type="geography" />
+        </EntityType>
+        <EntityType Name="Raion">
+          <Key>
+            <PropertyRef Name="Ik_raion" />
+          </Key>
+          <Property Name="Ik_raion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Craion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Ik_region" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="Ik_region" />
+          </Key>
+          <Property Name="Ik_region" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cregion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Ik_strana" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Strana">
+          <Key>
+            <PropertyRef Name="Ik_strana" />
+          </Key>
+          <Property Name="Ik_strana" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cstrana" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="bit_SNG" Type="bit" Nullable="false" />
+          <Property Name="c_grazd" Type="varchar" MaxLength="50" />
+          <Property Name="ik_FB" Type="int" />
+          <Property Name="ik_type_grazd" Type="int" />
+        </EntityType>
+        <EntityType Name="Street">
+          <Key>
+            <PropertyRef Name="Ik_street" />
+          </Key>
+          <Property Name="Ik_street" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ik_gorod" Type="int" Nullable="false" />
+          <Property Name="CStreet" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Ik_type_street" Type="int" />
+        </EntityType>
+        <EntityType Name="type_gorod">
+          <Key>
+            <PropertyRef Name="ik_type_gorod" />
+          </Key>
+          <Property Name="ik_type_gorod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cshort_type_gorod" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ctype_gorod" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Gorod_Raion">
+          <End Role="Raion" Type="Self.Raion" Multiplicity="1" />
+          <End Role="Gorod" Type="Self.Gorod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Raion">
+              <PropertyRef Name="Ik_raion" />
+            </Principal>
+            <Dependent Role="Gorod">
+              <PropertyRef Name="Ik_raion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Gorod_type_gorod">
+          <End Role="type_gorod" Type="Self.type_gorod" Multiplicity="0..1" />
+          <End Role="Gorod" Type="Self.Gorod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="type_gorod">
+              <PropertyRef Name="ik_type_gorod" />
+            </Principal>
+            <Dependent Role="Gorod">
+              <PropertyRef Name="ik_type_gorod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Raion_Region">
+          <End Role="Region" Type="Self.Region" Multiplicity="1" />
+          <End Role="Raion" Type="Self.Raion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="Ik_region" />
+            </Principal>
+            <Dependent Role="Raion">
+              <PropertyRef Name="Ik_region" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Region_Strana">
+          <End Role="Strana" Type="Self.Strana" Multiplicity="1" />
+          <End Role="Region" Type="Self.Region" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Strana">
+              <PropertyRef Name="Ik_strana" />
+            </Principal>
+            <Dependent Role="Region">
+              <PropertyRef Name="Ik_strana" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Street_Gorod">
+          <End Role="Gorod" Type="Self.Gorod" Multiplicity="1" />
+          <End Role="Street" Type="Self.Street" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gorod">
+              <PropertyRef Name="Ik_gorod" />
+            </Principal>
+            <Dependent Role="Street">
+              <PropertyRef Name="ik_gorod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="UGTUModelStoreContainer">
+          <EntitySet Name="Gorod" EntityType="Self.Gorod" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Raion" EntityType="Self.Raion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Strana" EntityType="Self.Strana" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Street" EntityType="Self.Street" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="type_gorod" EntityType="Self.type_gorod" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Gorod_Raion" Association="Self.FK_Gorod_Raion">
+            <End Role="Raion" EntitySet="Raion" />
+            <End Role="Gorod" EntitySet="Gorod" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Gorod_type_gorod" Association="Self.FK_Gorod_type_gorod">
+            <End Role="type_gorod" EntitySet="type_gorod" />
+            <End Role="Gorod" EntitySet="Gorod" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Raion_Region" Association="Self.FK_Raion_Region">
+            <End Role="Region" EntitySet="Region" />
+            <End Role="Raion" EntitySet="Raion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Region_Strana" Association="Self.FK_Region_Strana">
+            <End Role="Strana" EntitySet="Strana" />
+            <End Role="Region" EntitySet="Region" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Street_Gorod" Association="Self.FK_Street_Gorod">
+            <End Role="Gorod" EntitySet="Gorod" />
+            <End Role="Street" EntitySet="Street" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="UGTUModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Locality">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SubAreaId" Type="Int32" Nullable="false" />
+          <Property Name="Index" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LocalityTypeId" Type="Int32" />
+          <Property Name="Latitude" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="Longitude" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="Location" Type="Geography" />
+          <NavigationProperty Name="SubArea" Relationship="Self.FK_Gorod_Raion" FromRole="Gorod" ToRole="Raion" />
+          <NavigationProperty Name="Street" Relationship="Self.FK_Street_Gorod" FromRole="Gorod" ToRole="Street" />
+          <NavigationProperty Name="LocalityType" Relationship="UGTUModel.FK_Gorod_type_gorod" FromRole="Gorod" ToRole="type_gorod" />
+        </EntityType>
+        <EntityType Name="SubArea">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AreaId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Localities" Relationship="Self.FK_Gorod_Raion" FromRole="Raion" ToRole="Gorod" />
+          <NavigationProperty Name="Area" Relationship="Self.FK_Raion_Region" FromRole="Raion" ToRole="Region" />
+        </EntityType>
+        <EntityType Name="Area">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CountryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SubAreas" Relationship="Self.FK_Raion_Region" FromRole="Region" ToRole="Raion" />
+          <NavigationProperty Name="Country" Relationship="Self.FK_Region_Strana" FromRole="Region" ToRole="Strana" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsCIS" Type="Boolean" Nullable="false" />
+          <Property Name="Citizenship" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ik_FB" Type="Int32" />
+          <Property Name="CitizenshipId" Type="Int32" />
+          <NavigationProperty Name="Areas" Relationship="Self.FK_Region_Strana" FromRole="Strana" ToRole="Region" />
+        </EntityType>
+        <EntityType Name="Street">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LocalityId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StreetTypeId" Type="Int32" />
+          <NavigationProperty Name="Locality" Relationship="Self.FK_Street_Gorod" FromRole="Street" ToRole="Gorod" />
+        </EntityType>
+        <Association Name="FK_Gorod_Raion">
+          <End Role="Raion" Type="UGTUModel.SubArea" Multiplicity="1" />
+          <End Role="Gorod" Type="UGTUModel.Locality" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Raion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Gorod">
+              <PropertyRef Name="SubAreaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Street_Gorod">
+          <End Role="Gorod" Type="UGTUModel.Locality" Multiplicity="1" />
+          <End Role="Street" Type="Self.Street" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gorod">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Street">
+              <PropertyRef Name="LocalityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Raion_Region">
+          <End Role="Region" Type="UGTUModel.Area" Multiplicity="1" />
+          <End Role="Raion" Type="UGTUModel.SubArea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Raion">
+              <PropertyRef Name="AreaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Region_Strana">
+          <End Role="Strana" Type="UGTUModel.Country" Multiplicity="1" />
+          <End Role="Region" Type="UGTUModel.Area" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Strana">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Region">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AddressEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Gorod" EntityType="UGTUModel.Locality" />
+          <EntitySet Name="Raion" EntityType="UGTUModel.SubArea" />
+          <EntitySet Name="Region" EntityType="UGTUModel.Area" />
+          <EntitySet Name="Strana" EntityType="UGTUModel.Country" />
+          <EntitySet Name="Street" EntityType="Self.Street" />
+          <AssociationSet Name="FK_Gorod_Raion" Association="Self.FK_Gorod_Raion">
+            <End Role="Raion" EntitySet="Raion" />
+            <End Role="Gorod" EntitySet="Gorod" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Street_Gorod" Association="Self.FK_Street_Gorod">
+            <End Role="Gorod" EntitySet="Gorod" />
+            <End Role="Street" EntitySet="Street" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Raion_Region" Association="Self.FK_Raion_Region">
+            <End Role="Region" EntitySet="Region" />
+            <End Role="Raion" EntitySet="Raion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Region_Strana" Association="Self.FK_Region_Strana">
+            <End Role="Strana" EntitySet="Strana" />
+            <End Role="Region" EntitySet="Region" />
+          </AssociationSet>
+          <EntitySet Name="type_gorod" EntityType="UGTUModel.LocalityType" />
+          <AssociationSet Name="FK_Gorod_type_gorod" Association="UGTUModel.FK_Gorod_type_gorod">
+            <End Role="type_gorod" EntitySet="type_gorod" />
+            <End Role="Gorod" EntitySet="Gorod" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="LocalityType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ShortName" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Localities" Relationship="UGTUModel.FK_Gorod_type_gorod" FromRole="type_gorod" ToRole="Gorod" />
+        </EntityType>
+        <Association Name="FK_Gorod_type_gorod">
+          <End Type="UGTUModel.LocalityType" Role="type_gorod" Multiplicity="0..1" />
+          <End Type="UGTUModel.Locality" Role="Gorod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="type_gorod">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Gorod">
+              <PropertyRef Name="LocalityTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="UGTUModelStoreContainer" CdmEntityContainer="AddressEntities">
+          <EntitySetMapping Name="Gorod">
+            <EntityTypeMapping TypeName="UGTUModel.Locality">
+              <MappingFragment StoreEntitySet="Gorod">
+                <ScalarProperty Name="Id" ColumnName="Ik_gorod" />
+                <ScalarProperty Name="Name" ColumnName="Cgorod" />
+                <ScalarProperty Name="SubAreaId" ColumnName="Ik_raion" />
+                <ScalarProperty Name="Index" ColumnName="CIndex" />
+                <ScalarProperty Name="LocalityTypeId" ColumnName="ik_type_gorod" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Raion">
+            <EntityTypeMapping TypeName="UGTUModel.SubArea">
+              <MappingFragment StoreEntitySet="Raion">
+                <ScalarProperty Name="Id" ColumnName="Ik_raion" />
+                <ScalarProperty Name="Name" ColumnName="Craion" />
+                <ScalarProperty Name="AreaId" ColumnName="Ik_region" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Region">
+            <EntityTypeMapping TypeName="UGTUModel.Area">
+              <MappingFragment StoreEntitySet="Region">
+                <ScalarProperty Name="Id" ColumnName="Ik_region" />
+                <ScalarProperty Name="Name" ColumnName="Cregion" />
+                <ScalarProperty Name="CountryId" ColumnName="Ik_strana" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Strana">
+            <EntityTypeMapping TypeName="UGTUModel.Country">
+              <MappingFragment StoreEntitySet="Strana">
+                <ScalarProperty Name="Id" ColumnName="Ik_strana" />
+                <ScalarProperty Name="Name" ColumnName="Cstrana" />
+                <ScalarProperty Name="IsCIS" ColumnName="bit_SNG" />
+                <ScalarProperty Name="Citizenship" ColumnName="c_grazd" />
+                <ScalarProperty Name="ik_FB" ColumnName="ik_FB" />
+                <ScalarProperty Name="CitizenshipId" ColumnName="ik_type_grazd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Street">
+            <EntityTypeMapping TypeName="UGTUModel.Street">
+              <MappingFragment StoreEntitySet="Street">
+                <ScalarProperty Name="Id" ColumnName="Ik_street" />
+                <ScalarProperty Name="LocalityId" ColumnName="ik_gorod" />
+                <ScalarProperty Name="Name" ColumnName="CStreet" />
+                <ScalarProperty Name="StreetTypeId" ColumnName="Ik_type_street" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="type_gorod">
+            <EntityTypeMapping TypeName="UGTUModel.LocalityType">
+              <MappingFragment StoreEntitySet="type_gorod">
+                <ScalarProperty Name="Name" ColumnName="ctype_gorod" />
+                <ScalarProperty Name="ShortName" ColumnName="cshort_type_gorod" />
+                <ScalarProperty Name="Id" ColumnName="ik_type_gorod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

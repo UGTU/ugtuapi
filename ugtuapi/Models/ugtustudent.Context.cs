@@ -20,6 +20,7 @@ namespace ugtuapi.Models
         public UGTUEntities()
             : base("name=UGTUEntities")
         {
+    		this.Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
