@@ -18,8 +18,8 @@ namespace ugtuapi.Models
         {
             this.Document = new HashSet<PersonDocument>();
             this.Roles = new HashSet<Roles>();
-            this.Grounds = new HashSet<Destination>();
-            this.Derived = new HashSet<Destination>();
+            this.Base_Destination = new HashSet<Base_Destination>();
+            this.Base_Destination1 = new HashSet<Base_Destination>();
         }
     
         public int Ik_destination { get; set; }
@@ -28,11 +28,12 @@ namespace ugtuapi.Models
         public Nullable<int> ik_typesup { get; set; }
         public Nullable<bool> IsBase { get; set; }
         public string DescriptionDoc { get; set; }
+        public Nullable<int> Ik_TypeDest { get; set; }
     
         public virtual ICollection<PersonDocument> Document { get; set; }
         public virtual ICollection<Roles> Roles { get; set; }
         public virtual TypeSupply TypeSupply { get; set; }
-        public virtual ICollection<Destination> Grounds { get; set; }
-        public virtual ICollection<Destination> Derived { get; set; }
+        public virtual ICollection<Base_Destination> Base_Destination { get; set; }
+        public virtual ICollection<Base_Destination> Base_Destination1 { get; set; }
     }
 }

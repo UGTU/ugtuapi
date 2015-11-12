@@ -70,6 +70,7 @@ namespace ugtuapi
             builder.EntitySet<Campus>("Campuses");
             builder.EntitySet<ugtuapi.Models.PersonDocument>("PersonDocuments");
             builder.EntitySet<Destination>("Destinations");
+            builder.EntitySet<Base_Destination>("Base_Destinations");
             builder.EntitySet<Address>("Addresses");
             builder.EntitySet<BrunchType>("BrunchTypes");
             builder.EntitySet<ugtuapi.Models.EducationForm>("EducationForms");
@@ -93,6 +94,11 @@ namespace ugtuapi
             builder.EntitySet<Locality>("Localities");
             builder.EntitySet<LocalityType>("LocalityTypes");
             builder.EntitySet<Street>("Streets");
+
+            
+            
+
+
 
             var persons = builder.EntitySet<ugtuapi.Models.Person>("People");
             persons.EntityType.Ignore(x => x.Photo);
@@ -147,6 +153,7 @@ namespace ugtuapi
             builder.Entity<Models.Enrolleeies.EnrollerPersonDocument>().HasKey(x => x.Id);
             builder.Entity<Models.Enrolleeies.Enroller>().HasKey(x => x.nCode);
             builder.Entity<Models.Enrolleeies.TestResult>().HasKey(x => x.Id);
+
         }
 
         private static void SetupPrimaryKeys(ODataModelBuilder builder)
@@ -180,6 +187,19 @@ namespace ugtuapi
             builder.Entity<Locality>().HasKey(x => x.Id);
             builder.Entity<LocalityType>().HasKey(x => x.Id);
             builder.Entity<Street>().HasKey(x => x.Id);
+            builder.Entity<Base_Destination>().HasKey(x => x.ik_basedest);
+            builder.Entity<BrunchType>().HasKey(x => x.ik_type_branch);
+            builder.Entity<ugtuapi.Models.EducationForm>().HasKey(x=>x.Id);
+            builder.Entity<CurriculaYear>().HasKey(x => x.ik_year_uch_pl);
+            builder.Entity<CurriculaDisciplines>().HasKey(x => x.ik_disc_uch_plan);
+            builder.Entity<Content>().HasKey(x => x.ik_upContent);
+            builder.Entity<ugtuapi.Models.Discipline>().HasKey(x => x.iK_disc);
+            builder.Entity<DisciplineCycle>().HasKey(x => x.IK_ckl_disc);
+            builder.Entity<DisciplineType>().HasKey(x => x.ik_type_disc);
+            builder.Entity<TutorialClass>().HasKey(x => x.iK_vid_zanyat);
+            builder.Entity<TutorialTypeClass>().HasKey(x => x.iK_type_vz);
+            builder.Entity<TutorialType>().HasKey(x => x.ikTypeZanyat);
+            builder.Entity<DisciplineGroup>().HasKey(x => x.IK_grp_disc);
             
         }
     }

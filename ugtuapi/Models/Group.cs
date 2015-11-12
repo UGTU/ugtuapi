@@ -27,10 +27,12 @@ namespace ugtuapi.Models
         public Nullable<System.DateTime> Created { get; set; }
         public Nullable<System.DateTime> DisbandedOn { get; set; }
         public Nullable<int> ProfileId { get; set; }
+        public Nullable<int> ik_Kurator { get; set; }
     
         public virtual ICollection<StudGrup> StudentGroup { get; set; }
         public virtual FacultyRel FacultyRel { get; set; }
         public virtual Curricula Curricula { get; set; }
         public virtual EducationBranch EducationBranch { get; set; }
+        public virtual Employee Supervisor { get; set; }
     }
 }

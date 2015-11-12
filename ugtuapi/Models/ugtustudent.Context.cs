@@ -64,6 +64,7 @@ namespace ugtuapi.Models
         public virtual DbSet<EducationForm> Form_ed { get; set; }
         public virtual DbSet<DisciplineGroup> grp_disc { get; set; }
         public virtual DbSet<TypeSupply> TypeSupply { get; set; }
+        public virtual DbSet<Base_Destination> Base_Destination { get; set; }
     
         public virtual ObjectResult<GetMagazineDocWeb_Result> GetMagazineDocWeb(Nullable<int> ik_zach)
         {

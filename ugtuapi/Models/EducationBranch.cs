@@ -39,6 +39,8 @@ namespace ugtuapi.Models
         public Nullable<int> ik_main_spec { get; set; }
         public Nullable<int> id_parent { get; set; }
         public Nullable<int> id_type_branch { get; set; }
+        public Nullable<int> YearNormObuch { get; set; }
+        public Nullable<int> ik_FinancingSource { get; set; }
     
         public virtual ICollection<EducationBranch> Children { get; set; }
         public virtual EducationBranch Parent { get; set; }

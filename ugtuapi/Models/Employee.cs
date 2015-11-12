@@ -17,6 +17,7 @@ namespace ugtuapi.Models
         public Employee()
         {
             this.Manages = new HashSet<Department>();
+            this.Grup = new HashSet<Group>();
         }
     
         public string TypeWorkName { get; set; }
@@ -41,8 +42,10 @@ namespace ugtuapi.Models
         public Nullable<System.DateTime> BirthDate { get; set; }
         public Nullable<int> idEmployee { get; set; }
         public string DegreeScienceName { get; set; }
+        public Nullable<double> PPSStuff { get; set; }
     
         public virtual Department Department { get; set; }
         public virtual ICollection<Department> Manages { get; set; }
+        public virtual ICollection<Group> Grup { get; set; }
     }
 }

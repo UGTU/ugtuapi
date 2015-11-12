@@ -23,7 +23,7 @@ namespace ugtuapi.Models
         public string cName_disc { get; set; }
         public string cShortName { get; set; }
         public bool lPract { get; set; }
-        public Nullable<byte> ik_type_disc { get; set; }
+        public byte ik_type_disc { get; set; }
         public string DiplDiscName { get; set; }
     
         public virtual DisciplineType Type_disc { get; set; }

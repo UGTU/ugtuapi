@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a0d8e2a1ab414761affb5060237b5d09" Name="Diagram1" ZoomLevel="98">
+      <Diagram DiagramId="a0d8e2a1ab414761affb5060237b5d09" Name="Diagram1" ZoomLevel="22">
         <EntityTypeShape EntityType="UGTUEnrolleeiesModel.Bonus" Width="1.5" PointX="6.875" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="UGTUEnrolleeiesModel.DirectionRequirement" Width="2.375" PointX="12.125" PointY="12.375" IsExpanded="true" />
         <EntityTypeShape EntityType="UGTUEnrolleeiesModel.EnrollmentProperty" Width="2.125" PointX="7.625" PointY="9.625" IsExpanded="true" />

@@ -174,14 +174,14 @@ namespace ugtuapi.Controllers
         [EnableQuery]
         public IQueryable<Destination> GetGrounds([FromODataUri] int key)
         {
-            return _db.Destination.Where(m => m.Ik_destination == key).SelectMany(m => m.Grounds);
+            return null; _db.Destination.Where(m => m.Ik_destination == key).SelectMany(m => m.Base_Destination);
         }
 
         // GET: odata/Destinations(5)/Derived
         [EnableQuery]
         public IQueryable<Destination> GetDerived([FromODataUri] int key)
         {
-            return _db.Destination.Where(m => m.Ik_destination == key).SelectMany(m => m.Derived);
+            return null; //_db.Destination.Where(m => m.Ik_destination == key).SelectMany(m => m.Derived);
         }
 
         protected override void Dispose(bool disposing)

@@ -28,6 +28,8 @@ namespace ugtuapi.Models
         public Nullable<int> NumberDoc { get; set; }
         public Nullable<System.DateTime> DateCreate { get; set; }
         public Nullable<System.DateTime> DateReady { get; set; }
+        public System.DateTime DatePod { get; set; }
+        public Nullable<int> Ik_reason_issuing { get; set; }
     
         public virtual Destination Destination { get; set; }
         public virtual StudGrup StudGrup { get; set; }

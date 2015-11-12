@@ -29,6 +29,7 @@ namespace ugtuapi.Models
         public Nullable<bool> bit_nagr { get; set; }
         public Nullable<bool> bit_must_be_in_uch_plan { get; set; }
         public Nullable<int> year_expire { get; set; }
+        public string reason_call { get; set; }
     
         public virtual ICollection<Content> Content_UchPl { get; set; }
         public virtual TutorialTypeClass typ_zan { get; set; }

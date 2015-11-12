@@ -16,13 +16,11 @@
           <Property Name="FlatNumber" Type="varchar" MaxLength="10" />
           <Property Name="fIndex" Type="varchar" MaxLength="10" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'UGTU.dbo.Base_Destination' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Base_Destination">
           <Key>
-            <PropertyRef Name="Ik_destination1" />
-            <PropertyRef Name="Ik_destination2" />
+            <PropertyRef Name="ik_basedest" />
           </Key>
+          <Property Name="ik_basedest" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Ik_destination1" Type="int" Nullable="false" />
           <Property Name="Ik_destination2" Type="int" Nullable="false" />
         </EntityType>
@@ -69,6 +67,7 @@ warning 6002: The table/view 'UGTU.dbo.Base_Destination' does not have a primary
           <Property Name="ik_typesup" Type="int" />
           <Property Name="Base" Type="bit" />
           <Property Name="DescriptionDoc" Type="nvarchar(max)" />
+          <Property Name="Ik_TypeDest" Type="int" />
         </EntityType>
         <EntityType Name="discpln">
           <Key>
@@ -78,7 +77,7 @@ warning 6002: The table/view 'UGTU.dbo.Base_Destination' does not have a primary
           <Property Name="cName_disc" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="cShortName" Type="varchar" MaxLength="40" />
           <Property Name="lPract" Type="bit" Nullable="false" />
-          <Property Name="ik_type_disc" Type="tinyint" />
+          <Property Name="ik_type_disc" Type="tinyint" Nullable="false" />
           <Property Name="DiplDiscName" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="Doc_stud">
@@ -107,6 +106,8 @@ warning 6002: The table/view 'UGTU.dbo.Base_Destination' does not have a primary
           <Property Name="NumberDoc" Type="int" />
           <Property Name="DateCreate" Type="datetime" />
           <Property Name="DateReady" Type="datetime" />
+          <Property Name="DatePod" Type="datetime" Nullable="false" />
+          <Property Name="Ik_reason_issuing" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'UGTU.dbo.DocumentBase' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -151,6 +152,8 @@ warning 6002: The table/view 'UGTU.dbo.DocumentBase' does not have a primary key
           <Property Name="ik_main_spec" Type="int" />
           <Property Name="id_parent" Type="int" />
           <Property Name="id_type_branch" Type="int" />
+          <Property Name="YearNormObuch" Type="int" />
+          <Property Name="ik_FinancingSource" Type="int" />
         </EntityType>
         <EntityType Name="Fac">
           <Key>
@@ -204,6 +207,7 @@ warning 6002: The table/view 'UGTU.dbo.DocumentBase' does not have a primary key
           <Property Name="DateCreate" Type="datetime" />
           <Property Name="DateExit" Type="datetime" />
           <Property Name="ik_spclz" Type="int" />
+          <Property Name="ik_Kurator" Type="int" />
         </EntityType>
         <EntityType Name="Person">
           <Key>
@@ -443,6 +447,7 @@ warning 6002: The table/view 'UGTU.dbo.Roles_Destination' does not have a primar
           <Property Name="bit_nagr" Type="bit" />
           <Property Name="bit_must_be_in_uch_plan" Type="bit" />
           <Property Name="year_expire" Type="int" />
+          <Property Name="reason_call" Type="varchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="Year_uch_pl">
           <Key>
@@ -503,6 +508,7 @@ warning 6002: The table/view 'UGTU.dbo.Roles_Destination' does not have a primar
           <Property Name="BirthDate" Type="date" />
           <Property Name="idEmployee" Type="int" />
           <Property Name="DegreeScienceName" Type="varchar" MaxLength="50" />
+          <Property Name="PPSStuff" Type="float" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -661,7 +667,7 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_discpln_Type_disc">
-          <End Role="Type_disc" Type="Self.Type_disc" Multiplicity="0..1" />
+          <End Role="Type_disc" Type="Self.Type_disc" Multiplicity="1" />
           <End Role="discpln" Type="Self.discpln" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Type_disc">
@@ -729,6 +735,18 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
             </Principal>
             <Dependent Role="Grup">
               <PropertyRef Name="ik_spclz" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grup_KafTeachers">
+          <End Role="KafTeachers" Type="Self.KafTeachers" Multiplicity="0..1" />
+          <End Role="Grup" Type="Self.Grup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KafTeachers">
+              <PropertyRef Name="idFactStaffHistory" />
+            </Principal>
+            <Dependent Role="Grup">
+              <PropertyRef Name="ik_Kurator" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1101,6 +1119,7 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
         </Function>
         <EntityContainer Name="UGTU_ACTTESTModelStoreContainer">
           <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Base_Destination" EntityType="Self.Base_Destination" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Campus" EntityType="Self.Campus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ckl_disc" EntityType="Self.ckl_disc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Content_UchPl" EntityType="Self.Content_UchPl" Schema="dbo" store:Type="Tables" />
@@ -1135,12 +1154,6 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
           <EntitySet Name="Zach" EntityType="Self.Zach" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepartmentMainData" EntityType="Self.DepartmentMainData" Schema="Import" store:Type="Tables" />
           <EntitySet Name="KafTeachers" EntityType="Self.KafTeachers" Schema="Import" store:Type="Tables" />
-          <EntitySet Name="Base_Destination" EntityType="Self.Base_Destination" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Base_Destination].[Ik_destination1] AS [Ik_destination1], 
-    [Base_Destination].[Ik_destination2] AS [Ik_destination2]
-    FROM [dbo].[Base_Destination] AS [Base_Destination]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="DocumentBase" EntityType="Self.DocumentBase" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [DocumentBase].[Ik_Document_base] AS [Ik_Document_base], 
@@ -1238,6 +1251,10 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
           </AssociationSet>
           <AssociationSet Name="FK_Grup_EdBranch" Association="Self.FK_Grup_EdBranch">
             <End Role="EducationBranch" EntitySet="EducationBranch" />
+            <End Role="Grup" EntitySet="Grup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grup_KafTeachers" Association="Self.FK_Grup_KafTeachers">
+            <End Role="KafTeachers" EntitySet="KafTeachers" />
             <End Role="Grup" EntitySet="Grup" />
           </AssociationSet>
           <AssociationSet Name="FK_Grup_Relation_spec_fac" Association="Self.FK_Grup_Relation_spec_fac">
@@ -1596,8 +1613,8 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
             <End Role="Content_UchPl" EntitySet="Content_UchPl" />
           </AssociationSet>
           <AssociationSet Name="FK_discpln_Type_disc" Association="UGTU_ACTTESTModel.FK_discpln_Type_disc">
-            <End Role="Type_disc" EntitySet="Type_disc" />
-            <End Role="discpln" EntitySet="discpln" />
+            <End EntitySet="Type_disc" Role="Type_disc" />
+            <End EntitySet="discpln" Role="discpln" />
           </AssociationSet>
           <AssociationSet Name="FK_sv_disc_discpln" Association="UGTU_ACTTESTModel.FK_sv_disc_discpln">
             <End Role="discpln" EntitySet="discpln" />
@@ -1647,13 +1664,22 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
             <End Role="TypeSupply" EntitySet="TypeSupply" />
             <End Role="Destination" EntitySet="Destination" />
           </AssociationSet>
-          <AssociationSet Name="Base_Destination" Association="UGTU_ACTTESTModel.Base_Destination">
-            <End Role="Destination" EntitySet="Destination" />
-            <End Role="Destination1" EntitySet="Destination" />
-          </AssociationSet>
           <FunctionImport Name="GetMagazineDocWeb" ReturnType="Collection(UGTU_ACTTESTModel.GetMagazineDocWeb_Result)">
           <Parameter Name="Ik_zach" Mode="In" Type="Int32" />
           </FunctionImport>
+          <AssociationSet Name="FK_Grup_KafTeachers" Association="UGTU_ACTTESTModel.FK_Grup_KafTeachers">
+            <End Role="Employee" EntitySet="KafTeachers" />
+            <End Role="Group" EntitySet="Grup" />
+          </AssociationSet>
+          <EntitySet Name="Base_Destination" EntityType="UGTU_ACTTESTModel.Base_Destination" />
+          <AssociationSet Name="Base_Destination_Destination_FK1" Association="UGTU_ACTTESTModel.Base_Destination_Destination_FK1">
+            <End Role="Destination" EntitySet="Destination" />
+            <End Role="Base_Destination" EntitySet="Base_Destination" />
+          </AssociationSet>
+          <AssociationSet Name="Base_Destination_Destination_FK2" Association="UGTU_ACTTESTModel.Base_Destination_Destination_FK2">
+            <End Role="Destination" EntitySet="Destination" />
+            <End Role="Base_Destination" EntitySet="Base_Destination" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Zach">
           <Key>
@@ -1703,6 +1729,8 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
           <NavigationProperty Name="FacultyRel" Relationship="UGTU_ACTTESTModel.FK_Grup_Relation_spec_fac" FromRole="Grup" ToRole="Relation_spec_fac" />
           <NavigationProperty Name="Curricula" Relationship="UGTU_ACTTESTModel.FK_Grup_Uch_pl" FromRole="Grup" ToRole="Uch_pl" />
           <NavigationProperty Name="EducationBranch" Relationship="UGTU_ACTTESTModel.FK_Grup_EdBranch" FromRole="Grup" ToRole="EducationBranch" />
+          <Property Name="ik_Kurator" Type="Int32" />
+          <NavigationProperty Name="Supervisor" Relationship="UGTU_ACTTESTModel.FK_Grup_KafTeachers" FromRole="Group" ToRole="Employee" />
         </EntityType>
         <EntityType Name="StudGrup">
           <Key>
@@ -1867,6 +1895,8 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
           <NavigationProperty Name="CurriculaProfiles" Relationship="UGTU_ACTTESTModel.FK_Uch_pl_spclz" FromRole="EducationBranch" ToRole="Uch_pl" />
           <NavigationProperty Name="CurriculaDirections" Relationship="UGTU_ACTTESTModel.FK_Uch_pl_Spec_stud" FromRole="EducationBranch" ToRole="Uch_pl" />
           <NavigationProperty Name="Type_branch" Relationship="UGTU_ACTTESTModel.FK_EdBranch_Type_Branch" FromRole="EducationBranch" ToRole="Type_branch" />
+          <Property Name="YearNormObuch" Type="Int32" />
+          <Property Name="ik_FinancingSource" Type="Int32" />
         </EntityType>
         <Association Name="FK_EdBranch_EdBranch">
           <End Type="UGTU_ACTTESTModel.EducationBranch" Role="EducationBranch" Multiplicity="0..1" />
@@ -2003,6 +2033,8 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
           <Property Name="BirthDate" Type="DateTime" Precision="0" />
           <Property Name="idEmployee" Type="Int32" />
           <Property Name="DegreeScienceName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PPSStuff" Type="Double" />
+          <NavigationProperty Name="Grup" Relationship="UGTU_ACTTESTModel.FK_Grup_KafTeachers" FromRole="Employee" ToRole="Group" />
         </EntityType>
         <Association Name="FK_DepartmentMainData_DepartmentMainData">
           <End Type="UGTU_ACTTESTModel.Department" Role="DepartmentMainData" Multiplicity="0..1" />
@@ -2222,8 +2254,9 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
           <Property Name="IsBase" Type="Boolean" />
           <Property Name="DescriptionDoc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="TypeSupply" Relationship="UGTU_ACTTESTModel.FK_TypeSupply_Destination" FromRole="Destination" ToRole="TypeSupply" />
-          <NavigationProperty Name="Grounds" Relationship="UGTU_ACTTESTModel.Base_Destination" FromRole="Destination" ToRole="Destination1" />
-          <NavigationProperty Name="Derived" Relationship="UGTU_ACTTESTModel.Base_Destination" FromRole="Destination1" ToRole="Destination" />
+          <Property Name="Ik_TypeDest" Type="Int32" />
+          <NavigationProperty Name="Base_Destination" Relationship="UGTU_ACTTESTModel.Base_Destination_Destination_FK1" FromRole="Destination" ToRole="Base_Destination" />
+          <NavigationProperty Name="Base_Destination1" Relationship="UGTU_ACTTESTModel.Base_Destination_Destination_FK2" FromRole="Destination" ToRole="Base_Destination" />
           </EntityType>
         <EntityType Name="PersonDocument">
           <Key>
@@ -2241,6 +2274,8 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
           <NavigationProperty Name="StudGrup" Relationship="UGTU_ACTTESTModel.Document_StudGrup_FK" FromRole="Document1" ToRole="StudGrup" />
           <NavigationProperty Name="Document11" Relationship="UGTU_ACTTESTModel.DocumentBase" FromRole="Document1" ToRole="Document11" />
           <NavigationProperty Name="Document2" Relationship="UGTU_ACTTESTModel.DocumentBase" FromRole="Document11" ToRole="Document1" />
+          <Property Name="DatePod" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Ik_reason_issuing" Type="Int32" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -2391,7 +2426,7 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
           <Property Name="cName_disc" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="cShortName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Name="lPract" Type="Boolean" Nullable="false" />
-          <Property Name="ik_type_disc" Type="Byte" />
+          <Property Name="ik_type_disc" Type="Byte" Nullable="false" />
           <Property Name="DiplDiscName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Type_disc" Relationship="UGTU_ACTTESTModel.FK_discpln_Type_disc" FromRole="discpln" ToRole="Type_disc" />
           <NavigationProperty Name="sv_disc" Relationship="UGTU_ACTTESTModel.FK_sv_disc_discpln" FromRole="discpln" ToRole="sv_disc" />
@@ -2445,8 +2480,8 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
           <Key>
             <PropertyRef Name="ik_type_disc" />
           </Key>
-          <Property Name="ik_type_disc" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="cName_type_disc" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ik_type_disc" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Byte" />
+          <Property Name="cName_type_disc" MaxLength="30" FixedLength="false" Unicode="false" Type="String" />
           <Property Name="bit_calc_as_practice" Type="Boolean" />
           <Property Name="ik_ed_izm" Type="Int32" />
           <NavigationProperty Name="discpln" Relationship="UGTU_ACTTESTModel.FK_discpln_Type_disc" FromRole="Type_disc" ToRole="discpln" />
@@ -2479,6 +2514,7 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
           <NavigationProperty Name="Content_UchPl" Relationship="UGTU_ACTTESTModel.FK_Content_UchPl_vid_zaniat" FromRole="vid_zaniat" ToRole="Content_UchPl" />
           <NavigationProperty Name="typ_zan" Relationship="UGTU_ACTTESTModel.FK_vid_zaniat_typ_zan" FromRole="vid_zaniat" ToRole="typ_zan" />
           <NavigationProperty Name="TypeZanyat" Relationship="UGTU_ACTTESTModel.FK_vid_zaniat_TypeZanyat" FromRole="vid_zaniat" ToRole="TypeZanyat" />
+          <Property Name="reason_call" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="CurriculaYear">
           <Key>
@@ -2516,8 +2552,8 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_discpln_Type_disc">
-          <End Type="UGTU_ACTTESTModel.DisciplineType" Role="Type_disc" Multiplicity="0..1" />
-          <End Type="UGTU_ACTTESTModel.Discipline" Role="discpln" Multiplicity="*" />
+          <End Type="UGTU_ACTTESTModel.DisciplineType" Multiplicity="1" Role="Type_disc" />
+          <End Type="UGTU_ACTTESTModel.Discipline" Multiplicity="*" Role="discpln" />
           <ReferentialConstraint>
             <Principal Role="Type_disc">
               <PropertyRef Name="ik_type_disc" />
@@ -2703,10 +2739,6 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Base_Destination">
-          <End Type="UGTU_ACTTESTModel.Destination" Role="Destination" Multiplicity="*" />
-          <End Type="UGTU_ACTTESTModel.Destination" Role="Destination1" Multiplicity="*" />
-        </Association>
         <ComplexType Name="GetMagazineDocWeb_Result">
           <Property Type="Int32" Name="NumberDoc" Nullable="true" />
           <Property Type="Int32" Name="Ik_Document" Nullable="false" />
@@ -2718,6 +2750,52 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
           <Property Type="String" Name="Phone" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Timetable" Nullable="true" MaxLength="70" />
         </ComplexType>
+        <Association Name="FK_Grup_KafTeachers">
+          <End Type="UGTU_ACTTESTModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="UGTU_ACTTESTModel.Group" Role="Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Group">
+              <PropertyRef Name="ik_Kurator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Base_Destination">
+          <Key>
+            <PropertyRef Name="ik_basedest" />
+          </Key>
+          <Property Name="ik_basedest" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ik_destination1" Type="Int32" Nullable="false" />
+          <Property Name="Ik_destination2" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Destination" Relationship="UGTU_ACTTESTModel.Base_Destination_Destination_FK1" FromRole="Base_Destination" ToRole="Destination" />
+          <NavigationProperty Name="Destination1" Relationship="UGTU_ACTTESTModel.Base_Destination_Destination_FK2" FromRole="Base_Destination" ToRole="Destination" />
+        </EntityType>
+        <Association Name="Base_Destination_Destination_FK1">
+          <End Type="UGTU_ACTTESTModel.Destination" Role="Destination" Multiplicity="1" />
+          <End Type="UGTU_ACTTESTModel.Base_Destination" Role="Base_Destination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Destination">
+              <PropertyRef Name="Ik_destination" />
+            </Principal>
+            <Dependent Role="Base_Destination">
+              <PropertyRef Name="Ik_destination1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Base_Destination_Destination_FK2">
+          <End Type="UGTU_ACTTESTModel.Destination" Role="Destination" Multiplicity="1" />
+          <End Type="UGTU_ACTTESTModel.Base_Destination" Role="Base_Destination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Destination">
+              <PropertyRef Name="Ik_destination" />
+            </Principal>
+            <Dependent Role="Base_Destination">
+              <PropertyRef Name="Ik_destination2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2794,6 +2872,7 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
           <EntitySetMapping Name="Grup">
             <EntityTypeMapping TypeName="UGTU_ACTTESTModel.Group">
               <MappingFragment StoreEntitySet="Grup">
+                <ScalarProperty Name="ik_Kurator" ColumnName="ik_Kurator" />
                 <ScalarProperty Name="ProfileId" ColumnName="ik_spclz" />
                 <ScalarProperty Name="DisbandedOn" ColumnName="DateExit" />
                 <ScalarProperty Name="Created" ColumnName="DateCreate" />
@@ -2862,6 +2941,8 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
           <EntitySetMapping Name="EducationBranch">
             <EntityTypeMapping TypeName="UGTU_ACTTESTModel.EducationBranch">
               <MappingFragment StoreEntitySet="EducationBranch">
+                <ScalarProperty Name="ik_FinancingSource" ColumnName="ik_FinancingSource" />
+                <ScalarProperty Name="YearNormObuch" ColumnName="YearNormObuch" />
                 <ScalarProperty Name="id_type_branch" ColumnName="id_type_branch" />
                 <ScalarProperty Name="id_parent" ColumnName="id_parent" />
                 <ScalarProperty Name="ik_main_spec" ColumnName="ik_main_spec" />
@@ -2927,6 +3008,7 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
           <EntitySetMapping Name="KafTeachers">
             <EntityTypeMapping TypeName="UGTU_ACTTESTModel.Employee">
               <MappingFragment StoreEntitySet="KafTeachers">
+                <ScalarProperty Name="PPSStuff" ColumnName="PPSStuff" />
                 <ScalarProperty Name="DegreeScienceName" ColumnName="DegreeScienceName" />
                 <ScalarProperty Name="idEmployee" ColumnName="idEmployee" />
                 <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
@@ -3035,6 +3117,7 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
           <EntitySetMapping Name="Destination">
             <EntityTypeMapping TypeName="UGTU_ACTTESTModel.Destination">
               <MappingFragment StoreEntitySet="Destination">
+                <ScalarProperty Name="Ik_TypeDest" ColumnName="Ik_TypeDest" />
                 <ScalarProperty Name="DescriptionDoc" ColumnName="DescriptionDoc" />
                 <ScalarProperty Name="IsBase" ColumnName="Base" />
                 <ScalarProperty Name="ik_typesup" ColumnName="ik_typesup" />
@@ -3047,6 +3130,8 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
           <EntitySetMapping Name="PersonDocumentSet">
             <EntityTypeMapping TypeName="UGTU_ACTTESTModel.PersonDocument">
               <MappingFragment StoreEntitySet="Document">
+                <ScalarProperty Name="Ik_reason_issuing" ColumnName="Ik_reason_issuing" />
+                <ScalarProperty Name="DatePod" ColumnName="DatePod" />
                 <ScalarProperty Name="DateReady" ColumnName="DateReady" />
                 <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
                 <ScalarProperty Name="NumberDoc" ColumnName="NumberDoc" />
@@ -3197,6 +3282,7 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
           <EntitySetMapping Name="vid_zaniat">
             <EntityTypeMapping TypeName="UGTU_ACTTESTModel.TutorialClass">
               <MappingFragment StoreEntitySet="vid_zaniat">
+                <ScalarProperty Name="reason_call" ColumnName="reason_call" />
                 <ScalarProperty Name="year_expire" ColumnName="year_expire" />
                 <ScalarProperty Name="bit_must_be_in_uch_plan" ColumnName="bit_must_be_in_uch_plan" />
                 <ScalarProperty Name="bit_nagr" ColumnName="bit_nagr" />
@@ -3260,14 +3346,6 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="Base_Destination" TypeName="UGTU_ACTTESTModel.Base_Destination" StoreEntitySet="Base_Destination">
-            <EndProperty Name="Destination1">
-              <ScalarProperty Name="Ik_destination" ColumnName="Ik_destination2" />
-            </EndProperty>
-            <EndProperty Name="Destination">
-              <ScalarProperty Name="Ik_destination" ColumnName="Ik_destination1" />
-            </EndProperty>
-          </AssociationSetMapping>
           <FunctionImportMapping FunctionImportName="GetMagazineDocWeb" FunctionName="UGTU_ACTTESTModel.Store.GetMagazineDocWeb">
             <ResultMapping>
               <ComplexTypeMapping TypeName="UGTU_ACTTESTModel.GetMagazineDocWeb_Result">
@@ -3283,6 +3361,15 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="Base_Destination">
+            <EntityTypeMapping TypeName="UGTU_ACTTESTModel.Base_Destination">
+              <MappingFragment StoreEntitySet="Base_Destination">
+                <ScalarProperty Name="Ik_destination2" ColumnName="Ik_destination2" />
+                <ScalarProperty Name="Ik_destination1" ColumnName="Ik_destination1" />
+                <ScalarProperty Name="ik_basedest" ColumnName="ik_basedest" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
