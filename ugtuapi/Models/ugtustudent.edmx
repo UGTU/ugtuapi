@@ -544,6 +544,39 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
           <Property Name="ik_spec" Type="int" Nullable="false" />
           <Property Name="DepartmentGUID" Type="uniqueidentifier" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'UGTU.dbo.UspevView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UspevView">
+          <Key>
+            <PropertyRef Name="Nn_zach" />
+            <PropertyRef Name="Name_osenca" />
+            <PropertyRef Name="cName_vid_zanyat" />
+            <PropertyRef Name="cName_disc" />
+            <PropertyRef Name="n_sem" />
+            <PropertyRef Name="iK_disc" />
+            <PropertyRef Name="iK_vid_zanyat" />
+            <PropertyRef Name="bitExam" />
+            <PropertyRef Name="bitZach" />
+            <PropertyRef Name="lVibor" />
+            <PropertyRef Name="Ik_zach" />
+          </Key>
+          <Property Name="Nn_zach" Type="char" MaxLength="6" Nullable="false" />
+          <Property Name="Name_osenca" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Dd_exam" Type="datetime" />
+          <Property Name="cName_vid_zanyat" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="cName_disc" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="n_sem" Type="tinyint" Nullable="false" />
+          <Property Name="Ik_grup" Type="int" />
+          <Property Name="planDate" Type="datetime" />
+          <Property Name="iK_disc" Type="int" Nullable="false" />
+          <Property Name="iK_vid_zanyat" Type="int" Nullable="false" />
+          <Property Name="bitExam" Type="bit" Nullable="false" />
+          <Property Name="bitZach" Type="bit" Nullable="false" />
+          <Property Name="lVibor" Type="bit" Nullable="false" />
+          <Property Name="ViborGroup" Type="int" />
+          <Property Name="Cosenca" Type="int" />
+          <Property Name="Ik_zach" Type="int" Nullable="false" />
+        </EntityType>
         <Association Name="Base_Destination_Destination_FK1">
           <End Role="Destination" Type="Self.Destination" Multiplicity="1" />
           <End Role="Base_Destination" Type="Self.Base_Destination" Multiplicity="*" />
@@ -1189,6 +1222,26 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
     [StudInfo].[DepartmentGUID] AS [DepartmentGUID]
     FROM [dbo].[StudInfo] AS [StudInfo]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="UspevView" EntityType="Self.UspevView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UspevView].[Nn_zach] AS [Nn_zach], 
+    [UspevView].[Name_osenca] AS [Name_osenca], 
+    [UspevView].[Dd_exam] AS [Dd_exam], 
+    [UspevView].[cName_vid_zanyat] AS [cName_vid_zanyat], 
+    [UspevView].[cName_disc] AS [cName_disc], 
+    [UspevView].[n_sem] AS [n_sem], 
+    [UspevView].[Ik_grup] AS [Ik_grup], 
+    [UspevView].[planDate] AS [planDate], 
+    [UspevView].[iK_disc] AS [iK_disc], 
+    [UspevView].[iK_vid_zanyat] AS [iK_vid_zanyat], 
+    [UspevView].[bitExam] AS [bitExam], 
+    [UspevView].[bitZach] AS [bitZach], 
+    [UspevView].[lVibor] AS [lVibor], 
+    [UspevView].[ViborGroup] AS [ViborGroup], 
+    [UspevView].[Cosenca] AS [Cosenca], 
+    [UspevView].[Ik_zach] AS [Ik_zach]
+    FROM [dbo].[UspevView] AS [UspevView]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="Base_Destination_Destination_FK1" Association="Self.Base_Destination_Destination_FK1">
             <End Role="Destination" EntitySet="Destination" />
             <End Role="Base_Destination" EntitySet="Base_Destination" />
@@ -1680,6 +1733,11 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
             <End Role="Destination" EntitySet="Destination" />
             <End Role="Base_Destination" EntitySet="Base_Destination" />
           </AssociationSet>
+          <EntitySet Name="UspevView" EntityType="UGTU_ACTTESTModel.ViewProgress" />
+          <AssociationSet Name="ZachUspevView" Association="UGTU_ACTTESTModel.ZachUspevView">
+            <End Role="Zach" EntitySet="Zach" />
+            <End Role="UspevView" EntitySet="UspevView" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Zach">
           <Key>
@@ -1690,6 +1748,7 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
           <Property Name="nCode" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <NavigationProperty Name="Student" Relationship="UGTU_ACTTESTModel.FK_Zach_Stud" FromRole="Zach" ToRole="Student" />
           <NavigationProperty Name="StudentGroup" Relationship="UGTU_ACTTESTModel.FK_StudZach_Zach" FromRole="Zach" ToRole="StudGrup" />
+          <NavigationProperty Name="UspevView" Relationship="UGTU_ACTTESTModel.ZachUspevView" FromRole="Zach" ToRole="UspevView" />
         </EntityType>
         <Association Name="FK_Zach_Stud">
           <End Type="UGTU_ACTTESTModel.Student" Role="Student" Multiplicity="1" />
@@ -2796,6 +2855,50 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ViewProgress">
+          <Key>
+            <PropertyRef Name="Nn_zach" />
+            <PropertyRef Name="MarkName" />
+            <PropertyRef Name="cName_vid_zanyat" />
+            <PropertyRef Name="cName_disc" />
+            <PropertyRef Name="n_sem" />
+            <PropertyRef Name="iK_disc" />
+            <PropertyRef Name="iK_vid_zanyat" />
+            <PropertyRef Name="bitExam" />
+            <PropertyRef Name="bitZach" />
+            <PropertyRef Name="lVibor" />
+            <PropertyRef Name="Ik_zach" />
+          </Key>
+          <Property Name="Nn_zach" Type="String" Nullable="false" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Name="MarkName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DatePassed" Type="DateTime" Precision="3" />
+          <Property Name="cName_vid_zanyat" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cName_disc" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="n_sem" Type="Byte" Nullable="false" />
+          <Property Name="Ik_grup" Type="Int32" />
+          <Property Name="planDate" Type="DateTime" Precision="3" />
+          <Property Name="iK_disc" Type="Int32" Nullable="false" />
+          <Property Name="iK_vid_zanyat" Type="Int32" Nullable="false" />
+          <Property Name="bitExam" Type="Boolean" Nullable="false" />
+          <Property Name="bitZach" Type="Boolean" Nullable="false" />
+          <Property Name="lVibor" Type="Boolean" Nullable="false" />
+          <Property Name="ViborGroup" Type="Int32" />
+          <Property Name="Cosenca" Type="Int32" />
+          <Property Name="Ik_zach" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Zach" Relationship="UGTU_ACTTESTModel.ZachUspevView" FromRole="UspevView" ToRole="Zach" />
+        </EntityType>
+        <Association Name="ZachUspevView">
+          <End Type="UGTU_ACTTESTModel.Zach" Role="Zach" Multiplicity="1" />
+          <End Type="UGTU_ACTTESTModel.ViewProgress" Role="UspevView" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zach">
+              <PropertyRef Name="Ik_zach" />
+            </Principal>
+            <Dependent Role="UspevView">
+              <PropertyRef Name="Ik_zach" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3370,6 +3473,37 @@ warning 6002: The table/view 'UGTU.dbo.StudInfo' does not have a primary key def
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="UspevView">
+            <EntityTypeMapping TypeName="UGTU_ACTTESTModel.ViewProgress">
+              <MappingFragment StoreEntitySet="UspevView">
+                <ScalarProperty Name="Ik_zach" ColumnName="Ik_zach" />
+                <ScalarProperty Name="Cosenca" ColumnName="Cosenca" />
+                <ScalarProperty Name="ViborGroup" ColumnName="ViborGroup" />
+                <ScalarProperty Name="lVibor" ColumnName="lVibor" />
+                <ScalarProperty Name="bitZach" ColumnName="bitZach" />
+                <ScalarProperty Name="bitExam" ColumnName="bitExam" />
+                <ScalarProperty Name="iK_vid_zanyat" ColumnName="iK_vid_zanyat" />
+                <ScalarProperty Name="iK_disc" ColumnName="iK_disc" />
+                <ScalarProperty Name="planDate" ColumnName="planDate" />
+                <ScalarProperty Name="Ik_grup" ColumnName="Ik_grup" />
+                <ScalarProperty Name="n_sem" ColumnName="n_sem" />
+                <ScalarProperty Name="cName_disc" ColumnName="cName_disc" />
+                <ScalarProperty Name="cName_vid_zanyat" ColumnName="cName_vid_zanyat" />
+                <ScalarProperty Name="DatePassed" ColumnName="Dd_exam" />
+                <ScalarProperty Name="MarkName" ColumnName="Name_osenca" />
+                <ScalarProperty Name="Nn_zach" ColumnName="Nn_zach" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ZachUspevView" TypeName="UGTU_ACTTESTModel.ZachUspevView" StoreEntitySet="Zach">
+            <EndProperty Name="UspevView">
+              <ScalarProperty Name="Ik_zach" ColumnName="Ik_zach" />
+              <ScalarProperty Name="Nn_zach" ColumnName="Nn_zach" />
+            </EndProperty>
+            <EndProperty Name="Zach">
+              <ScalarProperty Name="Ik_zach" ColumnName="Ik_zach" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

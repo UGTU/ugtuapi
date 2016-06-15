@@ -17,6 +17,7 @@ namespace ugtuapi.Models
         public Zach()
         {
             this.StudentGroup = new HashSet<StudGrup>();
+            this.UspevView = new HashSet<ViewProgress>();
         }
     
         public int Ik_zach { get; set; }
@@ -25,5 +26,6 @@ namespace ugtuapi.Models
     
         public virtual Student Student { get; set; }
         public virtual ICollection<StudGrup> StudentGroup { get; set; }
+        public virtual ICollection<ViewProgress> UspevView { get; set; }
     }
 }

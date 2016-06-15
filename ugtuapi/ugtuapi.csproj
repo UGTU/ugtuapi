@@ -15,7 +15,7 @@
     <AssemblyName>ugtuapi</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -235,6 +235,7 @@
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\EnrollerPeopleController.cs" />
     <Compile Include="Controllers\EnrollersController.cs" />
+    <Compile Include="Controllers\EnrollerServicesController.cs" />
     <Compile Include="Controllers\EnrollmentsController.cs" />
     <Compile Include="Controllers\FacultiesController.cs" />
     <Compile Include="Controllers\GradebooksController.cs" />
@@ -246,6 +247,7 @@
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\StudentInfoesController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
+    <Compile Include="Controllers\ViewProgressesController.cs" />
     <Compile Include="Controllers\WebOrdersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -390,6 +392,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>UgtuEnrolleeies.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\EnrollerInfo.cs" />
     <Compile Include="Models\Faculty.cs">
       <DependentUpon>ugtustudent.tt</DependentUpon>
     </Compile>
@@ -491,6 +494,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ugtustudent.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewProgress.cs">
+      <DependentUpon>ugtustudent.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Zach.cs">
       <DependentUpon>ugtustudent.tt</DependentUpon>
     </Compile>
@@ -578,6 +584,7 @@
     <Content Include="Models\Enrolleeies\UgtuEnrolleeies.edmx.diagram">
       <DependentUpon>UgtuEnrolleeies.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\Api.pubxml" />
     <None Include="Properties\PublishProfiles\Local IIS.pubxml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -639,7 +646,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>37099</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/ugtuapi</IISUrl>
+          <IISUrl>http://localhost:37099/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

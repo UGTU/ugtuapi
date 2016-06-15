@@ -100,6 +100,8 @@
         <EntityTypeShape EntityType="UGTU_ACTTESTModel.Base_Destination" Width="1.5" PointX="28.375" PointY="5.75" />
         <AssociationConnector Association="UGTU_ACTTESTModel.Base_Destination_Destination_FK1" />
         <AssociationConnector Association="UGTU_ACTTESTModel.Base_Destination_Destination_FK2" />
+        <EntityTypeShape EntityType="UGTU_ACTTESTModel.ViewProgress" Width="1.5" PointX="14.125" PointY="21.5" />
+        <AssociationConnector Association="UGTU_ACTTESTModel.ZachUspevView" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

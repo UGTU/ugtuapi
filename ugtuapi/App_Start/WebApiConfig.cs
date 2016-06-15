@@ -6,7 +6,7 @@ using Microsoft.Owin.Security.OAuth;
 using ugtuapi.Models;
 using ugtuapi.Models.Enrolleeies;
 using WebApiContrib.Formatting.Jsonp;
-
+using System.Web.Mvc;
 
 namespace ugtuapi
 {
@@ -23,17 +23,28 @@ namespace ugtuapi
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
+               name: "EnrollerServices",
+               routeTemplate: "Services/Enrollment/{action}/{year}/{directionId}",
+               defaults: new
+               {
+                   controller = "EnrollerServices",                   
+                   year = 2016                   
+               }
+           );
+
+            config.Routes.MapHttpRoute(
                 name: "API Default",
-                routeTemplate: "services/{controller}/{action}/{id}"                
-            );          
+                routeTemplate: "Services/{controller}/{action}/{id}"
+            );
+
 
             ConfigFormatters(config);
 
             var builder = new ODataConventionModelBuilder();
-            
+
             ConfigStudentModel(builder);
             ConfigEnrollmentModel(builder);
-            config.Routes.MapODataServiceRoute("odata", null, builder.GetEdmModel());            
+            config.Routes.MapODataServiceRoute("odata", null, builder.GetEdmModel());
         }
 
         private static void ConfigFormatters(HttpConfiguration config)
@@ -41,7 +52,7 @@ namespace ugtuapi
             config.Formatters.Clear();
             var jsn = new JsonMediaTypeFormatter
             {
-                SerializerSettings = {ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Error}
+                SerializerSettings = { ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Error }
             };
             config.AddJsonpFormatter(jsn);
         }
@@ -95,10 +106,7 @@ namespace ugtuapi
             builder.EntitySet<LocalityType>("LocalityTypes");
             builder.EntitySet<Street>("Streets");
 
-            
-            
-
-
+            builder.EntitySet<ViewProgress>("ViewProgress");
 
             var persons = builder.EntitySet<ugtuapi.Models.Person>("People");
             persons.EntityType.Ignore(x => x.Photo);
@@ -189,7 +197,7 @@ namespace ugtuapi
             builder.Entity<Street>().HasKey(x => x.Id);
             builder.Entity<Base_Destination>().HasKey(x => x.ik_basedest);
             builder.Entity<BrunchType>().HasKey(x => x.ik_type_branch);
-            builder.Entity<ugtuapi.Models.EducationForm>().HasKey(x=>x.Id);
+            builder.Entity<ugtuapi.Models.EducationForm>().HasKey(x => x.Id);
             builder.Entity<CurriculaYear>().HasKey(x => x.ik_year_uch_pl);
             builder.Entity<CurriculaDisciplines>().HasKey(x => x.ik_disc_uch_plan);
             builder.Entity<Content>().HasKey(x => x.ik_upContent);
@@ -200,7 +208,7 @@ namespace ugtuapi
             builder.Entity<TutorialTypeClass>().HasKey(x => x.iK_type_vz);
             builder.Entity<TutorialType>().HasKey(x => x.ikTypeZanyat);
             builder.Entity<DisciplineGroup>().HasKey(x => x.IK_grp_disc);
-            
+
         }
     }
 }
